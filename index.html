@@ -6,7 +6,16 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&amp;family=Fraunces:wght@600;700;800&amp;family=Noto+Sans+Javanese&amp;display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box}html,body{margin:0;width:100%}body{font-family:"DM Sans",sans-serif;color:#fff7df}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.48;cursor:not-allowed}:focus-visible{outline:4px solid #32cad3;outline-offset:3px}[hidden]{display:none!important}
-    .world{position:relative;isolation:isolate;width:100%;min-height:calc(100 * min(var(--vh,1vh),1vh))}.world-bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.world:before{content:"";position:fixed;inset:0;background:linear-gradient(#162b20ac,#203c2a65 36%,#1d271bc4);z-index:-1;pointer-events:none}
+    .world{position:relative;isolation:isolate;width:100%;min-height:calc(100 * min(var(--vh,1vh),1vh))}
+.world-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.world:before{content:"";position:fixed;inset:0;background:linear-gradient(#162b20ac,#203c2a65 36%,#1d271bc4);z-index:-1;pointer-events:none}
     .stage{width:min(94%,1120px);min-height:calc(100 * min(var(--vh,1vh),1vh));margin:auto;padding:calc(12px + env(safe-area-inset-top)) 0 calc(48px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px}.top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.hud{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;flex:1}.chip{border:2px solid #e7ac62;background:#512c19eb;border-radius:40px;padding:8px 12px;font-weight:800;white-space:nowrap}
     main{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:12px 0 24px;text-align:center;font-size:clamp(16px,2vw,23px);line-height:1.5}h1,h2,h3,p{margin:0}h1,h2{font-family:Fraunces,serif;text-shadow:0 4px 7px #20180e}h2{font-size:clamp(27px,4vw,57px);line-height:1.18}h3{font-size:clamp(20px,2.4vw,29px)}.cover-title{font-size:clamp(65px,10vw,145px);line-height:1.06;overflow-wrap:anywhere}.cover-subtitle{font-size:clamp(30px,6vw,82px);font-weight:800}
     .wood,.scroll{width:100%;padding:clamp(17px,3vw,32px);border-radius:22px;box-shadow:0 9px 0 #392315,0 18px 28px #10221b88}.wood{background:linear-gradient(150deg,#a76530f5,#79421ff5 55%,#603418f5);border:4px ridge #d59a50}.scroll{background:linear-gradient(105deg,#e4c28bf6,#fff2d2fa 9% 91%,#c8985df6);border:6px solid #8d542d;color:#422a19}
@@ -49,7 +58,9 @@
   <script src="/_sdk/03eb2403dcb2c820.resizing_sdk.js" type="text/javascript" integrity="sha512-3rStQpeHJ9SpUz/tPWj3qoOTc5Wdb4M77IFGFVtMTQ/GLbCg6/OVP+yWZaTo/YDzpJdLk+FvEXzvR4ZNQQ4/HQ=="></script>
  </head>
  <body data-template-id="__page-root" class="w-full" style="background: rgb(36, 124, 143);">
-  <div class="world"><img data-template-id="world-background" class="canva-image world-bg" loading="lazy" src="canva://MAHX28mZCWQ/1" alt="Pemandangan desa dengan sawah hijau, sungai, jembatan, pepohonan, rumah, dan gunung">
+  <div class="world"><img data-template-id="world-background" class="canva-image world-bg" loading="lazy" 
+src="https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/latar.png"
+ alt="Pemandangan desa dengan sawah hijau, sungai, jembatan, pepohonan, rumah, dan gunung">
    <div class="stage">
     <header class="top"><button id="back" class="btn small" type="button" hidden="">← Bali</button>
      <div class="hud" aria-live="polite">
