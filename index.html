@@ -61,11 +61,65 @@
     <button data-template-id="start-button" class="canva-button btn gold" data-action="start-playing" type="button">AYO WIWITI</button>
    </div>
   </template>
-  <template id="letter-template"><span class="glyph" role="img"><img data-template-id="aksara-ra-asli" class="canva-image" loading="lazy"><img data-template-id="aksara-da-asli" class="canva-image" loading="lazy"><span class="letter-glyph"></span></span>
-  </template>
-  <template id="character-template">
-   <span><img data-template-id="cakrawala-image" class="canva-image character" loading="lazy"></span>
-  </template>
+  
+<template id="letter-template">
+  <span class="glyph" role="img">
+    <img
+      data-template-id="aksara-ra-asli"
+      class="aksara-image"
+      alt="Aksara Ra"
+      loading="eager"
+      hidden
+    >
+    <img
+      data-template-id="aksara-da-asli"
+      class="aksara-image"
+      alt="Aksara Da"
+      loading="eager"
+      hidden
+    >
+    <span class="letter-glyph"></span>
+  </span>
+</template>
+
+.aksara-image {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.glyph img[hidden] {
+  display: none !important;
+}
+
+  
+<template id="character-template">
+  
+.character-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.character-wrap .character {
+  width: clamp(75px, 12vw, 125px);
+  max-height: 145px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+    <img
+      class="character"
+      src="https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/kartunjawa.png"
+      alt="Karakter Cakrawala"
+      loading="eager"
+    >
+  </span>
+</template>
+
   <template id="closing-template">
    <div class="mt-4 font-bold">
     <p data-template-id="final-thanks" class="canva-text">Matur nuwun wis dolanan lan sinau. Ketemu maneh ing dolanan sabanjure!</p>
@@ -99,25 +153,31 @@
   const pageVoices=[['voice-cover','Swara Sampul'],['voice-goals','Swara Tujuan'],['voice-map','Swara Peta'],['voice-material-1','Swara Materi Level 1'],['voice-example-1','Swara Tuladha Level 1'],['voice-result-1','Swara Asil Level 1'],['voice-material-2','Swara Materi Level 2'],['voice-example-2','Swara Tuladha Level 2'],['voice-result-2','Swara Asil Level 2'],['voice-material-3','Swara Materi Level 3'],['voice-example-3','Swara Tuladha Level 3'],['voice-result-3','Swara Asil Level 3'],['voice-final','Swara Asil Akhir'],['voice-scoreboard','Swara Papan Skor'],['voice-mission','Swara Misi'],['voice-treasure','Swara Kamar Bandha'],['voice-guide','Swara Pandhuan']];
   pageMusic.concat(pageVoices).forEach(([id,label])=>addSlot(id,label));
   
-const audioSources = {
-  correct:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/jawabanbenar.mp3',
 
-  wrong: [
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/jawabansalah.mp3'
+const GH =
+  'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/';
+
+const audioSources = {
+  correct: GH + 'jawabanbenar.mp3',
+  wrong: [GH + 'jawabansalah.mp3'],
+
+  musicTitle: GH + 'musik%20semangat.mp3',
+  musicGoals: GH + 'menuutama.mp3',
+  musicMap: GH + 'menuutama.mp3',
+
+  musicLevels: [
+    GH + 'level1.mp3',
+    GH + 'level2.mp3',
+    GH + 'level3.mp3'
   ],
 
-  musicTitle:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/pembukaan.mp3',
+  musicScoreboard: GH + 'musik%20semangat.mp3',
 
-  musicGoals:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/tujuan.mp3',
-
-  musicMap:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/menuutama.mp3',
-
-  musicScoreboard:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/tepuktanganpanjang.mp3'
+  letters: {
+    Ka: GH + 'ka.mp3',
+    La: GH + 'la.mp3',
+    Ma: GH + 'ma.mp3'
+  }
 };
 
   const media={
@@ -136,16 +196,58 @@ const audioSources = {
       this.stopVoice();const slot=slots.get(id);if(!slot?.buffer)return false;
       try{const ctx=this.ctx(),source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=slot.buffer;gain.gain.value=this.voiceVolume/100;source.connect(gain).connect(ctx.destination);source.onended=()=>{if(this.active===source)this.active=null};this.active=source;source.start();return true}catch{return false}
     },
-    background(){
-      if(!this.started||!this.musicOn)return;
-      const remote=screen==='cover'?audioSources.musicTitle:screen==='goals'?audioSources.musicGoals:null;
-      if(remote){if(this.remoteMusic&&this.remoteMusicUrl===remote)return;this.stopMusic();try{const audio=new Audio(remote);audio.loop=true;audio.preload='auto';audio.volume=Math.max(.01,this.musicVolume/100);audio.addEventListener('error',()=>{if(this.remoteMusic===audio)this.stopMusic()},{once:true});this.remoteMusic=audio;this.remoteMusicUrl=remote;this.musicId=remote;const attempt=audio.play();if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{});return}catch{return}}
-      const id=screen==='map'?'music-map':screen==='scoreboard'?'music-scoreboard':screen==='material'||screen==='example'?'music-level-'+(level+1):'music';
-      const slot=slots.get(id)?.buffer?slots.get(id):slots.get('music');if(!slot?.buffer){this.stopMusic();return}
-      if(this.music&&this.musicId===id)return;
+    
+background() {
+  if (!this.started || !this.musicOn) return;
+
+  let url = null;
+
+  if (screen === 'cover') {
+    url = audioSources.musicTitle;
+  } else if (screen === 'goals') {
+    url = audioSources.musicGoals;
+  } else if (screen === 'map') {
+    url = audioSources.musicMap;
+  } else if (screen === 'scoreboard' || screen === 'final') {
+    url = audioSources.musicScoreboard;
+  } else if (
+    ['material', 'example', 'game', 'gameResult', 'levelResult'].includes(screen)
+  ) {
+    url = audioSources.musicLevels[level] || null;
+  }
+
+  if (!url) {
+    this.stopMusic();
+    return;
+  }
+
+  if (this.remoteMusic && this.remoteMusicUrl === url) {
+    return;
+  }
+
+  this.stopMusic();
+
+  const audio = new Audio(url);
+  audio.loop = true;
+  audio.preload = 'auto';
+  audio.volume = this.musicVolume / 100;
+
+  this.remoteMusic = audio;
+  this.remoteMusicUrl = url;
+  this.musicId = url;
+
+  audio.addEventListener('error', () => {
+    if (this.remoteMusic === audio) {
       this.stopMusic();
-      try{const ctx=this.ctx(),source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=slot.buffer;source.loop=true;gain.gain.value=Math.max(.01,this.musicVolume/100*(screen==='game'?.22:1));source.connect(gain).connect(ctx.destination);source.onended=()=>{if(this.music===source){this.music=null;this.musicId=null}};source.start();this.music=source;this.musicId=id}catch{this.music=null;this.musicId=null}
-    },
+      notice('Musik gagal dimuat. Periksa URL file GitHub.');
+    }
+  }, { once: true });
+
+  audio.play().catch(() => {
+    notice('Tekan tombol Musik atau AYO WIWITI untuk memulai audio.');
+  });
+},
+
     async assign(id,file){
       const slot=slots.get(id);if(!slot||!file)return;
       if(!file.type.startsWith('audio/')&&!/\.(mp3|wav|ogg|m4a|aac|webm)$/i.test(file.name)){message('Pilih berkas swara sing bener.');return}
@@ -160,6 +262,20 @@ const audioSources = {
   function addMedia(){
     view.querySelectorAll('[data-letter]').forEach(node=>{
       const n=node.dataset.letter,f=document.getElementById('letter-template').content.cloneNode(true),root=f.querySelector('.glyph');
+      
+const raImage = root.querySelector(
+  '[data-template-id="aksara-ra-asli"]'
+);
+const daImage = root.querySelector(
+  '[data-template-id="aksara-da-asli"]'
+);
+
+raImage.src =
+  'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ra.png';
+
+daImage.src =
+  'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/da.png';
+
       root.querySelector('[data-template-id="aksara-ra-asli"]').hidden=n!=='Ra';
       root.querySelector('[data-template-id="aksara-da-asli"]').hidden=n!=='Da';
       const glyph=root.querySelector('.letter-glyph');glyph.hidden=n==='Ra'||n==='Da';
@@ -391,7 +507,22 @@ const audioSources = {
     else if(a==='level'){const i=Number(b.dataset.index);if(unlocked(i)){level=i;game=0;navigate('material')}}
     else if(a==='bypass'){if(adminUnlock){level=Number(b.dataset.index);game=1;exampleAnswered=false;navigate('example')}}
     else if(a==='first-example'||a==='second-example'){if(a==='second-example'&&!gameTwoOpen(level))return;game=a==='first-example'?0:1;exampleAnswered=false;navigate('example')}
-    else if(a==='letter'){const n=b.dataset.name;document.getElementById('material-status').textContent='Aksara '+n+(media.play('letter-'+n)?' · Swara lagi diputer.':' · Swara durung dipasang.')}
+    
+else if (a === 'letter') {
+  const n = b.dataset.name;
+  const url = audioSources.letters[n];
+
+  if (url) {
+    const ok = media.playRemoteEffect(url);
+    document.getElementById('material-status').textContent =
+      ok
+        ? 'Aksara ' + n + ' · Swara lagi diputer.'
+        : 'Aksara ' + n + ' · Audio durung bisa diputer.';
+  } else {
+    document.getElementById('material-status').textContent =
+      'Swara aksara ' + n + ' durung duwe URL.';
+  }
+}
     else if(a==='example-answer'){
       if(exampleAnswered)return;exampleAnswered=true;
       const {target,ids}=exampleData(),index=Number(b.dataset.index),correct=level===2?same(ids[index],target):ids[index]===target;
