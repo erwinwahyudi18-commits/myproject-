@@ -214,19 +214,25 @@
   function symbol(n){return `<span data-letter="${esc(n)}"></span>`}
   function portrait(){return '<span data-character></span>'}
   
+
 function addMedia(){
   view.querySelectorAll('[data-letter]').forEach(node=>{
     const n=node.dataset.letter;
     const f=document.getElementById('letter-template').content.cloneNode(true);
     const root=f.querySelector('.glyph');
 
-    root.querySelectorAll('img').forEach(img=>{
-      img.hidden=true;
-    });
-
+    const ra=root.querySelector('[data-template-id="aksara-ra-asli"]');
+    const da=root.querySelector('[data-template-id="aksara-da-asli"]');
     const glyph=root.querySelector('.letter-glyph');
-    glyph.hidden=false;
-    glyph.textContent=forms[n]||'';
+
+    ra.hidden=n!=='Ra';
+    da.hidden=n!=='Da';
+    glyph.hidden=n==='Ra'||n==='Da';
+
+    if(n==='Ra') ra.src='./gambarra.jpg';
+    if(n==='Da') da.src='./gambarda.jpg';
+
+    if(!glyph.hidden) glyph.textContent=forms[n]||'';
 
     root.setAttribute('aria-label','Aksara '+n);
     node.appendChild(f);
@@ -238,6 +244,7 @@ function addMedia(){
     );
   });
 }
+
 
   function hud(){
     ['name','score','star','coin','key'].forEach((key,i)=>document.getElementById('hud-'+key).textContent=['🧭 '+player,'Nilai '+total()+'/600','⭐ '+(keys()+(missionDone?1:0)),'🪙 '+coins,'🗝️ '+keys()][i]);
