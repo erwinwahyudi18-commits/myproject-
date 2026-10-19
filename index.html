@@ -13,6 +13,123 @@
     .btn{border:3px solid #f8c87d;background:linear-gradient(#ab642b,#663414);color:#fff6dc;border-radius:15px;min-height:52px;padding:9px 16px;font-weight:800;line-height:1.35;box-shadow:0 4px 0 #3b240f;transition:transform .15s,filter .15s}.btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.12)}.btn.gold{background:linear-gradient(#f9d56e,#bc751b);color:#3e260e}.btn.small{min-height:39px;padding:7px 10px;font-size:14px}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:18px}.hero{display:flex;align-items:center;justify-content:center;gap:20px;width:100%}.character{display:block;width:clamp(115px,18vw,220px);max-height:270px;object-fit:contain;filter:drop-shadow(3px 8px 6px #18231599);animation:idle 3s ease-in-out infinite}.dialog{background:#fff1d0;color:#4c2c19;border:3px solid #986432;border-radius:22px;box-shadow:0 6px 0 #613f20;padding:16px 22px;font-weight:800;max-width:650px}
     .map-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%}.locked{filter:grayscale(.7);opacity:.8}.gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.choices,.stat-grid,.slot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}.choice{border:4px solid #98602b;background:#fff0cd;color:#3b2617;border-radius:18px;min-height:69px;padding:9px;font-weight:800;line-height:1.45;box-shadow:0 4px 0 #70411f;overflow-wrap:anywhere}.choice:hover:not(:disabled){background:#ffe09f}.choice.selected{border-color:#168a9c;background:#c5efed}.glyph{display:inline-flex;align-items:center;justify-content:center;color:#251b14;font-family:"Noto Sans Javanese",serif;font-size:clamp(58px,8vw,105px);line-height:1.4;min-width:1em}.glyph img{width:1em;height:1em;object-fit:contain;mix-blend-mode:multiply}.choice .glyph,.gallery .glyph{font-size:clamp(32px,4vw,56px)}.question-glyphs{display:flex;justify-content:center;flex-wrap:wrap;gap:2px}.question-glyphs .glyph{font-size:clamp(52px,7vw,90px)}.stat,.slot{background:#fff9e7ed;color:#422a19;border-radius:14px;padding:15px}.slot{border:2px solid #a16c34;text-align:left;font-size:15px}.field{width:100%;border:2px solid #a46a31;border-radius:10px;padding:10px;background:#fff9e8;color:#352315;font-size:16px}.notice{text-align:center;font-size:14px;background:#4c2b19dc;border-radius:10px;padding:8px 11px;align-self:center}.credit{position:fixed;right:14px;bottom:10px;padding:3px 8px;border-radius:8px;background:#17251cc9;color:#fff5d9;font-size:14px;pointer-events:none}.overlay{position:fixed;inset:0;z-index:10;background:#102f31e8;padding:12px;display:flex;align-items:center;justify-content:center}.overlay .scroll{max-height:90%;overflow:auto;width:min(950px,100%)}.feedback{min-height:2em;font-weight:800}.rank-wrap{width:100%;overflow:auto}table{width:100%;border-collapse:collapse;min-width:450px;text-align:left}th,td{padding:10px;border-bottom:1px solid #af875c}.timer{display:inline-block;padding:5px 18px;border-radius:30px;background:#653917;color:#fff4d6;font-weight:800}.javanese{font-family:"Noto Sans Javanese",serif;line-height:2;overflow-wrap:anywhere}
     @keyframes idle{50%{transform:translateY(-7px) rotate(1deg)}}@media(prefers-reduced-motion:reduce){.character{animation:none}}@media(max-width:750px){.stage{width:calc(100% - 20px)}.hero{flex-direction:column}.character{width:130px;max-height:170px}.map-grid,.slot-grid{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}.top{justify-content:center}.hud{order:3;flex-basis:100%}main{justify-content:flex-start}.game-screen{padding:12px 12px 14px;border-width:4px;border-radius:16px;box-shadow:0 5px 0 #392315,0 10px 16px #10221b66;font-size:clamp(12px,3.5vw,17px);line-height:1.25}.game-screen .my-4{margin-top:.65rem;margin-bottom:.65rem}.game-screen .choices{gap:7px;margin-top:.65rem;margin-bottom:.65rem}.game-screen .choice{min-height:48px;padding:6px;border-width:3px;border-radius:12px;box-shadow:0 3px 0 #70411f}.game-screen .question-glyphs .glyph{font-size:clamp(40px,12vw,68px)}.game-screen .glyph{font-size:clamp(42px,12vw,72px)}.game-screen .actions{gap:7px;margin-top:8px}.game-screen .btn{min-height:40px;padding:6px 10px;font-size:13px}.game-screen h2{font-size:clamp(22px,7vw,36px);margin-bottom:4px}.game-screen .feedback{min-height:1.4em;margin-top:.5rem;margin-bottom:.5rem}}@media(max-width:400px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.scroll{padding:13px}}
+  
+/* Karakter kecil di samping teks pada halaman Tujuan Sinau */
+#view .hero:has(.scroll) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+#view .hero:has(.scroll) [data-character] {
+  flex: 0 0 90px;
+  width: 90px;
+}
+
+#view .hero:has(.scroll) .character {
+  width: 90px;
+  max-height: 125px;
+  object-fit: contain;
+}
+
+#view .hero:has(.scroll) .scroll {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Khusus HP */
+@media (max-width: 750px) {
+  #view .hero:has(.scroll) {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  #view .hero:has(.scroll) [data-character] {
+    flex-basis: 76px;
+    width: 76px;
+  }
+
+  #view .hero:has(.scroll) .character {
+    width: 76px;
+    max-height: 110px;
+  }
+
+  #view .hero:has(.scroll) .scroll {
+    padding: 14px 12px;
+    border-width: 4px;
+    border-radius: 16px;
+  }
+}
+
+/* Gambar aksara Ra dan Da */
+.aksara-image {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.glyph img[hidden] {
+  display: none !important;
+}
+
+/* Karakter kecil di samping teks pada halaman Tujuan Sinau */
+#view .hero:has(.scroll) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+#view .hero:has(.scroll) [data-character] {
+  flex: 0 0 90px;
+  width: 90px;
+}
+
+#view .hero:has(.scroll) .character {
+  width: 90px;
+  max-height: 125px;
+  object-fit: contain;
+}
+
+#view .hero:has(.scroll) .scroll {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 750px) {
+  #view .hero:has(.scroll) {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  #view .hero:has(.scroll) [data-character] {
+    flex-basis: 76px;
+    width: 76px;
+  }
+
+  #view .hero:has(.scroll) .character {
+    width: 76px;
+    max-height: 110px;
+  }
+
+  #view .hero:has(.scroll) .scroll {
+    padding: 14px 12px;
+    border-width: 4px;
+    border-radius: 16px;
+  }
+}
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
@@ -174,11 +291,30 @@ const audioSources = {
   musicScoreboard: GH + 'musik%20semangat.mp3',
 
   letters: {
-    Ka: GH + 'ka.mp3',
-    La: GH + 'la.mp3',
-    Ma: GH + 'ma.mp3'
-  }
-};
+    
+letters: {
+  Ha: GH + 'ha.mp3',
+  Na: GH + 'na.mp3',
+  Ca: GH + 'ca.mp3',
+  Ra: GH + 'ra.mp3',
+  Ka: GH + 'ka.mp3',
+  Da: GH + 'da.mp3',
+  Ta: GH + 'ta.mp3',
+  Sa: GH + 'sa.mp3',
+  Wa: GH + 'wa.mp3',
+  La: GH + 'la.mp3',
+  Pa: GH + 'pa.mp3',
+  Dha: GH + 'dha.mp3',
+  Ja: GH + 'ja.mp3',
+  Ya: GH + 'ya.mp3',
+  Nya: GH + 'nya.mp3',
+  Ma: GH + 'ma.mp3',
+  Ga: GH + 'ga.mp3',
+  Ba: GH + 'ba.mp3',
+  Tha: GH + 'tha.mp3',
+  Nga: GH + 'nga.mp3'
+}
+
 
   const media={
     context:null,active:null,music:null,musicId:null,musicOn:true,musicVolume:35,voiceVolume:70,started:false,failed:false,ducked:false,
@@ -259,10 +395,55 @@ background() {
   function notice(t){storageMessage=t;hud()}
   function symbol(n){return `<span data-letter="${esc(n)}"></span>`}
   function portrait(){return '<span data-character></span>'}
-  function addMedia(){
-    view.querySelectorAll('[data-letter]').forEach(node=>{
-      const n=node.dataset.letter,f=document.getElementById('letter-template').content.cloneNode(true),root=f.querySelector('.glyph');
-      
+  
+function addMedia() {
+  view.querySelectorAll('[data-letter]').forEach(node => {
+    const n = node.dataset.letter;
+    const f = document
+      .getElementById('letter-template')
+      .content.cloneNode(true);
+
+    const root = f.querySelector('.glyph');
+    const raImage = root.querySelector(
+      '[data-template-id="aksara-ra-asli"]'
+    );
+    const daImage = root.querySelector(
+      '[data-template-id="aksara-da-asli"]'
+    );
+    const glyph = root.querySelector('.letter-glyph');
+
+    raImage.src =
+      'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ra.png';
+    daImage.src =
+      'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/da.png';
+
+    raImage.hidden = n !== 'Ra';
+    daImage.hidden = n !== 'Da';
+    glyph.hidden = n === 'Ra' || n === 'Da';
+
+    if (n === 'Ra' || n === 'Da') {
+      const img = n === 'Ra' ? raImage : daImage;
+      img.onerror = () => {
+        img.hidden = true;
+        glyph.hidden = false;
+        glyph.textContent = forms[n];
+      };
+    } else {
+      glyph.textContent = forms[n] || '';
+    }
+
+    root.setAttribute('aria-label', 'Aksara ' + n);
+    node.appendChild(f);
+  });
+
+  view.querySelectorAll('[data-character]').forEach(node => {
+    node.appendChild(
+      document.getElementById('character-template')
+        .content.cloneNode(true)
+    );
+  });
+}
+
 const raImage = root.querySelector(
   '[data-template-id="aksara-ra-asli"]'
 );
@@ -508,21 +689,40 @@ daImage.src =
     else if(a==='bypass'){if(adminUnlock){level=Number(b.dataset.index);game=1;exampleAnswered=false;navigate('example')}}
     else if(a==='first-example'||a==='second-example'){if(a==='second-example'&&!gameTwoOpen(level))return;game=a==='first-example'?0:1;exampleAnswered=false;navigate('example')}
     
+
 else if (a === 'letter') {
   const n = b.dataset.name;
   const url = audioSources.letters[n];
+  const status = document.getElementById('material-status');
 
-  if (url) {
-    const ok = media.playRemoteEffect(url);
-    document.getElementById('material-status').textContent =
-      ok
-        ? 'Aksara ' + n + ' · Swara lagi diputer.'
-        : 'Aksara ' + n + ' · Audio durung bisa diputer.';
-  } else {
-    document.getElementById('material-status').textContent =
-      'Swara aksara ' + n + ' durung duwe URL.';
+  if (!url) {
+    status.textContent = 'URL suara aksara ' + n + ' belum tersedia.';
+    return;
   }
+
+  const audio = new Audio(url);
+  audio.preload = 'auto';
+  audio.volume = media.voiceVolume / 100;
+
+  status.textContent = 'Memuat swara aksara ' + n + '...';
+
+  audio.addEventListener('ended', () => {
+    status.textContent = 'Swara aksara ' + n + ' rampung.';
+  }, { once: true });
+
+  audio.addEventListener('error', () => {
+    status.textContent =
+      'Audio gagal dimuat. Priksa file ' + n.toLowerCase() + '.mp3.';
+  }, { once: true });
+
+  audio.play().then(() => {
+    status.textContent = 'Swara aksara ' + n + ' lagi diputer.';
+  }).catch(() => {
+    status.textContent =
+      'Audio durung bisa diputer. Coba tekan aksara maneh.';
+  });
 }
+
     else if(a==='example-answer'){
       if(exampleAnswered)return;exampleAnswered=true;
       const {target,ids}=exampleData(),index=Number(b.dataset.index),correct=level===2?same(ids[index],target):ids[index]===target;
@@ -548,7 +748,31 @@ else if (a === 'letter') {
   view.addEventListener('change',e=>{if(e.target.id==='nickname'){player=e.target.value.trim().slice(0,24)||'Kanca';e.target.value=player;hud()}});
   document.getElementById('back').addEventListener('click',back);
   document.getElementById('settings-shortcut').addEventListener('click',()=>showOverlay('settings'));
-  document.getElementById('music-toggle').addEventListener('click',e=>{if(!media.started)media.start();else{media.musicOn=!media.musicOn;if(!media.musicOn)media.stopMusic();else media.restoreMusic()}e.currentTarget.textContent=media.musicOn?'Musik: Urip':'Musik: Mati';e.currentTarget.setAttribute('aria-pressed',String(media.musicOn))});
+  
+document.getElementById('music-toggle').addEventListener(
+  'click',
+  () => {
+    if (!media.started) {
+      media.start();
+    } else if (media.musicOn) {
+      media.musicOn = false;
+      media.stopMusic();
+    } else {
+      media.musicOn = true;
+      media.background();
+    }
+
+    const btn = document.getElementById('music-toggle');
+    btn.textContent = media.musicOn
+      ? 'Musik: Urip'
+      : 'Musik: Mati';
+
+    btn.setAttribute(
+      'aria-pressed',
+      String(media.musicOn)
+    );
+  }
+);
   document.getElementById('overlay-close').addEventListener('click',closeOverlay);
   content.addEventListener('input',e=>{
     if(e.target.dataset.transcript){slots.get(e.target.dataset.transcript).transcript=e.target.value;return}
