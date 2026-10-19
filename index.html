@@ -213,17 +213,32 @@
   function notice(t){storageMessage=t;hud()}
   function symbol(n){return `<span data-letter="${esc(n)}"></span>`}
   function portrait(){return '<span data-character></span>'}
-  function addMedia(){
-    view.querySelectorAll('[data-letter]').forEach(node=>{
-      const n=node.dataset.letter,f=document.getElementById('letter-template').content.cloneNode(true),root=f.querySelector('.glyph');
-      root.querySelector('[data-template-id="aksara-ra-asli"]').hidden=n!=='Ra';
-      root.querySelector('[data-template-id="aksara-da-asli"]').hidden=n!=='Da';
-      const glyph=root.querySelector('.letter-glyph');glyph.hidden=n==='Ra'||n==='Da';
-      if(!glyph.hidden)glyph.textContent=forms[n]||'';
-      root.setAttribute('aria-label','Aksara '+n);node.appendChild(f)
+  
+function addMedia(){
+  view.querySelectorAll('[data-letter]').forEach(node=>{
+    const n=node.dataset.letter;
+    const f=document.getElementById('letter-template').content.cloneNode(true);
+    const root=f.querySelector('.glyph');
+
+    root.querySelectorAll('img').forEach(img=>{
+      img.hidden=true;
     });
-    view.querySelectorAll('[data-character]').forEach(n=>n.appendChild(document.getElementById('character-template').content.cloneNode(true)))
-  }
+
+    const glyph=root.querySelector('.letter-glyph');
+    glyph.hidden=false;
+    glyph.textContent=forms[n]||'';
+
+    root.setAttribute('aria-label','Aksara '+n);
+    node.appendChild(f);
+  });
+
+  view.querySelectorAll('[data-character]').forEach(n=>{
+    n.appendChild(
+      document.getElementById('character-template').content.cloneNode(true)
+    );
+  });
+}
+
   function hud(){
     ['name','score','star','coin','key'].forEach((key,i)=>document.getElementById('hud-'+key).textContent=['🧭 '+player,'Nilai '+total()+'/600','⭐ '+(keys()+(missionDone?1:0)),'🪙 '+coins,'🗝️ '+keys()][i]);
     document.getElementById('back').hidden=screen==='cover';document.getElementById('storage-note').textContent=storageMessage
