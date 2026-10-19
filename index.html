@@ -91,12 +91,51 @@
   const pageMusic=[['music-title','Musik Latar Sampul'],['music-goals','Musik Latar Tujuan'],['music-map','Musik Latar Peta'],['music-level-1','Musik Latar Level 1'],['music-level-2','Musik Latar Level 2'],['music-level-3','Musik Latar Level 3'],['music-scoreboard','Musik Latar Papan Skor']];
   const pageVoices=[['voice-cover','Swara Sampul'],['voice-goals','Swara Tujuan'],['voice-map','Swara Peta'],['voice-material-1','Swara Materi Level 1'],['voice-example-1','Swara Tuladha Level 1'],['voice-result-1','Swara Asil Level 1'],['voice-material-2','Swara Materi Level 2'],['voice-example-2','Swara Tuladha Level 2'],['voice-result-2','Swara Asil Level 2'],['voice-material-3','Swara Materi Level 3'],['voice-example-3','Swara Tuladha Level 3'],['voice-result-3','Swara Asil Level 3'],['voice-final','Swara Asil Akhir'],['voice-scoreboard','Swara Papan Skor'],['voice-mission','Swara Misi'],['voice-treasure','Swara Kamar Bandha'],['voice-guide','Swara Pandhuan']];
   pageMusic.concat(pageVoices).forEach(([id,label])=>addSlot(id,label));
-  const audioSources={
-    correct:'https://github.com/erwinwahyudi18-commits/myproject-/blob/main/jawabanbenar.mp3',
-    wrong:['https://github.com/erwinwahyudi18-commits/myproject-/blob/main/jawabansalah.mp3','https://github.com/erwinwahyudi18-commits/myproject-/blob/main/ha.mp3'],
-    musicTitle:'https://github.com/erwinwahyudi18-commits/myproject-/blob/main/pembukaan.mp3',
-    musicGoals:'https://github.com/erwinwahyudi18-commits/myproject-/blob/main/tujuan.mp3'
-  };
+  
+const audioSources = {
+  correct:
+    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/jawabanbenar.mp3',
+
+  wrong: [
+    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/jawabansalah.mp3',
+  ],
+
+  musicTitle:
+    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/pembukaan.mp3',
+
+  musicGoals:
+    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/tujuan.mp3',
+
+  musicMap:
+    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/petamu.mp3',
+
+  musicScoreboard:
+    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/papanskor.mp3'
+};
+
+const aksaraJawaAudio = {
+  ha: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ha.mp3',
+  na: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/na.mp3',
+  ca: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ca.mp3',
+  ra: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ra.mp3',
+  ka: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ka.mp3',
+  da: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/da.mp3',
+  ta: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ta.mp3',
+  sa: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/sa.mp3',
+  wa: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/wa.mp3',
+  la: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/la.mp3',
+  pa: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/pa.mp3',
+  dha: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/dha.mp3',
+  ja: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ja.mp3',
+  ya: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ya.mp3',
+  nya: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/nya.mp3',
+  ma: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ma.mp3',
+  ga: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ga.mp3',
+  ba: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ba.mp3',
+  tha: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/tha.mp3',
+  nga: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/nga.mp3'
+};
+
   const media={
     context:null,active:null,music:null,musicId:null,musicOn:true,musicVolume:35,voiceVolume:70,started:false,failed:false,ducked:false,
     remoteMusic:null,remoteMusicUrl:null,wrongIndex:0,effectBusy:false,
