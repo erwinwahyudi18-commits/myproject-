@@ -21,12 +21,11 @@
   <script src="/_sdk/03eb2403dcb2c820.resizing_sdk.js" type="text/javascript" integrity="sha512-3rStQpeHJ9SpUz/tPWj3qoOTc5Wdb4M77IFGFVtMTQ/GLbCg6/OVP+yWZaTo/YDzpJdLk+FvEXzvR4ZNQQ4/HQ=="></script>
  </head>
  <body data-template-id="__page-root" class="w-full" style="background: rgb(36, 124, 143);">
-  <div class="world">
-   <img data-template-id="world-background" class="canva-image world-bg" loading="lazy" src="canva://MAHX28mZCWQ/1" alt="Pemandangan desa dengan sawah hijau, sungai, jembatan, pepohonan, rumah, dan gunung">
+  <div class="world"><img data-template-id="world-background" class="canva-image world-bg" loading="lazy" src="canva://MAHX28mZCWQ/1" alt="Pemandangan desa dengan sawah hijau, sungai, jembatan, pepohonan, rumah, dan gunung">
    <div class="stage">
-    <header class="top">
-     <button id="back" class="btn small" type="button" hidden="">← Bali</button>
-     <div class="hud" aria-live="polite"><span id="hud-name" class="chip"></span><span id="hud-score" class="chip"></span><span id="hud-star" class="chip"></span><span id="hud-coin" class="chip"></span><span id="hud-key" class="chip"></span>
+    <header class="top"><button id="back" class="btn small" type="button" hidden="">← Bali</button>
+     <div class="hud" aria-live="polite">
+      <span id="hud-name" class="chip"></span><span id="hud-score" class="chip"></span><span id="hud-star" class="chip"></span><span id="hud-coin" class="chip"></span><span id="hud-key" class="chip"></span>
      </div><button id="music-toggle" class="btn small" type="button" aria-pressed="true">Musik: Urip</button> <button id="settings-shortcut" class="btn small" type="button">⚙ Setelan</button>
     </header>
     <main id="view"></main>
@@ -38,7 +37,8 @@
      <h2 id="overlay-title"></h2>
      <p id="overlay-message" class="my-3" role="status" aria-live="polite"></p>
      <div id="overlay-content"></div>
-     <div class="actions"><button id="overlay-close" data-template-id="overlay-close-label" class="canva-button btn gold" type="button" style="color: rgb(62, 38, 14); font-weight: 800; font-style: normal; font-size: 16px;">Rampung</button>
+     <div class="actions">
+      <button id="overlay-close" data-template-id="overlay-close-label" class="canva-button btn gold" type="button" style="color: rgb(62, 38, 14); font-weight: 800; font-style: normal; font-size: 16px;">Rampung</button>
      </div>
     </section>
    </div>
@@ -46,16 +46,18 @@
   <template id="cover-template">
    <h1 data-template-id="game-title" class="canva-text cover-title">SI CAKRAWALA</h1>
    <p data-template-id="game-subtitle" class="canva-text cover-subtitle">Sinau Maca Aksara Jawa Lancar</p>
-   <div class="hero"><span data-character=""></span>
+   <div class="hero">
+    <span data-character=""></span>
     <p data-template-id="welcome-text" class="canva-text dialog">Halo, kanca-kanca! Ayo sinau aksara Jawa!</p>
    </div>
-   <div class="actions"><button data-template-id="start-button" class="canva-button btn gold" data-action="start-playing" type="button">AYO WIWITI</button>
+   <div class="actions">
+    <button data-template-id="start-button" class="canva-button btn gold" data-action="start-playing" type="button">AYO WIWITI</button>
    </div>
   </template>
-  <template id="letter-template">
-   <span class="glyph" role="img"><img data-template-id="aksara-ra-asli" class="canva-image" loading="lazy"><img data-template-id="aksara-da-asli" class="canva-image" loading="lazy"><span class="letter-glyph"></span></span>
+  <template id="letter-template"><span class="glyph" role="img"><img data-template-id="aksara-ra-asli" class="canva-image" loading="lazy"><img data-template-id="aksara-da-asli" class="canva-image" loading="lazy"><span class="letter-glyph"></span></span>
   </template>
-  <template id="character-template"><span><img data-template-id="cakrawala-image" class="canva-image character" loading="lazy"></span>
+  <template id="character-template">
+   <span><img data-template-id="cakrawala-image" class="canva-image character" loading="lazy"></span>
   </template>
   <template id="closing-template">
    <div class="mt-4 font-bold">
