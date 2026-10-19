@@ -135,6 +135,16 @@ const aksaraJawaAudio = {
   tha: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/tha.mp3',
   nga: 'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/nga.mp3'
 };
+function bacaAksara(namaAksara) {
+  const url = aksaraJawaAudio[namaAksara];
+  if (!url) return;
+
+  const audio = new Audio(url);
+  audio.play().catch(error => {
+    console.error('Suara aksara gagal diputar:', error);
+  });
+}
+
 
   const media={
     context:null,active:null,music:null,musicId:null,musicOn:true,musicVolume:35,voiceVolume:70,started:false,failed:false,ducked:false,
