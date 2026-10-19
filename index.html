@@ -54,19 +54,8 @@
     <button data-template-id="start-button" class="canva-button btn gold" data-action="start-playing" type="button">AYO WIWITI</button>
    </div>
   </template>
-  <template id="letter-template">
-  <span class="glyph" role="img">
-    <img data-template-id="aksara-ra-asli"
-         class="canva-image"
-         src="gambarra.jpg"
-         alt="Aksara Ra">
-    <img data-template-id="aksara-da-asli"
-         class="canva-image"
-         src="gambarda.jpg"
-         alt="Aksara Da">
-    <span class="letter-glyph"></span>
-  </span>
-</template>
+  <template id="letter-template"><span class="glyph" role="img"><img data-template-id="aksara-ra-asli" class="canva-image" loading="lazy"><img data-template-id="aksara-da-asli" class="canva-image" loading="lazy"><span class="letter-glyph"></span></span>
+  </template>
   <template id="character-template">
    <span><img data-template-id="cakrawala-image" class="canva-image character" loading="lazy"></span>
   </template>
@@ -102,18 +91,12 @@
   const pageMusic=[['music-title','Musik Latar Sampul'],['music-goals','Musik Latar Tujuan'],['music-map','Musik Latar Peta'],['music-level-1','Musik Latar Level 1'],['music-level-2','Musik Latar Level 2'],['music-level-3','Musik Latar Level 3'],['music-scoreboard','Musik Latar Papan Skor']];
   const pageVoices=[['voice-cover','Swara Sampul'],['voice-goals','Swara Tujuan'],['voice-map','Swara Peta'],['voice-material-1','Swara Materi Level 1'],['voice-example-1','Swara Tuladha Level 1'],['voice-result-1','Swara Asil Level 1'],['voice-material-2','Swara Materi Level 2'],['voice-example-2','Swara Tuladha Level 2'],['voice-result-2','Swara Asil Level 2'],['voice-material-3','Swara Materi Level 3'],['voice-example-3','Swara Tuladha Level 3'],['voice-result-3','Swara Asil Level 3'],['voice-final','Swara Asil Akhir'],['voice-scoreboard','Swara Papan Skor'],['voice-mission','Swara Misi'],['voice-treasure','Swara Kamar Bandha'],['voice-guide','Swara Pandhuan']];
   pageMusic.concat(pageVoices).forEach(([id,label])=>addSlot(id,label));
-  const audioSources = {
-  correct:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/jawabanbenar.mp3',
-  wrong: [
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/jawabansalah.mp3',
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ha.mp3'
-  ],
-  musicTitle:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/pembukaan.mp3',
-  musicGoals:
-    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/tujuan.mp3'
-};
+  const audioSources={
+    correct:'https://github.com/erwinwahyudi18-commits/myproject-/blob/main/tepuk-tangan%20pendek%20.mp3',
+    wrong:['https://github.com/erwinwahyudi18-commits/myproject-/blob/main/tot%20salah.mp3','https://github.com/erwinwahyudi18-commits/myproject-/blob/main/ha%20.mp3'],
+    musicTitle:'https://github.com/erwinwahyudi18-commits/myproject-/blob/main/pembukaan..mp3',
+    musicGoals:'https://github.com/erwinwahyudi18-commits/myproject-/blob/main/tujuan.mp3'
+  };
   const media={
     context:null,active:null,music:null,musicId:null,musicOn:true,musicVolume:35,voiceVolume:70,started:false,failed:false,ducked:false,
     remoteMusic:null,remoteMusicUrl:null,wrongIndex:0,effectBusy:false,
@@ -126,72 +109,10 @@
     stopMusic(){if(this.music){try{this.music.stop()}catch{}this.music=null}if(this.remoteMusic){try{this.remoteMusic.pause();this.remoteMusic.currentTime=0}catch{}this.remoteMusic=null}this.remoteMusicUrl=null;this.musicId=null},
     stopAll(){this.stopVoice();this.stopMusic()},
     playRemoteEffect(url){if(this.effectBusy)return false;this.effectBusy=true;try{const audio=new Audio(url);audio.preload='auto';audio.volume=Math.max(.01,this.voiceVolume/100);const done=()=>{this.effectBusy=false;audio.removeEventListener('ended',done);audio.removeEventListener('error',done)};audio.addEventListener('ended',done,{once:true});audio.addEventListener('error',done,{once:true});const attempt=audio.play();if(attempt&&typeof attempt.catch==='function')attempt.catch(done);return true}catch{this.effectBusy=false;return false}},
-    play(id) {
-  this.stopVoice();
-
-  const slot = slots.get(id);
-
-  // Jika audio dipasang melalui setelan game, gunakan audio itu.
-  if (slot?.buffer) {
-    try {
-      const ctx = this.ctx();
-      const source = ctx.createBufferSource();
-      const gain = ctx.createGain();
-
-      source.buffer = slot.buffer;
-      gain.gain.value = this.voiceVolume / 100;
-      source.connect(gain).connect(ctx.destination);
-
-      source.onended = () => {
-        if (this.active === source) this.active = null;
-      };
-
-      this.active = source;
-      source.start();
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  // Jika belum ada audio setelan, coba ambil MP3 dari GitHub.
-  if (id.startsWith('letter-')) {
-    const name = id.slice('letter-'.length).toLowerCase();
-    const url =
-      'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/' +
-      encodeURIComponent(name) + '.mp3';
-
-    try {
-      const audio = new Audio(url);
-      audio.volume = this.voiceVolume / 100;
-      audio.preload = 'auto';
-
-      this.active = audio;
-      audio.addEventListener('ended', () => {
-        if (this.active === audio) this.active = null;
-      }, { once: true });
-
-      audio.addEventListener('error', () => {
-        if (this.active === audio) this.active = null;
-        notice('File swara aksara ' + name + ' ora ditemokake.');
-      }, { once: true });
-
-      const result = audio.play();
-      if (result && typeof result.catch === 'function') {
-        result.catch(() => {
-          if (this.active === audio) this.active = null;
-          notice('Swara ora bisa diputer. Priksa file MP3.');
-        });
-      }
-
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  return false;
-},
+    play(id){
+      this.stopVoice();const slot=slots.get(id);if(!slot?.buffer)return false;
+      try{const ctx=this.ctx(),source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=slot.buffer;gain.gain.value=this.voiceVolume/100;source.connect(gain).connect(ctx.destination);source.onended=()=>{if(this.active===source)this.active=null};this.active=source;source.start();return true}catch{return false}
+    },
     background(){
       if(!this.started||!this.musicOn)return;
       const remote=screen==='cover'?audioSources.musicTitle:screen==='goals'?audioSources.musicGoals:null;
@@ -213,37 +134,17 @@
   function notice(t){storageMessage=t;hud()}
   function symbol(n){return `<span data-letter="${esc(n)}"></span>`}
   function portrait(){return '<span data-character></span>'}
-  
-function addMedia(){
-  view.querySelectorAll('[data-letter]').forEach(node=>{
-    const n=node.dataset.letter;
-    const f=document.getElementById('letter-template').content.cloneNode(true);
-    const root=f.querySelector('.glyph');
-
-    const ra=root.querySelector('[data-template-id="aksara-ra-asli"]');
-    const da=root.querySelector('[data-template-id="aksara-da-asli"]');
-    const glyph=root.querySelector('.letter-glyph');
-
-    ra.hidden=n!=='Ra';
-    da.hidden=n!=='Da';
-    glyph.hidden=n==='Ra'||n==='Da';
-
-    if(n==='Ra') ra.src='./gambarra.jpg';
-    if(n==='Da') da.src='./gambarda.jpg';
-
-    if(!glyph.hidden) glyph.textContent=forms[n]||'';
-
-    root.setAttribute('aria-label','Aksara '+n);
-    node.appendChild(f);
-  });
-
-  view.querySelectorAll('[data-character]').forEach(n=>{
-    n.appendChild(
-      document.getElementById('character-template').content.cloneNode(true)
-    );
-  });
-}
-
+  function addMedia(){
+    view.querySelectorAll('[data-letter]').forEach(node=>{
+      const n=node.dataset.letter,f=document.getElementById('letter-template').content.cloneNode(true),root=f.querySelector('.glyph');
+      root.querySelector('[data-template-id="aksara-ra-asli"]').hidden=n!=='Ra';
+      root.querySelector('[data-template-id="aksara-da-asli"]').hidden=n!=='Da';
+      const glyph=root.querySelector('.letter-glyph');glyph.hidden=n==='Ra'||n==='Da';
+      if(!glyph.hidden)glyph.textContent=forms[n]||'';
+      root.setAttribute('aria-label','Aksara '+n);node.appendChild(f)
+    });
+    view.querySelectorAll('[data-character]').forEach(n=>n.appendChild(document.getElementById('character-template').content.cloneNode(true)))
+  }
   function hud(){
     ['name','score','star','coin','key'].forEach((key,i)=>document.getElementById('hud-'+key).textContent=['🧭 '+player,'Nilai '+total()+'/600','⭐ '+(keys()+(missionDone?1:0)),'🪙 '+coins,'🗝️ '+keys()][i]);
     document.getElementById('back').hidden=screen==='cover';document.getElementById('storage-note').textContent=storageMessage
