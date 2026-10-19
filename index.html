@@ -68,6 +68,8 @@
 
 /* Gambar aksara Ra dan Da */
 .aksara-image {
+
+.aksara-image {
   width: 1em;
   height: 1em;
   object-fit: contain;
@@ -79,27 +81,23 @@
   display: none !important;
 }
 
-/* Karakter kecil di samping teks pada halaman Tujuan Sinau */
+/* Karakter kecil di samping teks tujuan belajar */
 #view .hero:has(.scroll) {
-  display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 14px;
-  width: 100%;
+  gap: 12px;
   max-width: 850px;
   margin: 0 auto;
 }
 
 #view .hero:has(.scroll) [data-character] {
-  flex: 0 0 90px;
-  width: 90px;
+  flex: 0 0 76px;
+  width: 76px;
 }
 
 #view .hero:has(.scroll) .character {
-  width: 90px;
-  max-height: 125px;
-  object-fit: contain;
+  width: 76px;
+  max-height: 110px;
 }
 
 #view .hero:has(.scroll) .scroll {
@@ -113,20 +111,8 @@
     gap: 8px;
   }
 
-  #view .hero:has(.scroll) [data-character] {
-    flex-basis: 76px;
-    width: 76px;
-  }
-
-  #view .hero:has(.scroll) .character {
-    width: 76px;
-    max-height: 110px;
-  }
-
   #view .hero:has(.scroll) .scroll {
     padding: 14px 12px;
-    border-width: 4px;
-    border-radius: 16px;
   }
 }
 
@@ -179,25 +165,25 @@
    </div>
   </template>
   
+
 <template id="letter-template">
   <span class="glyph" role="img">
     <img
       data-template-id="aksara-ra-asli"
       class="aksara-image"
       alt="Aksara Ra"
-      loading="eager"
       hidden
     >
     <img
       data-template-id="aksara-da-asli"
       class="aksara-image"
       alt="Aksara Da"
-      loading="eager"
       hidden
     >
     <span class="letter-glyph"></span>
   </span>
 </template>
+
 
 .aksara-image {
   width: 1em;
@@ -212,29 +198,14 @@
 
   
 <template id="character-template">
-  
-.character-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex-shrink: 0;
-}
 
-.character-wrap .character {
-  width: clamp(75px, 12vw, 125px);
-  max-height: 145px;
-  object-fit: contain;
-  margin: 0 auto;
-}
-
-    <img
-      class="character"
-      src="https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/kartunjawa.png"
-      alt="Karakter Cakrawala"
-      loading="eager"
-    >
-  </span>
+<template id="character-template">
+  <img
+    class="character"
+    src="https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/kartunjawa.png"
+    alt="Karakter Cakrawala"
+    loading="eager"
+  >
 </template>
 
   <template id="closing-template">
@@ -271,6 +242,7 @@
   pageMusic.concat(pageVoices).forEach(([id,label])=>addSlot(id,label));
   
 
+
 const GH =
   'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/';
 
@@ -291,29 +263,29 @@ const audioSources = {
   musicScoreboard: GH + 'musik%20semangat.mp3',
 
   letters: {
-    
-letters: {
-  Ha: GH + 'ha.mp3',
-  Na: GH + 'na.mp3',
-  Ca: GH + 'ca.mp3',
-  Ra: GH + 'ra.mp3',
-  Ka: GH + 'ka.mp3',
-  Da: GH + 'da.mp3',
-  Ta: GH + 'ta.mp3',
-  Sa: GH + 'sa.mp3',
-  Wa: GH + 'wa.mp3',
-  La: GH + 'la.mp3',
-  Pa: GH + 'pa.mp3',
-  Dha: GH + 'dha.mp3',
-  Ja: GH + 'ja.mp3',
-  Ya: GH + 'ya.mp3',
-  Nya: GH + 'nya.mp3',
-  Ma: GH + 'ma.mp3',
-  Ga: GH + 'ga.mp3',
-  Ba: GH + 'ba.mp3',
-  Tha: GH + 'tha.mp3',
-  Nga: GH + 'nga.mp3'
-}
+    Ha: GH + 'ha.mp3',
+    Na: GH + 'na.mp3',
+    Ca: GH + 'ca.mp3',
+    Ra: GH + 'ra.mp3',
+    Ka: GH + 'ka.mp3',
+    Da: GH + 'da.mp3',
+    Ta: GH + 'ta.mp3',
+    Sa: GH + 'sa.mp3',
+    Wa: GH + 'wa.mp3',
+    La: GH + 'la.mp3',
+    Pa: GH + 'pa.mp3',
+    Dha: GH + 'dha.mp3',
+    Ja: GH + 'ja.mp3',
+    Ya: GH + 'ya.mp3',
+    Nya: GH + 'nya.mp3',
+    Ma: GH + 'ma.mp3',
+    Ga: GH + 'ga.mp3',
+    Ba: GH + 'ba.mp3',
+    Tha: GH + 'tha.mp3',
+    Nga: GH + 'nga.mp3'
+  }
+};
+
 
 
   const media={
@@ -333,6 +305,7 @@ letters: {
       try{const ctx=this.ctx(),source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=slot.buffer;gain.gain.value=this.voiceVolume/100;source.connect(gain).connect(ctx.destination);source.onended=()=>{if(this.active===source)this.active=null};this.active=source;source.start();return true}catch{return false}
     },
     
+
 background() {
   if (!this.started || !this.musicOn) return;
 
@@ -347,7 +320,8 @@ background() {
   } else if (screen === 'scoreboard' || screen === 'final') {
     url = audioSources.musicScoreboard;
   } else if (
-    ['material', 'example', 'game', 'gameResult', 'levelResult'].includes(screen)
+    ['material', 'example', 'game',
+     'gameResult', 'levelResult'].includes(screen)
   ) {
     url = audioSources.musicLevels[level] || null;
   }
@@ -357,10 +331,16 @@ background() {
     return;
   }
 
-  if (this.remoteMusic && this.remoteMusicUrl === url) {
+  // Jika musik yang sama sudah berjalan, jangan mulai ulang.
+  if (
+    this.remoteMusic &&
+    this.remoteMusicUrl === url &&
+    !this.remoteMusic.paused
+  ) {
     return;
   }
 
+  // Hentikan musik sebelumnya.
   this.stopMusic();
 
   const audio = new Audio(url);
@@ -374,15 +354,15 @@ background() {
 
   audio.addEventListener('error', () => {
     if (this.remoteMusic === audio) {
-      this.stopMusic();
-      notice('Musik gagal dimuat. Periksa URL file GitHub.');
+      notice('Musik gagal dimuat. Priksa jeneng lan URL file GitHub.');
     }
-  }, { once: true });
+  });
 
   audio.play().catch(() => {
-    notice('Tekan tombol Musik atau AYO WIWITI untuk memulai audio.');
+    notice('Musik durung diputer. Pencet tombol Musik maneh.');
   });
 },
+
 
     async assign(id,file){
       const slot=slots.get(id);if(!slot||!file)return;
@@ -396,6 +376,7 @@ background() {
   function symbol(n){return `<span data-letter="${esc(n)}"></span>`}
   function portrait(){return '<span data-character></span>'}
   
+
 function addMedia() {
   view.querySelectorAll('[data-letter]').forEach(node => {
     const n = node.dataset.letter;
@@ -412,23 +393,23 @@ function addMedia() {
     );
     const glyph = root.querySelector('.letter-glyph');
 
-    raImage.src =
-      'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/ra.png';
-    daImage.src =
-      'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/da.png';
+    const image = n === 'Ra' ? raImage : daImage;
+    const isImageLetter = n === 'Ra' || n === 'Da';
 
-    raImage.hidden = n !== 'Ra';
-    daImage.hidden = n !== 'Da';
-    glyph.hidden = n === 'Ra' || n === 'Da';
+    if (isImageLetter) {
+      image.src = GH + (n === 'Ra' ? 'ra.png' : 'da.png');
+      image.hidden = false;
+      glyph.hidden = true;
 
-    if (n === 'Ra' || n === 'Da') {
-      const img = n === 'Ra' ? raImage : daImage;
-      img.onerror = () => {
-        img.hidden = true;
+      image.onerror = () => {
+        image.hidden = true;
         glyph.hidden = false;
         glyph.textContent = forms[n];
       };
     } else {
+      raImage.hidden = true;
+      daImage.hidden = true;
+      glyph.hidden = false;
       glyph.textContent = forms[n] || '';
     }
 
@@ -443,6 +424,7 @@ function addMedia() {
     );
   });
 }
+
 
 const raImage = root.querySelector(
   '[data-template-id="aksara-ra-asli"]'
@@ -762,17 +744,23 @@ document.getElementById('music-toggle').addEventListener(
       media.background();
     }
 
-    const btn = document.getElementById('music-toggle');
-    btn.textContent = media.musicOn
-      ? 'Musik: Urip'
-      : 'Musik: Mati';
-
-    btn.setAttribute(
-      'aria-pressed',
-      String(media.musicOn)
-    );
+    const btn = 
+document.getElementById('music-toggle').addEventListener('click', () => {
+  if (!media.started) {
+    media.start();
+  } else if (media.musicOn) {
+    media.musicOn = false;
+    media.stopMusic();
+  } else {
+    media.musicOn = true;
+    media.background();
   }
-);
+
+  const btn = document.getElementById('music-toggle');
+  btn.textContent = media.musicOn ? 'Musik: Urip' : 'Musik: Mati';
+  btn.setAttribute('aria-pressed', String(media.musicOn));
+});
+
   document.getElementById('overlay-close').addEventListener('click',closeOverlay);
   content.addEventListener('input',e=>{
     if(e.target.dataset.transcript){slots.get(e.target.dataset.transcript).transcript=e.target.value;return}
