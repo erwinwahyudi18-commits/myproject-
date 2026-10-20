@@ -109,8 +109,15 @@ src="https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/la
   </span>
 </template>
   <template id="character-template">
-   <span><img data-template-id="cakrawala-image" class="canva-image character" loading="lazy"></span>
-  </template>
+  <span>
+    <img
+      data-template-id="cakrawala-image"
+      class="canva-image character"
+      src="https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/kartunjawa.png"
+      alt="Karakter pemandu Cakrawala"
+      loading="lazy">
+  </span>
+</template>
   <template id="closing-template">
    <div class="mt-4 font-bold">
     <p data-template-id="final-thanks" class="canva-text">Matur nuwun wis dolanan lan sinau. Ketemu maneh ing dolanan sabanjure!</p>
@@ -211,7 +218,22 @@ function bacaAksara(namaAksara) {
     restoreMusic(){if(this.started&&this.musicOn&&!this.music)this.background()},
 
     ctx(){if(!this.context){const AudioContextClass=window.AudioContext||window.webkitAudioContext;if(!AudioContextClass)throw new Error('AudioContext ora kasedhiya');this.context=new AudioContextClass()}if(this.context.state==='suspended'){const resume=this.context.resume();if(resume&&typeof resume.catch==='function')resume.catch(()=>this.unavailable())}return this.context},
-    stopVoice(){if(this.active){try{this.active.stop()}catch{}this.active=null}},
+    stopVoice() {
+  if (!this.active) return;
+
+  try {
+    if (typeof this.active.stop === 'function') {
+      this.active.stop();
+    } else {
+      this.active.pause();
+      this.active.currentTime = 0;
+    }
+  } catch (error) {
+    console.warn('Gagal menghentikan suara:', error);
+  }
+
+  this.active = null;
+},
     stopMusic(){if(this.music){try{this.music.stop()}catch{}this.music=null}if(this.remoteMusic){try{this.remoteMusic.pause();this.remoteMusic.currentTime=0}catch{}this.remoteMusic=null}this.remoteMusicUrl=null;this.musicId=null},
     stopAll(){this.stopVoice();this.stopMusic()},
     playRemoteEffect(url){if(this.effectBusy)return false;this.effectBusy=true;try{const audio=new Audio(url);audio.preload='auto';audio.volume=Math.max(.01,this.voiceVolume/100);const done=()=>{this.effectBusy=false;audio.removeEventListener('ended',done);audio.removeEventListener('error',done)};audio.addEventListener('ended',done,{once:true});audio.addEventListener('error',done,{once:true});const attempt=audio.play();if(attempt&&typeof attempt.catch==='function')attempt.catch(done);return true}catch{this.effectBusy=false;return false}},
