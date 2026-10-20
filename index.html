@@ -281,16 +281,115 @@ function bacaAksara(namaAksara) {
 
   return false;
 },
-    background(){
-      if(!this.started||!this.musicOn)return;
-      const remote=screen==='cover'?audioSources.musicTitle:screen==='goals'?audioSources.musicGoals:null;
-      if(remote){if(this.remoteMusic&&this.remoteMusicUrl===remote)return;this.stopMusic();try{const audio=new Audio(remote);audio.loop=true;audio.preload='auto';audio.volume=Math.max(.01,this.musicVolume/100);audio.addEventListener('error',()=>{if(this.remoteMusic===audio)this.stopMusic()},{once:true});this.remoteMusic=audio;this.remoteMusicUrl=remote;this.musicId=remote;const attempt=audio.play();if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{});return}catch{return}}
-      const id=screen==='map'?'music-map':screen==='scoreboard'?'music-scoreboard':screen==='material'||screen==='example'?'music-level-'+(level+1):'music';
-      const slot=slots.get(id)?.buffer?slots.get(id):slots.get('music');if(!slot?.buffer){this.stopMusic();return}
-      if(this.music&&this.musicId===id)return;
-      this.stopMusic();
-      try{const ctx=this.ctx(),source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=slot.buffer;source.loop=true;gain.gain.value=Math.max(.01,this.musicVolume/100*(screen==='game'?.22:1));source.connect(gain).connect(ctx.destination);source.onended=()=>{if(this.music===source){this.music=null;this.musicId=null}};source.start();this.music=source;this.musicId=id}catch{this.music=null;this.musicId=null}
-    },
+    background() {
+  if (!this.started || !this.musicOn) return;
+
+  let remote = null;
+  let volume = this.musicVolume / 100;
+
+  if (screen === 'cover') {
+    remote = audioSources.musicTitle;
+  } else if (screen === 'goals') {
+    remote = audioSources.musicGoals;
+  } else if (screen === 'map') {
+    remote = audioSources.musicMap;
+  } else if (screen === 'scoreboard') {
+    remote = audioSources.musicScoreboard;
+  } else if (
+    ['material', 'example', 'game', 'gameResult', 'levelResult'].includes(screen)
+  ) {
+    remote = audioSources['musicLevel' + (level + 1)];
+    volume *= 0.22; // Musik level lebih pelan, sekitar 22% dari volume musik
+  }
+
+  // Putar musik MP3 dari GitHub jika URL tersedia.
+  if (remote) {
+    if (
+      this.remoteMusic &&
+      this.remoteMusicUrl === remote &&
+      !this.remoteMusic.paused
+    ) {
+      this.remoteMusic.volume = Math.max(0, Math.min(1, volume));
+      return;
+    }
+
+    this.stopMusic();
+
+    try {
+      const audio = new Audio(remote);
+      audio.loop = true;
+      audio.preload = 'auto';
+      audio.volume = Math.max(0, Math.min(1, volume));
+
+      this.remoteMusic = audio;
+      this.remoteMusicUrl = remote;
+      this.musicId = remote;
+
+      audio.addEventListener('error', () => {
+        if (this.remoteMusic === audio) {
+          this.stopMusic();
+          console.error('Musik gagal dimuat:', remote);
+        }
+      }, { once: true });
+
+      const attempt = audio.play();
+      if (attempt && typeof attempt.catch === 'function') {
+        attempt.catch(error => {
+          console.warn('Musik belum bisa diputar:', error);
+        });
+      }
+      return;
+    } catch (error) {
+      console.error('Gagal memutar musik:', error);
+    }
+  }
+
+  // Jika tidak ada URL untuk halaman ini, gunakan musik dari Setelan game.
+  const id =
+    screen === 'game' ? 'music-level-' + (level + 1) :
+    screen === 'map' ? 'music-map' :
+    screen === 'scoreboard' ? 'music-scoreboard' :
+    screen === 'material' || screen === 'example'
+      ? 'music-level-' + (level + 1)
+      : 'music';
+
+  const slot = slots.get(id)?.buffer ? slots.get(id) : slots.get('music');
+
+  if (!slot?.buffer) {
+    this.stopMusic();
+    return;
+  }
+
+  if (this.music && this.musicId === id) return;
+
+  this.stopMusic();
+
+  try {
+    const ctx = this.ctx();
+    const source = ctx.createBufferSource();
+    const gain = ctx.createGain();
+
+    source.buffer = slot.buffer;
+    source.loop = true;
+    gain.gain.value = Math.max(0, Math.min(1, volume));
+
+    source.connect(gain).connect(ctx.destination);
+    source.onended = () => {
+      if (this.music === source) {
+        this.music = null;
+        this.musicId = null;
+      }
+    };
+
+    source.start();
+    this.music = source;
+    this.musicId = id;
+  } catch (error) {
+    console.error('Gagal memutar musik dari Setelan:', error);
+    this.music = null;
+    this.musicId = null;
+  }
+},
     async assign(id,file){
       const slot=slots.get(id);if(!slot||!file)return;
       if(!file.type.startsWith('audio/')&&!/\.(mp3|wav|ogg|m4a|aac|webm)$/i.test(file.name)){message('Pilih berkas swara sing bener.');return}
