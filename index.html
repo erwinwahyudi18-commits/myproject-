@@ -351,9 +351,15 @@ function bacaAksara(namaAksara) {
   let remote = null;
   let volume = this.musicVolume / 100;
 
-  if (screen === 'cover') {
-    remote = audioSources.musicTitle;
-  } else if (screen === 'goals') {
+  
+if(screen==='cover'){
+  view.replaceChildren(
+    document.getElementById('cover-template').content.cloneNode(true)
+  );
+  addMedia();
+  return;
+}
+ else if (screen === 'goals') {
     remote = audioSources.musicGoals;
   } else if (screen === 'map') {
     remote = audioSources.musicMap;
