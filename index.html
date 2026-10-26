@@ -84,30 +84,72 @@ src="https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/la
     </section>
    </div>
   </div>
-  <template id="cover-template">
-   <h1 data-template-id="game-title" class="canva-text cover-title">SI CAKRAWALA</h1>
-   <p data-template-id="game-subtitle" class="canva-text cover-subtitle">Sinau Maca Aksara Jawa Lancar</p>
-   <div class="hero">
-    <span data-character=""></span>
-    <p data-template-id="welcome-text" class="canva-text dialog">Halo, kanca-kanca! Ayo sinau aksara Jawa!</p>
-   </div>
-   <div class="actions">
-    <button data-template-id="start-button" class="canva-button btn gold" data-action="start-playing" type="button">AYO WIWITI</button>
-   </div>
-  </template>
-  <template id="letter-template">
-  <span class="glyph" role="img">
-    <img data-template-id="aksara-ra-asli"
-         class="canva-image"
-         src="gambarra.jpg"
-         alt="Aksara Ra">
-    <img data-template-id="aksara-da-asli"
-         class="canva-image"
-         src="gambarda.jpg"
-         alt="Aksara Da">
-    <span class="letter-glyph"></span>
-  </span>
+  
+<template id="cover-template">
+  <div style="
+    position:relative;
+    z-index:10;
+    box-sizing:border-box;
+    width:100%;
+    padding:35px 15px;
+    text-align:center;
+    color:#fff;
+    background:rgba(45,35,20,0.78);
+    border-radius:20px;
+  ">
+    <h1 style="
+      display:block;
+      color:#ffe09b;
+      font-size:clamp(28px,5vw,48px);
+      font-weight:bold;
+      margin:10px 0;
+    ">
+      SI CAKRAWALA
+    </h1>
+
+    <p style="
+      display:block;
+      color:white;
+      font-size:20px;
+      margin:15px 0;
+    ">
+      Sinau Maca Aksara Jawa Lancar
+    </p>
+
+    <p style="
+      display:block;
+      color:white;
+      font-size:18px;
+      margin:20px 0;
+    ">
+      Halo, kanca-kanca!
+      Ayo sinau aksara Jawa!
+    </p>
+
+    <button
+      data-template-id="start-button"
+      class="canva-button btn gold"
+      data-action="start-playing"
+      type="button"
+      style="
+        display:inline-block;
+        position:relative;
+        z-index:20;
+        padding:16px 30px;
+        margin:20px auto;
+        background:#f2b544;
+        color:#38230b;
+        font-size:20px;
+        font-weight:bold;
+        border:3px solid white;
+        border-radius:15px;
+        cursor:pointer;
+      ">
+      AYO WIWITI
+    </button>
+  </div>
 </template>
+
   <template id="character-template">
   <span>
     <img
