@@ -8,11 +8,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Serif+Javanese:wght@400;700&display=swap');
 :root{--green:#176b55;--green2:#24866b;--yellow:#ffd34e;--orange:#ff9850;--cream:#fff9e9;--ink:#183d35;--red:#d94b4b;--shadow:0 12px 30px #143d3030}
 *{box-sizing:border-box}body{margin:0;font-family:'Baloo 2',system-ui,sans-serif;color:var(--ink);background:#d8efdf;min-height:100vh}button,input{font:inherit}button{border:0;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
-#app{min-height:100vh;background:linear-gradient(#0d392c44,#0d392c55),url('https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/latar.png') center/cover fixed;display:flex;flex-direction:column}
+#app{min-height:100vh;background:linear-gradient(#0d392c18,#0d392c20),url('https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/latar.png') center/cover fixed;display:flex;flex-direction:column}
 .topbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 2vw;background:#104d40e8;color:white;box-shadow:0 4px 12px #0002;z-index:5}.topbar button,.pill{border-radius:999px;padding:7px 13px;background:#fff;color:#155443;font-weight:800}.pill{background:#ffdf70}.topbar .spacer{flex:1}.topbar button:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
-main{width:min(1200px,96vw);margin:auto;flex:1;display:flex;align-items:center;justify-content:center;padding:22px 0}.screen{width:100%;background:#fff9e9ed;border:4px solid #fff;border-radius:28px;padding:clamp(18px,3vw,36px);box-shadow:var(--shadow);text-align:center;max-height:calc(100vh - 105px);overflow:auto;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+main{width:min(1200px,96vw);margin:auto;flex:1;display:flex;align-items:center;justify-content:center;padding:22px 0}.screen{width:100%;background:rgba(255,249,233,.58);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border:4px solid rgba(255,255,255,.72);border-radius:28px;padding:clamp(18px,3vw,36px);box-shadow:var(--shadow);text-align:center;max-height:calc(100vh - 105px);overflow:auto;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 h1,h2,h3{margin:0 0 12px;color:#155744;line-height:1.1}h1{font-size:clamp(2rem,5vw,4rem);font-weight:800}h2{font-size:clamp(1.5rem,3vw,2.5rem)}p{font-size:clamp(1rem,1.8vw,1.25rem)}.sub{font-size:clamp(1rem,2vw,1.5rem);color:#a24e24;font-weight:700}.btn{background:var(--green2);color:white;border-radius:16px;padding:12px 23px;margin:7px;font-weight:800;font-size:1.05rem;box-shadow:0 5px 0 #10503f;transition:.15s}.btn.gold{background:var(--yellow);color:#533b05;box-shadow:0 5px 0 #d6a92c}.btn.light{background:#fff;color:var(--green);box-shadow:0 4px 0 #d7e8dc}.btn.danger{background:var(--red);box-shadow:0 5px 0 #a83232}.btn.small{padding:7px 12px;font-size:.92rem;margin:3px}.hero{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}.hero img.guide{width:min(210px,34vw);max-height:260px;object-fit:contain;animation:bob 2.2s infinite ease-in-out}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}.guidewrap{display:inline-flex;align-items:center;gap:8px}.guidewrap img{width:85px;height:100px;object-fit:contain;animation:bob 2s infinite}.talk{animation:talk .22s infinite alternate}@keyframes talk{to{transform:scaleY(.97) rotate(-2deg)}}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}.card{background:white;border:2px solid #e5d9b8;border-radius:18px;padding:15px;box-shadow:0 5px 12px #0000000c}.card strong{display:block;color:#155744}.script{font-family:'Noto Serif Javanese',serif;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.5}.script.smallscript{font-size:clamp(1.8rem,4vw,2.7rem)}.letter{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:120px}.letter button{width:100%;height:100%;background:#fff3c5;border:2px solid #f0c95e;border-radius:16px;color:#183d35}.letter button:hover{background:#ffe58d}.choices{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;max-width:700px;margin:20px auto}.choice{min-height:72px;background:#fff;border:3px solid #e7ca71;border-radius:18px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#175a48;padding:10px}.choice:hover{background:#fff0b6}.choice.correct{background:#b9edc9;border-color:#249b56}.choice.wrong{background:#ffd0c9;border-color:#d94b4b}.question{background:#fff0bb;border-radius:24px;padding:18px;margin:14px auto;max-width:600px}.progress{height:12px;background:#e4e5d7;border-radius:20px;overflow:hidden;margin:12px auto;max-width:650px}.progress span{display:block;height:100%;background:#36a879;transition:width .2s}.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.stat{background:#e9f6e9;padding:8px 14px;border-radius:14px;font-weight:800}.levelmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.level{background:#fff;border:3px solid #e6d48b;border-radius:22px;padding:20px 10px}.level.locked{filter:grayscale(.7);opacity:.75}.level .emoji{font-size:2.5rem}.feedback{font-size:1.25rem;font-weight:800;min-height:34px;margin:10px;color:#16714d}.timer{font-size:1.5rem;font-weight:800;color:#b33}.row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.hidden{display:none!important}input[type=text],input[type=password]{padding:10px 14px;border:2px solid #b6d6c5;border-radius:12px;font-size:1rem;max-width:100%}.settings{max-width:600px;margin:10px auto;text-align:left;background:#fff;padding:18px;border-radius:18px}.settings label{display:block;margin:10px 0;font-weight:700}.settings input[type=range]{width:100%}.badge{display:inline-block;background:#ffdf70;border-radius:99px;padding:8px 16px;font-weight:800}.footer-note{font-size:.85rem;color:#58746a}.songimg{width:min(330px,80%);max-height:220px;object-fit:contain;border-radius:18px}.word{font-size:clamp(3rem,8vw,5rem);font-family:'Noto Serif Javanese',serif}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#153f34;color:white;padding:10px 18px;border-radius:14px;z-index:20;box-shadow:var(--shadow)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}.card{background:white;border:2px solid #e5d9b8;border-radius:18px;padding:15px;box-shadow:0 5px 12px #0000000c}.card strong{display:block;color:#155744}.script{font-family:'Noto Serif Javanese',serif;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.5}.script.smallscript{font-size:clamp(1.8rem,4vw,2.7rem)}.letter{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:120px}.letter button{width:100%;height:100%;background:#fff3c5;border:2px solid #f0c95e;border-radius:16px;color:#183d35}.letter button:hover{background:#ffe58d}.choices{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;max-width:700px;margin:20px auto}.choice{min-height:72px;background:#fff;border:3px solid #e7ca71;border-radius:18px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#175a48;padding:10px}.choice:hover{background:#fff0b6}.choice.correct{background:#b9edc9;border-color:#249b56}.choice.wrong{background:#ffd0c9;border-color:#d94b4b}.question{background:#fff0bb;border-radius:24px;padding:18px;margin:14px auto;max-width:600px}.progress{height:12px;background:#e4e5d7;border-radius:20px;overflow:hidden;margin:12px auto;max-width:650px}.progress span{display:block;height:100%;background:#36a879;transition:width .2s}.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.stat{background:#e9f6e9;padding:8px 14px;border-radius:14px;font-weight:800}.levelmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.level{background:#fff;border:3px solid #e6d48b;border-radius:22px;padding:20px 10px}.level.locked{filter:grayscale(.7);opacity:.75}.level .emoji{font-size:2.5rem}.feedback{font-size:1.25rem;font-weight:800;min-height:34px;margin:10px;color:#16714d}.timer{font-size:1.5rem;font-weight:800;color:#b33}.row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.hidden{display:none!important}input[type=text],input[type=password]{padding:10px 14px;border:2px solid #b6d6c5;border-radius:12px;font-size:1rem;max-width:100%}.settings{max-width:600px;margin:10px auto;text-align:left;background:#fff;padding:18px;border-radius:18px}.settings label{display:block;margin:10px 0;font-weight:700}.settings input[type=range]{width:100%}.badge{display:inline-block;background:#ffdf70;border-radius:99px;padding:8px 16px;font-weight:800}.footer-note{font-size:.85rem;color:#58746a}.songimg{width:min(495px,90%);max-height:330px;object-fit:contain;border-radius:18px}.word{font-size:clamp(3rem,8vw,5rem);font-family:'Noto Serif Javanese',serif}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#153f34;color:white;padding:10px 18px;border-radius:14px;z-index:20;box-shadow:var(--shadow)}
 @media(max-width:650px){.topbar{justify-content:center}.topbar .spacer{display:none}.levelmap{grid-template-columns:1fr}.screen{max-height:calc(100vh - 150px)}main{padding:12px 0}.choices{gap:8px}.choice{min-height:62px}.hero img.guide{width:120px}}
 </style></head>
 <body><div id="app"><header class="topbar" id="topbar" hidden>
@@ -27,6 +27,7 @@ const asset=name=>GITHUB_BASE+encodeURIComponent(name);
 const APPS_SCRIPT_URL='';
 const PASSWORD_GURU='NAYA';
 const aksara=[['ꦲ','Ha','ha.mp3'],['ꦤ','Na','na.mp3'],['ꦕ','Ca','ca.mp3'],['ꦫ','Ra','ra.mp3'],['ꦏ','Ka','ka.mp3'],['ꦢ','Da','da.mp3'],['ꦠ','Ta','ta.mp3'],['ꦱ','Sa','sa.mp3'],['ꦮ','Wa','wa.mp3'],['ꦭ','La','la.mp3'],['ꦥ','Pa','pa.mp3'],['ꦝ','Dha','dha.mp3'],['ꦗ','Ja','ja.mp3'],['ꦪ','Ya','ya.mp3'],['ꦚ','Nya','nya.mp3'],['ꦩ','Ma','ma.mp3'],['ꦒ','Ga','ga.mp3'],['ꦧ','Ba','ba.mp3'],['ꦛ','Tha','tha.mp3'],['ꦔ','Nga','nga.mp3']];
+
 const q1=[['ꦲ',['Ha','Na','Ca','Ra'],'Ha'],['ꦤ',['Ca','Na','Ka','Ra'],'Na'],['ꦕ',['Ra','Ka','Ca','Da'],'Ca'],['ꦫ',['Ra','Ha','Na','Ta'],'Ra'],['ꦏ',['Ca','Ka','Sa','Wa'],'Ka'],['ꦢ',['La','Ta','Da','Ra'],'Da'],['ꦠ',['Sa','Ta','Wa','Ha'],'Ta'],['ꦱ',['Na','La','Sa','Ka'],'Sa'],['ꦮ',['Wa','Ca','Da','Ha'],'Wa'],['ꦭ',['Ra','La','Sa','Ta'],'La']];
 const q2=[['HA',['ꦲ','ꦤ','ꦕ','ꦫ'],'ꦲ'],['NA',['ꦕ','ꦤ','ꦏ','ꦫ'],'ꦤ'],['CA',['ꦫ','ꦏ','ꦕ','ꦢ'],'ꦕ'],['RA',['ꦫ','ꦲ','ꦤ','ꦠ'],'ꦫ'],['KA',['ꦕ','ꦏ','ꦱ','ꦮ'],'ꦏ'],['DA',['ꦭ','ꦠ','ꦢ','ꦫ'],'ꦢ'],['TA',['ꦱ','ꦠ','ꦮ','ꦲ'],'ꦠ'],['SA',['ꦤ','ꦭ','ꦱ','ꦏ'],'ꦱ'],['WA',['ꦮ','ꦕ','ꦢ','ꦲ'],'ꦮ'],['LA',['ꦫ','ꦭ','ꦱ','ꦠ'],'ꦭ']];
 const q3=[['ꦥ',['Pa','Dha','Ja','Ya'],'Pa'],['ꦝ',['Ma','Dha','Nya','Ga'],'Dha'],['ꦗ',['Ya','Ba','Ja','Tha'],'Ja'],['ꦪ',['Ya','Pa','Nga','Ma'],'Ya'],['ꦚ',['Ga','Nya','Dha','Ba'],'Nya'],['ꦩ',['Tha','Ja','Ma','Pa'],'Ma'],['ꦒ',['Ga','Nga','Ya','Nya'],'Ga'],['ꦧ',['Dha','Ba','Ja','Tha'],'Ba'],['ꦛ',['Ma','Pa','Tha','Nga'],'Tha'],['ꦔ',['Nga','Nya','Ga','Ya'],'Nga']];
@@ -34,101 +35,265 @@ const q4=[['PA',['ꦥ','ꦝ','ꦗ','ꦪ'],'ꦥ'],['DHA',['ꦩ','ꦝ','ꦚ','ꦒ'
 const q5=[['ꦧꦠ',['Bata','Gaga','Lara','Kaca'],'Bata'],['ꦩꦠ',['Mata','Rasa','Mala','Raga'],'Mata'],['ꦱꦥ',['Sapa','Bata','Dada','Kaca'],'Sapa'],['ꦫꦱ',['Rasa','Raga','Baba','Mala'],'Rasa'],['ꦏꦕ',['Kaca','Lara','Mata','Gaga'],'Kaca'],['ꦭꦫ',['Lara','Bata','Sapa','Rasa'],'Lara'],['ꦢꦢ',['Dada','Gaga','Kaca','Raga'],'Dada'],['ꦒꦒ',['Gaga','Baba','Mata','Bata'],'Gaga'],['ꦫꦒ',['Raga','Rasa','Lara','Sapa'],'Raga'],['ꦩꦭ',['Mala','Mata','Kaca','Dada'],'Mala']];
 const state={page:'home',history:[],name:localStorage.getItem('sc_name')||'Kanca Sinau',scores:[0,0,0,0,0],correct:[0,0,0,0,0],wrong:[0,0,0,0,0],unlocked:[true,false,false],musicOn:true,musicVol:.35,voiceVol:.9,questionSet:[],qIndex:0,answered:false,currentSet:0,level:0,teacherOpen:false,teacherAction:false,timer:null,seconds:15,feedback:''};
 const $=id=>document.getElementById(id), screen=$('screen'), topbar=$('topbar');
-function total(){return state.scores.reduce((a,b)=>a+b,0)}function right(){return state.correct.reduce((a,b)=>a+b,0)}function wrong(){return state.wrong.reduce((a,b)=>a+b,0)}function stars(){let s=total();return s>=850?4:s>=750?3:s>=650?2:s>=550?1:0}function reward(){let s=total();return s>=950?5:s>=900?5:s>=850?4:s>=750?3:s>=650?2:s>=550?1:0}
-function updateTop(){ $('playerName').textContent=state.name;$('scoreTop').textContent=total();$('starTop').textContent=reward();$('musicToggle').textContent=state.musicOn?'Musik Mati':'Musik Urip'; }
-function show(html,page){if(state.timer){clearInterval(state.timer);state.timer=null}state.page=page;screen.innerHTML=html;topbar.hidden=['home'].includes(page);updateTop();}
-function guide(){return `<div class="guidewrap"><img src="${asset('kartunjawa.png')}" alt="Paraga pemandu" onerror="this.style.display='none'"><span class="badge">Ayo semangat!</span></div>`}
-function playBg(file){const a=$('bgm');if(!state.musicOn){a.pause();return}if(!file){a.pause();return}const url=asset(file);if(a.src!==url)a.src=url;a.volume=state.musicVol;a.play().catch(()=>{});}
-function playSound(file){const bg=$('bgm'),resume=!bg.paused;bg.pause();const a=$('sfx');a.pause();a.loop=false;a.src=asset(file);a.volume=state.voiceVol;a.currentTime=0;a.onended=()=>{if(resume&&state.musicOn&&state.page!=='song')bg.play().catch(()=>{});};a.play().catch(()=>{});}
-function toggleMusic(){state.musicOn=!state.musicOn;if(state.musicOn){playBg(currentMusic());toast('Musik diuripake')}else{$('bgm').pause();toast('Musik dipateni')}updateTop()}
-function currentMusic(){return ({home:'pembukaan.mp3',objectives:'tujuan.mp3',instructions:'musik semangat.mp3',song:'menuutama.mp3',map:'menuutama.mp3',material1:'level1.mp3',material2:'level2.mp3',material3:'level3.mp3',score1:'level1.mp3',score2:'level2.mp3',final:'tepuktanganpanjang.mp3'})[state.page]||'menuutama.mp3'}
-function toast(t){$('toast').textContent=t;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2200)}
-function go(page){state.history.push(state.page);render(page)}function goBack(){if(state.history.length){const p=state.history.pop();render(p)}else render('map')}
-function editName(){const n=prompt('Sapa jenengmu?',state.name);if(n&&n.trim()){state.name=n.trim().slice(0,24);localStorage.setItem('sc_name',state.name);updateTop();toast('Jeneng kasil disimpen')}}
-function render(page){switch(page){case'home':home();break;case'objectives':objectives();break;case'instructions':instructions();break;case'song':song();break;case'map':mapPage();break;case'material1':material(1);break;case'example11':example(1,1);break;case'quiz11':startQuiz(1,1);break;case'example12':example(1,2);break;case'quiz12':startQuiz(1,2);break;case'score1':scoreLevel(1);break;case'material2':material(2);break;case'example21':example(2,1);break;case'quiz21':startQuiz(2,1);break;case'example22':example(2,2);break;case'quiz22':startQuiz(2,2);break;case'score2':scoreLevel(2);break;case'material3':material(3);break;case'example3':example(3,1);break;case'quiz3':startQuiz(3,1);break;case'final':finalPage();break;case'settings':settings();break;case'locks':locksPage();break;default:home()}}
-function home(){show(`<div class="hero"><div><p class="sub">Sugeng Rawuh!</p><h1>SI CAKRAWALA</h1><p class="sub">Sinau Maca Aksara Jawa Lancar</p><p>Ayo njelajah budaya Jawa lan sinau maca aksara Jawa!</p><button class="btn gold" onclick="go('objectives')">AYO WIWITI</button></div><img class="guide" src="${asset('kartunjawa.png')}" alt="Kartun Jawa"></div>`,'home');playBg('pembukaan.mp3')}
-function objectives(){show(`<h2>Tujuan Pasinaon</h2><div class="cards">${['Siswa bisa ngenali wujud lan jeneng aksara Jawa legena.','Siswa bisa nyebutake swara saben aksara Jawa kanthi bener.','Siswa bisa nggandhengake aksara Jawa karo tulisan Latine.','Siswa bisa maca tembung prasaja nganggo aksara Jawa.','Siswa bisa maca tembung prasaja nganggo aksara Jawa kanthi lancar.'].map((x,i)=>`<div class="card"><strong>Tujuan ${i+1}</strong>${x}</div>`).join('')}</div>${guide()}<div><button class="btn light" onclick="goBack()">Bali</button><button class="btn" onclick="go('instructions')">Sabanjure</button></div>`,'objectives');playBg('tujuan.mp3')}
-function instructions(){const rules=['Wacanen materi kanthi teliti.','Klik aksara Jawa kanggo ngrungokake swarane.','Wacanen tuladha soal sadurunge dolanan.','Pilihen siji wangsulan sing paling bener.','Saben wangsulan bener entuk 20 poin.','Wangsulan salah ora entuk poin.','Rampungna tantangan supaya bisa mbukak level sabanjure.','Gatekna wektu nalika dolanan ing level 3.'];show(`<h2>Petunjuk lan Tata Cara Dolan</h2><div class="cards">${rules.map((x,i)=>`<div class="card"><strong>${i+1}.</strong>${x}</div>`).join('')}</div>${guide()}<button class="btn light" onclick="goBack()">Bali</button><button class="btn" onclick="go('song')">Sabanjure</button>`,'instructions');playBg('musik semangat.mp3')}
-function song(){show(`<h2>Nyanyi Lagu Aksara Jawa</h2>${guide()}<p><img class="songimg" src="${asset('laguaksarajwa.jpg')}" alt="Lagu Aksara Jawa"></p><button class="btn gold" onclick="playSong()">▶ Puter Lagu</button><button class="btn danger" onclick="stopSong()">■ Mandheg</button><button class="btn" onclick="go('map')">Sabanjure</button>`,'song');playBg('menuutama.mp3')}
-function playSong(){playBg('');playSound('laguaksarajawa.mp3');$('sfx').loop=true}function stopSong(){$('sfx').pause();$('sfx').loop=false;playBg('menuutama.mp3')}
-function mapPage(){show(`<h2>Peta Petualangan</h2><p>Pilih papan dolananmu. Rampungna saben tantangan kanggo mbukak dalan sabanjure.</p>${guide()}<div class="levelmap"><div class="level"><div class="emoji">🌱</div><h3>Level 1</h3><p>Pambuka Aksara Jawa</p><span class="badge">Kebuka</span><br><button class="btn" onclick="go('material1')">Mlebu</button></div><div class="level ${state.unlocked[1]?'':'locked'}"><div class="emoji">${state.unlocked[1]?'🌳':'🔒'}</div><h3>Level 2</h3><p>Nglakoni Petualangan Aksara</p><span class="badge">${state.unlocked[1]?'Kebuka':'Kekunci'}</span><br><button class="btn" ${state.unlocked[1]?'':'disabled'} onclick="go('material2')">Mlebu</button></div><div class="level ${state.unlocked[2]?'':'locked'}"><div class="emoji">${state.unlocked[2]?'🏆':'🔒'}</div><h3>Level 3</h3><p>Maca Tembung</p><span class="badge">${state.unlocked[2]?'Kebuka':'Kekunci'}</span><br><button class="btn" ${state.unlocked[2]?'':'disabled'} onclick="go('material3')">Mlebu</button></div></div><button class="btn light" onclick="openSettings()">Setelan</button>`,'map');playBg('menuutama.mp3')}
-
-function material(level) {
-  let list = level === 1
-    ? aksara.slice(0, 10)
-    : level === 2
-      ? aksara.slice(10)
-      : aksara;
-
-  let title = level === 1
-    ? 'Sinau Aksara Jawa'
-    : level === 2
-      ? 'Sinau Aksara Jawa Sabanjure'
-      : 'Sinau Maca Tembung';
-
-  show(`
-    <h2>${title}</h2>
-    <p>Klik aksara kanggo ngrungokake swarane.</p>
-
-    <div class="cards">
-      ${list.map(([g, l, a]) => {
-        let gambar = '';
-
-        if (l === 'Ra') {
-          gambar = 'gambarra.jpg';
-        } else if (l === 'Da') {
-          gambar = 'gambarda.jpg';
-        }
-
-        return `
-          <div class="card letter">
-            <button onclick="playSound('${a}')">
-
-              ${gambar ? `
-                <img
-                  src="${asset(gambar)}"
-                  alt="Gambar aksara ${l}"
-                  style="width:85px;height:85px;object-fit:contain;"
-                >
-              ` : ''}
-
-              <span class="script">${g}</span>
-              <strong>${l}</strong>
-              <small>🔊 Rungokna</small>
-
-            </button>
-          </div>
-        `;
-      }).join('')}
-    </div>
-
-    <button class="btn"
-      onclick="go('${level === 1 ? 'example11' : level === 2 ? 'example21' : 'example3'}')">
-      Tuladha Soal
-    </button>
-  `, 'material' + level);
-
-  playBg('level' + level + '.mp3');
+function total(){return state.scores.reduce((a,b)=>a+b,0)}
+function right(){return state.correct.reduce((a,b)=>a+b,0)}
+function wrong(){return state.wrong.reduce((a,b)=>a+b,0)}
+function stars(){let s=total();return s>=850?4:s>=750?3:s>=650?2:s>=550?1:0}
+function reward(){let s=total();return s>=950?5:s>=900?5:s>=850?4:s>=750?3:s>=650?2:s>=550?1:0}
+function updateTop(){
+ $('playerName').textContent=state.name;
+ $('scoreTop').textContent=total();
+ $('starTop').textContent=reward();
+ $('musicToggle').textContent=state.musicOn?'Musik Mati':'Musik Urip';
 }
-function example(level,game){let html;if(level===1&&game===1)html=`<div class="question"><p>Wacanen aksara iki!</p><div class="script">ꦲ</div><div class="choices"><div class="choice">Ha</div><div class="choice">Na</div><div class="choice">Ca</div><div class="choice">Ra</div></div><b>Wangsulan sing bener yaiku Ha.</b></div>`;else if(level===1&&game===2)html=`<div class="question"><p>Tulisan Latin: <b>HA</b></p><div class="choices">${['ꦲ','ꦤ','ꦕ','ꦫ'].map(x=>`<div class="choice script">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku ꦲ.</b></div>`;else if(level===2&&game===1)html=`<div class="question"><p>Wacanen aksara iki!</p><div class="script">ꦥ</div><div class="choices">${['Pa','Dha','Ja','Ya'].map(x=>`<div class="choice">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku Pa.</b></div>`;else if(level===2)html=`<div class="question"><p>Tulisan Latin: <b>PA</b></p><div class="choices">${['ꦥ','ꦝ','ꦗ','ꦪ'].map(x=>`<div class="choice script">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku ꦥ.</b></div>`;else html=`<div class="question"><div class="word">ꦧꦠ</div><div class="choices">${['Bata','Gaga','Lara','Kaca'].map(x=>`<div class="choice">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku Bata.</b></div>`;let next=level===1?(game===1?'quiz11':'quiz12'):level===2?(game===1?'quiz21':'quiz22'):'quiz3';show(`<h2>Tuladha Soal</h2>${html}<p>Ora ana pilihan A, B, C, D. Klik wangsulan sing kokanggep bener.</p><button class="btn" onclick="go('${next}')">${level===3?'Miwiti Dolanan':game===2?'Miwiti Dolanan Kapindho':'Miwiti Dolanan'}</button>`,'example'+level+game);playBg('level'+level+'.mp3')}
-function startQuiz(level,game){let set=level===1?(game===1?q1:q2):level===2?(game===1?q3:q4):q5;state.level=level;state.currentSet=(level===1?game-1:level===2?game+1:4);state.questionSet=set;state.qIndex=0;state.answered=false;state.feedback='';quizPage();}
-function quizPage(){const q=state.questionSet[state.qIndex],level=state.level,game=state.currentSet;let isLatin=(level===1&&game===0)||(level===2&&game===2);let prompt=q[0],opts=q[1],answer=q[2],timed=level===3&&state.qIndex>=5;let promptHtml=isLatin?`<div class="script">${prompt}</div>`:level===3?`<div class="word">${prompt}</div>`:`<div class="prompttext">${prompt}</div>`;show(`<div class="stats"><span class="stat">Soal ${state.qIndex+1} / 10</span><span class="stat">Skor: ${state.scores[game]}</span>${timed?`<span class="stat" id="timer">⏱ ${state.seconds}</span>`:''}</div><div class="progress"><span style="width:${(state.qIndex/10)*100}%"></span></div><h2>${level===3?'Maca Tembung':'Pilih Wangsulan sing Bener'}</h2><div class="question"><p>${isLatin?'Pilih aksara Jawa sing trep!':level===3?'Wacanen tembung iki!':'Wacanen aksara Jawa iki!'}</p>${promptHtml}</div><div class="choices">${opts.map((o,i)=>`<button class="choice ${isLatin?'script smallscript':''}" onclick="answerQuestion(${i})">${o}</button>`).join('')}</div><div class="feedback" id="feedback">${state.feedback}</div><p class="footer-note">Wangsulan bener entuk 20 poin. Wangsulan salah entuk 0 poin.</p>`,'quiz');playBg('level'+level+'.mp3');if(timed)startTimer();}
-function startTimer(){state.seconds=15;let el=$('timer');if(el)el.textContent='⏱ 15';state.timer=setInterval(()=>{state.seconds--;let t=$('timer');if(t)t.textContent='⏱ '+state.seconds;if(state.seconds<=0){clearInterval(state.timer);state.timer=null;if(!state.answered)answerQuestion(-1,true)}},1000)}
-function answerQuestion(index,timeout=false){if(state.answered)return;state.answered=true;if(state.timer){clearInterval(state.timer);state.timer=null}const q=state.questionSet[state.qIndex],game=state.currentSet,correct=index>=0&&q[1][index]===q[2];let buttons=[...screen.querySelectorAll('.choice')];if(index>=0&&buttons[index])buttons[index].classList.add(correct?'correct':'wrong');buttons.forEach((b,i)=>{if(q[1][i]===q[2])b.classList.add('correct');b.disabled=true});if(correct){state.scores[game]+=20;state.correct[game]++;state.feedback='Pinter! Wangsulanmu Bener!';playSound('jawabanbenar.mp3')}else{state.wrong[game]++;state.feedback=(timeout?'Wektune entek. ':'Durung bener. ')+'Wangsulan sing bener yaiku '+q[2]+'.';playSound('jawabansalah.mp3')}let f=$('feedback');if(f)f.textContent=state.feedback;updateTop();setTimeout(()=>{state.qIndex++;if(state.qIndex<10){state.answered=false;quizPage()}else finishSet()},1450)}
-function finishSet(){if(state.level===1&&state.currentSet===0){go('example12')}else if(state.level===1){go('score1')}else if(state.level===2&&state.currentSet===2){go('example22')}else if(state.level===2){go('score2')}else go('final')}
-function scoreLevel(level){let ix=level===1?[0,1]:[2,3],sc=ix.reduce((a,i)=>a+state.scores[i],0),co=ix.reduce((a,i)=>a+state.correct[i],0),wr=ix.reduce((a,i)=>a+state.wrong[i],0);let pass=level===1?sc>=280:co>=14;if(level===1&&pass)state.unlocked[1]=true;if(level===2&&pass)state.unlocked[2]=true;let msg=level===1?(pass?'Sugeng! Kowe Wis Bisa Mbukak Level 2!':'Ayo Sinau Maneh Supaya Bisa Mbukak Level 2!'):(pass?'Apik! Kowe Wis Bisa Mbukak Level 3!':'Ayo Semangat Maneh! Sinaua Supaya Bisa Mbukak Level 3!');let next=level===1?'material2':'material3';show(`<h2>Skor Level ${level}</h2><div class="cards"><div class="card"><strong>Game 1</strong>${state.scores[ix[0]]} poin</div><div class="card"><strong>Game 2</strong>${state.scores[ix[1]]} poin</div><div class="card"><strong>Total Skor</strong><h2>${sc}</h2></div><div class="card"><strong>Wangsulan Bener</strong>${co}</div><div class="card"><strong>Wangsulan Salah</strong>${wr}</div></div><h2>${msg}</h2>${pass?`<button class="btn gold" onclick="go('${next}')">Lanjut Level ${level+1}</button>`:`<button class="btn" onclick="go('${level===1?'map':'material2'}')">${level===1?'Bali menyang Peta':'Bali menyang Level 2'}</button>`}<p><button class="btn light" onclick="resetProgress()">Bali menyang Peta (Reset Progres)</button></p>`,'score'+level);playBg('level'+level+'.mp3');saveResult('level'+level)}
-function finalPage(){let s=total(),r=reward(),trophy=s>=950;let msg=trophy?'Apik Banget! Kowe Entuk Piala!':s>=900?'Hebat! Kowe Entuk Lima Lintang!':s>=650?'Pinter! Terusna Semangat Sinau!':'Aja Gampang Nyerah, Ayo Sinau Maneh!';show(`<h2>Sugeng! Petualanganmu Wis Rampung!</h2><div class="badge">${trophy?'🏆 Piala lan ':''}⭐ ${r} Lintang</div><div class="cards"><div class="card"><strong>Skor Level 1</strong>${state.scores[0]+state.scores[1]}</div><div class="card"><strong>Skor Level 2</strong>${state.scores[2]+state.scores[3]}</div><div class="card"><strong>Skor Level 3</strong>${state.scores[4]}</div><div class="card"><strong>Skor Sakabehe</strong><h2>${s} / 1.000</h2></div><div class="card"><strong>Wangsulan Bener</strong>${right()}</div><div class="card"><strong>Wangsulan Salah</strong>${wrong()}</div></div><h2>${msg}</h2><p>${'⭐ '.repeat(r)}${trophy?'🏆':''}</p><button class="btn gold" onclick="newGame()">Dolanan Maneh</button><button class="btn danger" onclick="resetAll()">Reset</button>`,'final');playBg('tepuktanganpanjang.mp3');saveResult('final')}
-function clearScores(){state.scores=[0,0,0,0,0];state.correct=[0,0,0,0,0];state.wrong=[0,0,0,0,0];state.unlocked=[true,false,false];updateTop()}
-function resetProgress(){clearScores();state.history=[];render('map');toast('Progres wis direset')}
-function resetAll(){if(!confirm('Apa kowe yakin arep mbusak kabeh skor lan kemajuan dolanan?'))return;clearScores();state.history=[];render('map');toast('Kabeh progres wis direset')}
-function newGame(){clearScores();state.history=[];render('home')}
+function show(html,page){
+ if(state.timer){clearInterval(state.timer);state.timer=null}
+ state.page=page;screen.innerHTML=html;
+ topbar.hidden=['home'].includes(page);updateTop();
+}
+function guide(){return `<div class="guidewrap"><img src="${asset('kartunjawa.png')}" alt="Paraga pemandu" onerror="this.style.display='none'"><span class="badge">Ayo semangat!</span></div>`}
+function playBg(file){
+ const a=$('bgm');if(!state.musicOn){a.pause();return}
+ if(!file){a.pause();return}
+ const url=asset(file);if(a.src!==url)a.src=url;
+ a.volume=state.musicVol;a.play().catch(()=>{});
+}
+function playSound(file){
+ const bg=$('bgm'),resume=!bg.paused;bg.pause();
+ const a=$('sfx');a.pause();a.loop=false;a.src=asset(file);
+ a.volume=state.voiceVol;a.currentTime=0;
+ a.onended=()=>{if(resume&&state.musicOn&&state.page!=='song')bg.play().catch(()=>{});};
+ a.play().catch(()=>{});
+}
+function toggleMusic(){
+ state.musicOn=!state.musicOn;
+ if(state.musicOn){playBg(currentMusic());toast('Musik diuripake')}
+ else{$('bgm').pause();toast('Musik dipateni')}
+ updateTop();
+}
+function currentMusic(){
+ return ({home:'pembukaan.mp3',objectives:'tujuan.mp3',instructions:'musik semangat.mp3',song:'menuutama.mp3',map:'menuutama.mp3',material1:'level1.mp3',material2:'level2.mp3',material3:'level3.mp3',score1:'level1.mp3',score2:'level2.mp3',final:'tepuktanganpanjang.mp3'})[state.page]||'menuutama.mp3';
+}
+function toast(t){
+ $('toast').textContent=t;$('toast').classList.remove('hidden');
+ setTimeout(()=>$('toast').classList.add('hidden'),2200);
+}
+function go(page){state.history.push(state.page);render(page)}
+function goBack(){
+ if(state.history.length){const p=state.history.pop();render(p)}
+ else render('map');
+}
+function editName(){
+ const n=prompt('Sapa jenengmu?',state.name);
+ if(n&&n.trim()){state.name=n.trim().slice(0,24);localStorage.setItem('sc_name',state.name);updateTop();toast('Jeneng kasil disimpen')}
+}
+function render(page){
+ switch(page){
+ case'home':home();break;
+ case'objectives':objectives();break;
+ case'instructions':instructions();break;
+ case'song':song();break;
+ case'map':mapPage();break;
+ case'material1':material(1);break;
+ case'example11':example(1,1);break;
+ case'quiz11':startQuiz(1,1);break;
+ case'example12':example(1,2);break;
+ case'quiz12':startQuiz(1,2);break;
+ case'score1':scoreLevel(1);break;
+ case'material2':material(2);break;
+ case'example21':example(2,1);break;
+ case'quiz21':startQuiz(2,1);break;
+ case'example22':example(2,2);break;
+ case'quiz22':startQuiz(2,2);break;
+ case'score2':scoreLevel(2);break;
+ case'material3':material(3);break;
+ case'example3':example(3,1);break;
+ case'quiz3':startQuiz(3,1);break;
+ case'final':finalPage();break;
+ case'settings':settings();break;
+ case'locks':locksPage();break;
+ default:home();
+ }
+}
+function home(){
+ show(`<div class="hero"><div><p class="sub">Sugeng Rawuh!</p><h1>SI CAKRAWALA</h1><p class="sub">Sinau Maca Aksara Jawa Lancar</p><p>Ayo njelajah budaya Jawa lan sinau maca aksara Jawa!</p><button class="btn gold" onclick="go('objectives')">AYO WIWITI</button></div><img class="guide" src="${asset('kartunjawa.png')}" alt="Kartun Jawa"></div>`,'home');
+ playBg('pembukaan.mp3');
+}
+function objectives(){
+ show(`<h2>Tujuan Pasinaon</h2><div class="cards">${['Siswa bisa ngenali wujud lan jeneng aksara Jawa legena.','Siswa bisa nyebutake swara saben aksara Jawa kanthi bener.','Siswa bisa nggandhengake aksara Jawa karo tulisan Latine.','Siswa bisa maca tembung prasaja nganggo aksara Jawa.','Siswa bisa maca tembung prasaja nganggo aksara Jawa kanthi lancar.'].map((x,i)=>`<div class="card"><strong>Tujuan ${i+1}</strong>${x}</div>`).join('')}</div>${guide()}<div><button class="btn light" onclick="goBack()">Bali</button><button class="btn" onclick="go('instructions')">Sabanjure</button></div>`,'objectives');
+ playBg('tujuan.mp3');
+}
+function instructions(){
+ const rules=['Wacanen materi kanthi teliti.','Klik aksara Jawa kanggo ngrungokake swarane.','Wacanen tuladha soal sadurunge dolanan.','Pilihen siji wangsulan sing paling bener.','Saben wangsulan bener entuk 20 poin.','Wangsulan salah ora entuk poin.','Rampungna tantangan supaya bisa mbukak level sabanjure.','Gatekna wektu nalika dolanan ing level 3.'];
+ show(`<h2>Petunjuk lan Tata Cara Dolan</h2><div class="cards">${rules.map((x,i)=>`<div class="card"><strong>${i+1}.</strong>${x}</div>`).join('')}</div>${guide()}<button class="btn light" onclick="goBack()">Bali</button><button class="btn" onclick="go('song')">Sabanjure</button>`,'instructions');
+ playBg('musik semangat.mp3');
+}
+function song(){
+ show(`<h2>Nyanyi Lagu Aksara Jawa</h2>${guide()}<p><img class="songimg" src="${asset('laguaksarajwa.jpg')}" alt="Lagu Aksara Jawa"></p><button class="btn gold" onclick="playSong()">▶ Puter Lagu</button><button class="btn danger" onclick="stopSong()">■ Mandheg</button><button class="btn" onclick="go('map')">Sabanjure</button>`,'song');
+ playBg('menuutama.mp3');
+}
+function playSong(){playBg('');playSound('laguaksarajawa.mp3');$('sfx').loop=true}
+function stopSong(){$('sfx').pause();$('sfx').loop=false;playBg('menuutama.mp3')}
+function mapPage(){
+ show(`<h2>Peta Petualangan</h2><p>Pilih papan dolananmu. Rampungna saben tantangan kanggo mbukak dalan sabanjure.</p>${guide()}<div class="levelmap"><div class="level"><div class="emoji">🌱</div><h3>Level 1</h3><p>Pambuka Aksara Jawa</p><span class="badge">Kebuka</span><br><button class="btn" onclick="go('material1')">Mlebu</button></div><div class="level ${state.unlocked[1]?'':'locked'}"><div class="emoji">${state.unlocked[1]?'🌳':'🔒'}</div><h3>Level 2</h3><p>Nglakoni Petualangan Aksara</p><span class="badge">${state.unlocked[1]?'Kebuka':'Kekunci'}</span><br><button class="btn" ${state.unlocked[1]?'':'disabled'} onclick="go('material2')">Mlebu</button></div><div class="level ${state.unlocked[2]?'':'locked'}"><div class="emoji">${state.unlocked[2]?'🏆':'🔒'}</div><h3>Level 3</h3><p>Maca Tembung</p><span class="badge">${state.unlocked[2]?'Kebuka':'Kekunci'}</span><br><button class="btn" ${state.unlocked[2]?'':'disabled'} onclick="go('material3')">Mlebu</button></div></div><button class="btn light" onclick="openSettings()">Setelan</button>`,'map');
+ playBg('menuutama.mp3');
+}
+function material(level){
+ let list=level===1?aksara.slice(0,10):level===2?aksara.slice(10):aksara;
+ let title=level===1?'Sinau Aksara Jawa':level===2?'Sinau Aksara Jawa Sabanjure':'Sinau Maca Tembung';
+ show(`<h2>${title}</h2><p>Klik aksara kanggo ngrungokake swarane.</p><div class="cards">${list.map(([g,l,a])=>{let gambar=l==='Ra'?'gambarra.jpg':l==='Da'?'gambarda.jpg':'';return `<div class="card letter"><button onclick="playSound('${a}')">${gambar?`<img src="${asset(gambar)}" alt="Gambar aksara ${l}" style="width:85px;height:85px;object-fit:contain;">`:''}<span class="script">${g}</span><strong>${l}</strong><small>🔊 Rungokna</small></button></div>`}).join('')}</div><button class="btn" onclick="go('${level===1?'example11':level===2?'example21':'example3'}')">Tuladha Soal</button>`,'material'+level);
+ playBg('level'+level+'.mp3');
+}
+function example(level,game){
+ let html;
+ if(level===1&&game===1)html=`<div class="question"><p>Wacanen aksara iki!</p><div class="script">ꦲ</div><div class="choices"><div class="choice">Ha</div><div class="choice">Na</div><div class="choice">Ca</div><div class="choice">Ra</div></div><b>Wangsulan sing bener yaiku Ha.</b></div>`;
+ else if(level===1&&game===2)html=`<div class="question"><p>Tulisan Latin: <b>HA</b></p><div class="choices">${['ꦲ','ꦤ','ꦕ','ꦫ'].map(x=>`<div class="choice script">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku ꦲ.</b></div>`;
+ else if(level===2&&game===1)html=`<div class="question"><p>Wacanen aksara iki!</p><div class="script">ꦥ</div><div class="choices">${['Pa','Dha','Ja','Ya'].map(x=>`<div class="choice">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku Pa.</b></div>`;
+ else if(level===2)html=`<div class="question"><p>Tulisan Latin: <b>PA</b></p><div class="choices">${['ꦥ','ꦝ','ꦗ','ꦪ'].map(x=>`<div class="choice script">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku ꦥ.</b></div>`;
+ else html=`<div class="question"><div class="word">ꦧꦠ</div><div class="choices">${['Bata','Gaga','Lara','Kaca'].map(x=>`<div class="choice">${x}</div>`).join('')}</div><b>Wangsulan sing bener yaiku Bata.</b></div>`;
+ let next=level===1?(game===1?'quiz11':'quiz12'):level===2?(game===1?'quiz21':'quiz22'):'quiz3';
+ show(`<h2>Tuladha Soal</h2>${html}<p>Ora ana pilihan A, B, C, D. Klik wangsulan sing kokanggep bener.</p><button class="btn" onclick="go('${next}')">${level===3?'Miwiti Dolanan':game===2?'Miwiti Dolanan Kapindho':'Miwiti Dolanan'}</button>`,'example'+level+game);
+ playBg('level'+level+'.mp3');
+}
+
+function startQuiz(level,game){
+ let set=level===1?(game===1?q1:q2):level===2?(game===1?q3:q4):q5;
+ state.level=level;
+ state.currentSet=(level===1?game-1:level===2?game+1:4);
+ state.questionSet=set;state.qIndex=0;state.answered=false;state.feedback='';
+ quizPage();
+}
+function quizPage(){
+ const q=state.questionSet[state.qIndex],level=state.level,game=state.currentSet;
+ let isLatin=(level===1&&game===0)||(level===2&&game===2);
+ let prompt=q[0],opts=q[1],timed=level===3&&state.qIndex>=5;
+ let promptHtml=isLatin?`<div class="script">${prompt}</div>`:level===3?`<div class="word">${prompt}</div>`:`<div class="script">${prompt}</div>`;
+ show(`<div class="stats"><span class="stat">Soal ${state.qIndex+1} / 10</span><span class="stat">Skor: ${state.scores[game]}</span>${timed?`<span class="stat" id="timer">⏱ ${state.seconds}</span>`:''}</div><div class="progress"><span style="width:${(state.qIndex/10)*100}%"></span></div><h2>${level===3?'Maca Tembung':'Pilih Wangsulan sing Bener'}</h2><div class="question"><p>${isLatin?'Pilih aksara Jawa sing trep!':level===3?'Wacanen tembung iki!':'Wacanen aksara Jawa iki!'}</p>${promptHtml}</div><div class="choices">${opts.map((o,i)=>`<button class="choice ${isLatin?'script smallscript':''}" onclick="answerQuestion(${i})">${o}</button>`).join('')}</div><div class="feedback" id="feedback">${state.feedback}</div><p class="footer-note">Wangsulan bener entuk 20 poin. Wangsulan salah entuk 0 poin.</p>`,'quiz');
+ playBg('level'+level+'.mp3');
+ if(timed)startTimer();
+}
+function startTimer(){
+ state.seconds=15;
+ let el=$('timer');if(el)el.textContent='⏱ 15';
+ state.timer=setInterval(()=>{
+  state.seconds--;
+  let t=$('timer');if(t)t.textContent='⏱ '+state.seconds;
+  if(state.seconds<=0){
+   clearInterval(state.timer);state.timer=null;
+   if(!state.answered)answerQuestion(-1,true);
+  }
+ },1000);
+}
+function answerQuestion(index,timeout=false){
+ if(state.answered)return;
+ state.answered=true;
+ if(state.timer){clearInterval(state.timer);state.timer=null}
+ const q=state.questionSet[state.qIndex],game=state.currentSet;
+ const correct=index>=0&&q[1][index]===q[2];
+ let buttons=[...screen.querySelectorAll('.choice')];
+ if(index>=0&&buttons[index])buttons[index].classList.add(correct?'correct':'wrong');
+ buttons.forEach((b,i)=>{if(q[1][i]===q[2])b.classList.add('correct');b.disabled=true});
+ if(correct){
+  state.scores[game]+=20;state.correct[game]++;
+  state.feedback='Pinter! Wangsulanmu Bener!';
+  playSound('jawabanbenar.mp3');
+ }else{
+  state.wrong[game]++;
+  state.feedback=(timeout?'Wektune entek. ':'Durung bener. ')+'Wangsulan sing bener yaiku '+q[2]+'.';
+  playSound('jawabansalah.mp3');
+ }
+ let f=$('feedback');if(f)f.textContent=state.feedback;
+ updateTop();
+ setTimeout(()=>{
+  state.qIndex++;
+  if(state.qIndex<10){state.answered=false;quizPage()}
+  else finishSet();
+ },1450);
+}
+function finishSet(){
+ if(state.level===1&&state.currentSet===0)go('example12');
+ else if(state.level===1)go('score1');
+ else if(state.level===2&&state.currentSet===2)go('example22');
+ else if(state.level===2)go('score2');
+ else go('final');
+}
+function scoreLevel(level){
+ let ix=level===1?[0,1]:[2,3];
+ let sc=ix.reduce((a,i)=>a+state.scores[i],0);
+ let co=ix.reduce((a,i)=>a+state.correct[i],0);
+ let wr=ix.reduce((a,i)=>a+state.wrong[i],0);
+ let pass=level===1?sc>=280:co>=14;
+ if(level===1&&pass)state.unlocked[1]=true;
+ if(level===2&&pass)state.unlocked[2]=true;
+ let msg=level===1?(pass?'Sugeng! Kowe Wis Bisa Mbukak Level 2!':'Ayo Sinau Maneh Supaya Bisa Mbukak Level 2!'):(pass?'Apik! Kowe Wis Bisa Mbukak Level 3!':'Ayo Semangat Maneh! Sinaua Supaya Bisa Mbukak Level 3!');
+ let next=level===1?'material2':'material3';
+ show(`<h2>Skor Level ${level}</h2><div class="cards"><div class="card"><strong>Game 1</strong>${state.scores[ix[0]]} poin</div><div class="card"><strong>Game 2</strong>${state.scores[ix[1]]} poin</div><div class="card"><strong>Total Skor</strong><h2>${sc}</h2></div><div class="card"><strong>Wangsulan Bener</strong>${co}</div><div class="card"><strong>Wangsulan Salah</strong>${wr}</div></div><h2>${msg}</h2>${pass?`<button class="btn gold" onclick="go('${next}')">Lanjut Level ${level+1}</button>`:`<button class="btn" onclick="go('${level===1?'map':'material2'}')">${level===1?'Bali menyang Peta':'Bali menyang Level 2'}</button>`}<p><button class="btn light" onclick="resetProgress()">Bali menyang Peta (Reset Progres)</button></p>`,'score'+level);
+ playBg('level'+level+'.mp3');
+ saveResult('level'+level);
+}
+function finalPage(){
+ let s=total(),r=reward(),trophy=s>=950;
+ let msg=trophy?'Apik Banget! Kowe Entuk Piala!':s>=900?'Hebat! Kowe Entuk Lima Lintang!':s>=650?'Pinter! Terusna Semangat Sinau!':'Aja Gampang Nyerah, Ayo Sinau Maneh!';
+ show(`<h2>Sugeng! Petualanganmu Wis Rampung!</h2><div class="badge">${trophy?'🏆 Piala lan ':''}⭐ ${r} Lintang</div><div class="cards"><div class="card"><strong>Skor Level 1</strong>${state.scores[0]+state.scores[1]}</div><div class="card"><strong>Skor Level 2</strong>${state.scores[2]+state.scores[3]}</div><div class="card"><strong>Skor Level 3</strong>${state.scores[4]}</div><div class="card"><strong>Skor Sakabehe</strong><h2>${s} / 1.000</h2></div><div class="card"><strong>Wangsulan Bener</strong>${right()}</div><div class="card"><strong>Wangsulan Salah</strong>${wrong()}</div></div><h2>${msg}</h2><p>${'⭐ '.repeat(r)}${trophy?'🏆':''}</p><button class="btn gold" onclick="newGame()">Dolanan Maneh</button><button class="btn danger" onclick="resetAll()">Reset</button>`,'final');
+ playBg('tepuktanganpanjang.mp3');
+ saveResult('final');
+}
+function clearScores(){
+ state.scores=[0,0,0,0,0];
+ state.correct=[0,0,0,0,0];
+ state.wrong=[0,0,0,0,0];
+ state.unlocked=[true,false,false];
+ updateTop();
+}
+function resetProgress(){
+ clearScores();state.history=[];render('map');
+ toast('Progres wis direset');
+}
+function resetAll(){
+ if(!confirm('Apa kowe yakin arep mbusak kabeh skor lan kemajuan dolanan?'))return;
+ clearScores();state.history=[];render('map');
+ toast('Kabeh progres wis direset');
+}
+function newGame(){
+ clearScores();state.history=[];render('home');
+}
 function openSettings(){go('settings')}
-function settings(){show(`<h2>Setelan</h2><div class="settings"><label>Volume Musik Latar: <span id="mv">${Math.round(state.musicVol*100)}%</span><input type="range" min="0" max="100" value="${state.musicVol*100}" oninput="setVolume('music',this.value)"></label><label>Volume Swara Karakter: <span id="vv">${Math.round(state.voiceVol*100)}%</span><input type="range" min="0" max="100" value="${state.voiceVol*100}" oninput="setVolume('voice',this.value)"></label><hr><h3>Kunci Guru</h3><p>Lebokna sandhi guru kanggo mbukak utawa ngunci level.</p><input type="password" id="teacherPass" placeholder="Sandhi guru"><div class="row"><button class="btn" onclick="verifyTeacher('unlock')">Bukak Level 2 lan 3</button><button class="btn danger" onclick="verifyTeacher('lock')">Kunci Level 2 lan 3</button></div><p class="footer-note">Saben sandhi sing bener mung bisa digunakake kanggo siji prentah.</p></div><button class="btn light" onclick="goBack()">Bali</button>`,'settings');playBg(currentMusic())}
-function setVolume(which,v){let n=Number(v)/100;if(which==='music'){state.musicVol=n;$('mv').textContent=v+'%';$('bgm').volume=n}else{state.voiceVol=n;$('vv').textContent=v+'%';$('sfx').volume=n}}
-function verifyTeacher(action){let p=$('teacherPass').value;if(p!==PASSWORD_GURU){toast('Sandhi salah!');$('teacherPass').value='';return}if(action==='unlock'){state.unlocked=[true,true,true];toast('Level 2 lan 3 wis kabukak')}else{state.unlocked=[true,false,false];toast('Level 2 lan 3 wis dikunci')} $('teacherPass').value='';updateTop()}
+function settings(){
+ show(`<h2>Setelan</h2><div class="settings"><label>Volume Musik Latar: <span id="mv">${Math.round(state.musicVol*100)}%</span><input type="range" min="0" max="100" value="${state.musicVol*100}" oninput="setVolume('music',this.value)"></label><label>Volume Swara Karakter: <span id="vv">${Math.round(state.voiceVol*100)}%</span><input type="range" min="0" max="100" value="${state.voiceVol*100}" oninput="setVolume('voice',this.value)"></label><hr><h3>Kunci Guru</h3><p>Lebokna sandhi guru kanggo mbukak utawa ngunci level.</p><input type="password" id="teacherPass" placeholder="Sandhi guru"><div class="row"><button class="btn" onclick="verifyTeacher('unlock')">Bukak Level 2 lan 3</button><button class="btn danger" onclick="verifyTeacher('lock')">Kunci Level 2 lan 3</button></div><p class="footer-note">Saben sandhi sing bener mung bisa digunakake kanggo siji prentah.</p></div><button class="btn light" onclick="goBack()">Bali</button>`,'settings');
+ playBg(currentMusic());
+}
+function setVolume(which,v){
+ let n=Number(v)/100;
+ if(which==='music'){state.musicVol=n;$('mv').textContent=v+'%';$('bgm').volume=n}
+ else{state.voiceVol=n;$('vv').textContent=v+'%';$('sfx').volume=n}
+}
+function verifyTeacher(action){
+ let p=$('teacherPass').value;
+ if(p!==PASSWORD_GURU){toast('Sandhi salah!');$('teacherPass').value='';return}
+ if(action==='unlock'){
+  state.unlocked=[true,true,true];
+  toast('Level 2 lan 3 wis kabukak');
+ }else{
+  state.unlocked=[true,false,false];
+  toast('Level 2 lan 3 wis dikunci');
+ }
+ $('teacherPass').value='';
+ updateTop();
+}
 function showLocks(){go('locks')}
-function locksPage(){show(`<h2>Status Kunci Level</h2><div class="cards">${state.unlocked.map((v,i)=>`<div class="card"><strong>Level ${i+1}</strong>${v?'🔓 Kebuka':'🔒 Kekunci'}</div>`).join('')}</div><p>Level 1 tansah kabukak. Level sabanjure kudu dirampungake utawa dibukak dening guru.</p><button class="btn" onclick="goBack()">Bali</button>`,'locks')}
-async function saveResult(stage){const data={name:state.name,stage,score:total(),scores:state.scores,correct:right(),wrong:wrong(),stars:reward(),time:new Date().toISOString()};try{localStorage.setItem('siCakrawalaProgress',JSON.stringify(data));if(APPS_SCRIPT_URL){fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(()=>{})}}catch(e){console.warn('Panyimpenan lokal gagal',e)}}
-// Pulihake jeneng lan skor ringkes yen kaca dibukak maneh. Dolanan anyar diwiwiti saka pambuka.
-updateTop();render('home');
+function locksPage(){
+ show(`<h2>Status Kunci Level</h2><div class="cards">${state.unlocked.map((v,i)=>`<div class="card"><strong>Level ${i+1}</strong>${v?'🔓 Kebuka':'🔒 Kekunci'}</div>`).join('')}</div><p>Level 1 tansah kabukak. Level sabanjure kudu dirampungake utawa dibukak dening guru.</p><button class="btn" onclick="goBack()">Bali</button>`,'locks');
+}
+async function saveResult(stage){
+ const data={name:state.name,stage,score:total(),scores:state.scores,correct:right(),wrong:wrong(),stars:reward(),time:new Date().toISOString()};
+ try{
+  localStorage.setItem('siCakrawalaProgress',JSON.stringify(data));
+  if(APPS_SCRIPT_URL){
+   fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(()=>{});
+  }
+ }catch(e){console.warn('Panyimpenan lokal gagal',e)}
+}
+// Game diwiwiti saka kaca pambuka.
+updateTop();
+render('home');
 </script></body></html>
