@@ -609,7 +609,31 @@ function updateGuideCharacter() {
   function render(){
   hud();
   updateGuideCharacter();
-    if(screen==='cover'){view.replaceChildren(document.getElementById('cover-template').content.cloneNode(true));addMedia();return}
+    
+if(screen==='cover'){
+  view.innerHTML = `
+    <div style="
+      position:relative;
+      z-index:9999;
+      background:#fff;
+      color:#222;
+      padding:30px;
+      margin:30px auto;
+      max-width:500px;
+      border:5px solid orange;
+      border-radius:20px;
+      text-align:center;
+    ">
+      <h1>TES GAME SI CAKRAWALA</h1>
+      <p>Yen tulisan iki katon, bagean view katon.</p>
+      <button onclick="alert('Tombol bisa diklik!')">
+        TES TOMBOL
+      </button>
+    </div>
+  `;
+  return;
+}
+
     const pages={
       goals:()=>`<h2>Tujuan Sinau</h2><div class="hero">${portrait()}<section class="scroll"><p>Sawise sinau, aku bisa ngenali 20 aksara nglegena, nyebutake jenenge, mbedakake wujude, lan maca urutane.</p></section></div><div class="actions">${button('Ayo Lanjut','map','gold')}${button('Bali','cover')}</div>`,
       map:()=>`<h2>Peta Petualangan</h2><div class="hero">${portrait()}<p class="dialog">Pilih papan sinau sing wis kabukak, ya!</p></div>
