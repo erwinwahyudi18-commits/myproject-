@@ -115,7 +115,32 @@ main {
   background-size:cover;
   background-repeat:no-repeat;
 }
-</style></head>
+/* Susunan materi: 5 kartu atas dan 5 kartu bawah */
+.material-grid {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:14px;
+  width:min(1200px,96%);
+  margin:20px auto;
+  justify-content:center;
+  justify-items:center;
+  align-items:stretch;
+}
+
+.material-grid .card {
+  width:100%;
+  min-width:0;
+  min-height:250px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.material-grid .letter button {
+  width:100%;
+  height:100%;
+  min-height:250px;
+}</> javascript</style></head>
 <body><div id="app"><header class="topbar" id="topbar" hidden>
 <button onclick="goBack()">↩ Bali</button><button class="pill" onclick="editName()">👤 <span id="playerName">Jeneng</span></button><span class="pill">⭐ Skor: <b id="scoreTop">0</b></span><span class="pill">✨ <b id="starTop">0</b></span><button onclick="showLocks()">🔐 Kunci</button><button onclick="toggleMusic()" id="musicToggle">Musik Mati</button><button onclick="openSettings()">⚙ Setelan</button><span class="spacer"></span>
 </header><main><section id="screen" class="screen"></section></main></div>
@@ -221,7 +246,7 @@ function home(){
  playBg('pembukaan.mp3');
 }
 function objectives(){
- show(`<h2>Tujuan Pasinaon</h2><div class="cards">${['Siswa bisa ngenali wujud lan jeneng aksara Jawa legena.','Siswa bisa nyebutake swara saben aksara Jawa kanthi bener.','Siswa bisa nggandhengake aksara Jawa karo tulisan Latine.','Siswa bisa maca tembung prasaja nganggo aksara Jawa.','Siswa bisa maca tembung prasaja nganggo aksara Jawa kanthi lancar.'].map((x,i)=>`<div class="card"><strong>Tujuan ${i+1}</strong>${x}</div>`).join('')}</div>${guide()}<div><button class="btn light" onclick="goBack()">Bali</button><button class="btn" onclick="go('instructions')">Sabanjure</button></div>`,'objectives');
+ show(`<h2>Tujuan Pasinaon</h2><div class="cards">${['Siswa bisa ngenali wujud lan jeneng aksara Jawa legena.','Siswa bisa nyebutake swara saben aksara Jawa kanthi bener.','Siswa bisa nggandhengake aksara Jawa karo tulisan Latine.','Siswa bisa maca tembung prasaja nganggo aksara Jawa.','Siswa bisa maca tembung prasaja nganggo aksara Jawa kanthi lancar.'].map((x,i)=>`<div class="cards material-grid"><strong>Tujuan ${i+1}</strong>${x}</div>`).join('')}</div>${guide()}<div><button class="btn light" onclick="goBack()">Bali</button><button class="btn" onclick="go('instructions')">Sabanjure</button></div>`,'objectives');
  playBg('tujuan.mp3');
 }
 function instructions(){
@@ -242,31 +267,38 @@ function mapPage(){
 function material(level){
  let list=level===1?aksara.slice(0,10):level===2?aksara.slice(10):aksara;
  let title=level===1?'Sinau Aksara Jawa':level===2?'Sinau Aksara Jawa Sabanjure':'Sinau Maca Tembung';
- show(`<h2>${title}</h2><p>Klik aksara kanggo ngrungokake swarane.</p><div class="cards">$V$${list.map(([g,l,a])=>{
-  let gambar = l === 'Ra'
+ show(`<h2>${title}</h2><p>Klik aksara kanggo ngrungokake swarane.</p><div class="cards">$V$$${list.map(([g,l,a])=>{
+  let gambar = l==='Ra'
     ? 'gambarra.jpg'
-    : l === 'Da'
+    : l==='Da'
     ? 'gambarda.jpg'
     : '';
 
   return `
     <div class="card letter">
       <button onclick="playSound('${a}')">
-
         ${
           gambar
           ? `<img src="${asset(gambar)}"
-                 alt="Gambar aksara ${l}">`
+                 alt="Aksara ${l}"
+                 class="aksara-gambar">`
           : `<span class="script">${g}</span>`
         }
-
         <strong>${l}</strong>
         <small>🔊 Rungokna</small>
-
       </button>
     </div>
   `;
-}).join('')}</div><button class="btn" onclick="go('${level===1?'example11':level===2?'example21':'example3'}')">Tuladha Soal</button>`,'material'+level);
+}).join('')}.aksara-gambar {
+  width:85px;
+  height:85px;
+  object-fit:contain;
+  object-position:center;
+  background:transparent;
+  mix-blend-mode:multiply;
+  display:block;
+  margin:auto;
+}</div><button class="btn" onclick="go('${level===1?'example11':level===2?'example21':'example3'}')">Tuladha Soal</button>`,'material'+level);
  playBg('level'+level+'.mp3');
 }
 function example(level,game){
@@ -292,7 +324,27 @@ function quizPage(){
  const q=state.questionSet[state.qIndex],level=state.level,game=state.currentSet;
  let isLatin=(level===1&&game===0)||(level===2&&game===2);
  let prompt=q[0],opts=q[1],timed=level===3&&state.qIndex>=5;
- let promptHtml=isLatin?`<div class="script">${prompt}</div>`:level===3?`<div class="word">${prompt}</div>`:`<div class="script">${prompt}</div>`;
+ let promptHtml;
+
+if (level === 1 && prompt === 'ꦫ') {
+  promptHtml = `
+    <img src="${asset('gambarra.jpg')}"
+         class="aksara-gambar soal-gambar"
+         alt="Aksara Ra">
+  `;
+} else if (level === 1 && prompt === 'ꦢ') {
+  promptHtml = `
+    <img src="${asset('gambarda.jpg')}"
+         class="aksara-gambar soal-gambar"
+         alt="Aksara Da">
+  `;
+} else if (isLatin) {
+  promptHtml = `<div class="script">${prompt}</div>`;
+} else if (level === 3) {
+  promptHtml = `<div class="word">${prompt}</div>`;
+} else {
+  promptHtml = `<div class="script">${prompt}</div>`;
+}
  show(`<div class="stats"><span class="stat">Soal ${state.qIndex+1} / 10</span><span class="stat">Skor: ${state.scores[game]}</span>${timed?`<span class="stat" id="timer">⏱ ${state.seconds}</span>`:''}</div><div class="progress"><span style="width:${(state.qIndex/10)*100}%"></span></div><h2>${level===3?'Maca Tembung':'Pilih Wangsulan sing Bener'}</h2><div class="question"><p>${isLatin?'Pilih aksara Jawa sing trep!':level===3?'Wacanen tembung iki!':'Wacanen aksara Jawa iki!'}</p>${promptHtml}</div><div class="choices">${opts.map((o,i)=>`<button class="choice ${isLatin?'script smallscript':''}" onclick="answerQuestion(${i})">${o}</button>`).join('')}</div><div class="feedback" id="feedback">${state.feedback}</div><p class="footer-note">Wangsulan bener entuk 20 poin. Wangsulan salah entuk 0 poin.</p>`,'quiz');
  playBg('level'+level+'.mp3');
  if(timed)startTimer();
