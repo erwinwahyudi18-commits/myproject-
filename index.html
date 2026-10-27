@@ -17,7 +17,41 @@
 }.topbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 2vw;background:#104d40e8;color:white;box-shadow:0 4px 12px #0002;z-index:5}.topbar button,.pill{border-radius:999px;padding:7px 13px;background:#fff;color:#155443;font-weight:800}.pill{background:#ffdf70}.topbar .spacer{flex:1}.topbar button:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
 main{width:min(1200px,96vw);margin:auto;flex:1;display:flex;align-items:center;justify-content:center;padding:22px 0}.screen{width:100%;background:rgba(255,249,233,.58);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border:4px solid rgba(255,255,255,.72);border-radius:28px;padding:clamp(18px,3vw,36px);box-shadow:var(--shadow);text-align:center;max-height:calc(100vh - 105px);overflow:auto;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 h1,h2,h3{margin:0 0 12px;color:#155744;line-height:1.1}h1{font-size:clamp(2rem,5vw,4rem);font-weight:800}h2{font-size:clamp(1.5rem,3vw,2.5rem)}p{font-size:clamp(1rem,1.8vw,1.25rem)}.sub{font-size:clamp(1rem,2vw,1.5rem);color:#a24e24;font-weight:700}.btn{background:var(--green2);color:white;border-radius:16px;padding:12px 23px;margin:7px;font-weight:800;font-size:1.05rem;box-shadow:0 5px 0 #10503f;transition:.15s}.btn.gold{background:var(--yellow);color:#533b05;box-shadow:0 5px 0 #d6a92c}.btn.light{background:#fff;color:var(--green);box-shadow:0 4px 0 #d7e8dc}.btn.danger{background:var(--red);box-shadow:0 5px 0 #a83232}.btn.small{padding:7px 12px;font-size:.92rem;margin:3px}.hero{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}.hero img.guide{width:min(210px,34vw);max-height:260px;object-fit:contain;animation:bob 2.2s infinite ease-in-out}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}.guidewrap{display:inline-flex;align-items:center;gap:8px}.guidewrap img{width:85px;height:100px;object-fit:contain;animation:bob 2s infinite}.talk{animation:talk .22s infinite alternate}@keyframes talk{to{transform:scaleY(.97) rotate(-2deg)}}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}.card{background:white;border:2px solid #e5d9b8;border-radius:18px;padding:15px;box-shadow:0 5px 12px #0000000c}.card strong{display:block;color:#155744}.script{font-family:'Noto Serif Javanese',serif;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.5}.script.smallscript{font-size:clamp(1.8rem,4vw,2.7rem)}.letter{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:120px}.letter button{width:100%;height:100%;background:#fff3c5;border:2px solid #f0c95e;border-radius:16px;color:#183d35}.letter button:hover{background:#ffe58d}.choices{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;max-width:700px;margin:20px auto}.choice{min-height:72px;background:#fff;border:3px solid #e7ca71;border-radius:18px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#175a48;padding:10px}.choice:hover{background:#fff0b6}.choice.correct{background:#b9edc9;border-color:#249b56}.choice.wrong{background:#ffd0c9;border-color:#d94b4b}.question{background:#fff0bb;border-radius:24px;padding:18px;margin:14px auto;max-width:600px}.progress{height:12px;background:#e4e5d7;border-radius:20px;overflow:hidden;margin:12px auto;max-width:650px}.progress span{display:block;height:100%;background:#36a879;transition:width .2s}.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.stat{background:#e9f6e9;padding:8px 14px;border-radius:14px;font-weight:800}.levelmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.level{background:#fff;border:3px solid #e6d48b;border-radius:22px;padding:20px 10px}.level.locked{filter:grayscale(.7);opacity:.75}.level .emoji{font-size:2.5rem}.feedback{font-size:1.25rem;font-weight:800;min-height:34px;margin:10px;color:#16714d}.timer{font-size:1.5rem;font-weight:800;color:#b33}.row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.hidden{display:none!important}input[type=text],input[type=password]{padding:10px 14px;border:2px solid #b6d6c5;border-radius:12px;font-size:1rem;max-width:100%}.settings{max-width:600px;margin:10px auto;text-align:left;background:#fff;padding:18px;border-radius:18px}.settings label{display:block;margin:10px 0;font-weight:700}.settings input[type=range]{width:100%}.badge{display:inline-block;background:#ffdf70;border-radius:99px;padding:8px 16px;font-weight:800}.footer-note{font-size:.85rem;color:#58746a}.songimg{
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}.card{background:white;border:2px solid #e5d9b8;border-radius:18px;padding:15px;box-shadow:0 5px 12px #0000000c}.card strong{display:block;color:#155744}.script{font-family:'Noto Serif Javanese',serif;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.5}.script.smallscript{font-size:clamp(1.8rem,4vw,2.7rem)}.letter {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  min-height:120px;
+}
+
+.letter button {
+  width:100%;
+  min-height:250px;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#fff3c5;
+  border:2px solid #f0c95e;
+  border-radius:16px;
+  color:#183d35;
+  padding:12px;
+}
+
+.letter button img {
+  display:block;
+  width:85px;
+  height:85px;
+  object-fit:contain;
+  object-position:center;
+  background:transparent;
+  mix-blend-mode:multiply;
+  margin:0 auto;
+}.letter button:hover{background:#ffe58d}.choices{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;max-width:700px;margin:20px auto}.choice{min-height:72px;background:#fff;border:3px solid #e7ca71;border-radius:18px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#175a48;padding:10px}.choice:hover{background:#fff0b6}.choice.correct{background:#b9edc9;border-color:#249b56}.choice.wrong{background:#ffd0c9;border-color:#d94b4b}.question{background:#fff0bb;border-radius:24px;padding:18px;margin:14px auto;max-width:600px}.progress{height:12px;background:#e4e5d7;border-radius:20px;overflow:hidden;margin:12px auto;max-width:650px}.progress span{display:block;height:100%;background:#36a879;transition:width .2s}.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.stat{background:#e9f6e9;padding:8px 14px;border-radius:14px;font-weight:800}.levelmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.level{background:#fff;border:3px solid #e6d48b;border-radius:22px;padding:20px 10px}.level.locked{filter:grayscale(.7);opacity:.75}.level .emoji{font-size:2.5rem}.feedback{font-size:1.25rem;font-weight:800;min-height:34px;margin:10px;color:#16714d}.timer{font-size:1.5rem;font-weight:800;color:#b33}.row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.hidden{display:none!important}input[type=text],input[type=password]{padding:10px 14px;border:2px solid #b6d6c5;border-radius:12px;font-size:1rem;max-width:100%}.settings{max-width:600px;margin:10px auto;text-align:left;background:#fff;padding:18px;border-radius:18px}.settings label{display:block;margin:10px 0;font-weight:700}.settings input[type=range]{width:100%}.badge{display:inline-block;background:#ffdf70;border-radius:99px;padding:8px 16px;font-weight:800}.footer-note{font-size:.85rem;color:#58746a}.songimg{
   display:block;
   width:min(742px,96%);
   max-height:min(495px,62vh);
@@ -26,19 +60,60 @@ h1,h2,h3{margin:0 0 12px;color:#155744;line-height:1.1}h1{font-size:clamp(2rem,5
   border-radius:18px;
   margin:0 auto
 }
-@media(max-width:650px){.topbar{justify-content:center}.topbar .spacer{display:none}.levelmap{grid-template-columns:1fr}.screen{
-  width:100%;
-  background:transparent;
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-  border:0;
-  border-radius:0;
-  padding:clamp(12px,3vw,36px);
-  box-shadow:none;
-  text-align:center;
-  max-height:calc(100vh - 105px);
-  overflow:auto;
-  animation:appear .25s ease
+@media(max-width:650px) {
+  main {
+    width:100%;
+    padding:8px;
+  }
+
+  .screen {
+    width:100%;
+    padding:10px 5px;
+    max-height:calc(100svh - 125px);
+  }
+
+  .cards {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .letter button {
+    min-height:210px;
+    padding:8px;
+  }
+
+  .letter button img {
+    width:85px;
+    height:85px;
+  }
+}
+
+@media(min-width:651px) {
+  .cards {
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  }
+}/* Ngilangake panel utama sing nutupi latar */
+main {
+  background:transparent !important;
+}
+
+.screen {
+  background:transparent !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  border:none !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+/* Latar game katon luwih cetha */
+#app {
+  background-image:url(
+    'https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/latar.png'
+  ) !important;
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
 }
 </style></head>
 <body><div id="app"><header class="topbar" id="topbar" hidden>
@@ -167,17 +242,30 @@ function mapPage(){
 function material(level){
  let list=level===1?aksara.slice(0,10):level===2?aksara.slice(10):aksara;
  let title=level===1?'Sinau Aksara Jawa':level===2?'Sinau Aksara Jawa Sabanjure':'Sinau Maca Tembung';
- show(`<h2>${title}</h2><p>Klik aksara kanggo ngrungokake swarane.</p><div class="cards">$V${list.map(([g,l,a])=>{
-  let gambar=l==='Ra'?'gambarra.jpg':l==='Da'?'gambarda.jpg':'';
-  return `<div class="card letter">
-    <button onclick="playSound('${a}')">
-      ${gambar
-        ? `<img src="${asset(gambar)}" alt="Gambar aksara ${l}" style="width:clamp(105px,13vw,150px);height:clamp(105px,13vw,150px);object-fit:contain;">`
-        : `<span class="script">${g}</span>`}
-      <strong>${l}</strong>
-      <small>🔊 Rungokna</small>
-    </button>
-  </div>`;
+ show(`<h2>${title}</h2><p>Klik aksara kanggo ngrungokake swarane.</p><div class="cards">$V$${list.map(([g,l,a])=>{
+  let gambar = l === 'Ra'
+    ? 'gambarra.jpg'
+    : l === 'Da'
+    ? 'gambarda.jpg'
+    : '';
+
+  return `
+    <div class="card letter">
+      <button onclick="playSound('${a}')">
+
+        ${
+          gambar
+          ? `<img src="${asset(gambar)}"
+                 alt="Gambar aksara ${l}">`
+          : `<span class="script">${g}</span>`
+        }
+
+        <strong>${l}</strong>
+        <small>🔊 Rungokna</small>
+
+      </button>
+    </div>
+  `;
 }).join('')}</div><button class="btn" onclick="go('${level===1?'example11':level===2?'example21':'example3'}')">Tuladha Soal</button>`,'material'+level);
  playBg('level'+level+'.mp3');
 }
