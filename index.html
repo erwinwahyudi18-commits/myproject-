@@ -1,101 +1,32 @@
 <!DOCTYPE html>
 <html lang="jv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#176b55">
-<title>Si Cakrawala - Sinau Maca Aksara Jawa kanthi Lancar</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#176b55"><title>Si Cakrawala - Sinau Maca Aksara Jawa kanthi Lancar</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Serif+Javanese:wght@400;700&display=swap');
 :root{--green:#176b55;--green2:#24866b;--yellow:#ffd34e;--orange:#ff9850;--cream:#fff9e9;--ink:#183d35;--red:#d94b4b;--shadow:0 12px 30px #143d3030}
-*{box-sizing:border-box}
-body{margin:0;font-family:'Baloo 2',system-ui,sans-serif;color:var(--ink);background:#d8efdf;min-height:100vh}
-button,input{font:inherit}
-button{border:0;cursor:pointer}
-button:disabled{opacity:.45;cursor:not-allowed}
+*{box-sizing:border-box}body{margin:0;font-family:'Baloo 2',system-ui,sans-serif;color:var(--ink);background:#d8efdf;min-height:100vh}button,input{font:inherit}button{border:0;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
 #app{min-height:100vh;background:linear-gradient(#0d392c18,#0d392c20),url('https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/latar.png') center/cover fixed;display:flex;flex-direction:column}
-.topbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 2vw;background:#104d40e8;color:white;box-shadow:0 4px 12px #0002;z-index:5}
-.topbar button,.pill{border-radius:999px;padding:7px 13px;background:#fff;color:#155443;font-weight:800}
-.pill{background:#ffdf70}
-.topbar .spacer{flex:1}
-.topbar button:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
-main{width:min(1200px,96vw);margin:auto;flex:1;display:flex;align-items:center;justify-content:center;padding:22px 0}
-.screen{width:100%;background:rgba(255,249,233,.58);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border:4px solid rgba(255,255,255,.72);border-radius:28px;padding:clamp(18px,3vw,36px);box-shadow:var(--shadow);text-align:center;max-height:calc(100vh - 105px);overflow:auto;animation:appear .25s ease}
-@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-h1,h2,h3{margin:0 0 12px;color:#155744;line-height:1.1}
-h1{font-size:clamp(2rem,5vw,4rem);font-weight:800}
-h2{font-size:clamp(1.5rem,3vw,2.5rem)}
-p{font-size:clamp(1rem,1.8vw,1.25rem)}
-.sub{font-size:clamp(1rem,2vw,1.5rem);color:#a24e24;font-weight:700}
-.btn{background:var(--green2);color:white;border-radius:16px;padding:12px 23px;margin:7px;font-weight:800;font-size:1.05rem;box-shadow:0 5px 0 #10503f;transition:.15s}
-.btn.gold{background:var(--yellow);color:#533b05;box-shadow:0 5px 0 #d6a92c}
-.btn.light{background:#fff;color:var(--green);box-shadow:0 4px 0 #d7e8dc}
-.btn.danger{background:var(--red);box-shadow:0 5px 0 #a83232}
-.btn.small{padding:7px 12px;font-size:.92rem;margin:3px}
-.hero{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}
-.hero img.guide{width:min(210px,34vw);max-height:260px;object-fit:contain;animation:bob 2.2s infinite ease-in-out}
-@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
-.guidewrap{display:inline-flex;align-items:center;gap:8px}
-.guidewrap img{width:85px;height:100px;object-fit:contain;animation:bob 2s infinite}
-.talk{animation:talk .22s infinite alternate}
-@keyframes talk{to{transform:scaleY(.97) rotate(-2deg)}}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
-.card{background:white;border:2px solid #e5d9b8;border-radius:18px;padding:15px;box-shadow:0 5px 12px #0000000c}
-.card strong{display:block;color:#155744}
-.script{font-family:'Noto Serif Javanese',serif;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.5}
-.script.smallscript{font-size:clamp(1.8rem,4vw,2.7rem)}
-.letter{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:120px}
-.letter button{width:100%;height:100%;background:#fff3c5;border:2px solid #f0c95e;border-radius:16px;color:#183d35}
-.letter button:hover{background:#ffe58d}
-.choices{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;max-width:700px;margin:20px auto}
-.choice{min-height:72px;background:#fff;border:3px solid #e7ca71;border-radius:18px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#175a48;padding:10px}
-.choice:hover{background:#fff0b6}
-.choice.correct{background:#b9edc9;border-color:#249b56}
-.choice.wrong{background:#ffd0c9;border-color:#d94b4b}
-.question{background:#fff0bb;border-radius:24px;padding:18px;margin:14px auto;max-width:600px}
-.progress{height:12px;background:#e4e5d7;border-radius:20px;overflow:hidden;margin:12px auto;max-width:650px}
-.progress span{display:block;height:100%;background:#36a879;transition:width .2s}
-.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.stat{background:#e9f6e9;padding:8px 14px;border-radius:14px;font-weight:800}
-.levelmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
-.level{background:#fff;border:3px solid #e6d48b;border-radius:22px;padding:20px 10px}
-.level.locked{filter:grayscale(.7);opacity:.75}
-.level .emoji{font-size:2.5rem}
-.feedback{font-size:1.25rem;font-weight:800;min-height:34px;margin:10px;color:#16714d}
-.timer{font-size:1.5rem;font-weight:800;color:#b33}
-.row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
-.hidden{display:none!important}
-input[type=text],input[type=password]{padding:10px 14px;border:2px solid #b6d6c5;border-radius:12px;font-size:1rem;max-width:100%}
-.settings{max-width:600px;margin:10px auto;text-align:left;background:#fff;padding:18px;border-radius:18px}
-.settings label{display:block;margin:10px 0;font-weight:700}
-.settings input[type=range]{width:100%}
-.badge{display:inline-block;background:#ffdf70;border-radius:99px;padding:8px 16px;font-weight:800}
-.footer-note{font-size:.85rem;color:#58746a}
-.songimg{width:min(891px,90%);max-height:594px;object-fit:contain;border-radius:18px}
-.song-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-wrap:nowrap}
-.song-layout .guidewrap{order:2;flex:0 0 auto}
-.song-layout .guidewrap img{width:clamp(50px,8vw,85px);height:auto;max-height:115px}
-.song-layout .guidewrap .badge{font-size:.75rem;padding:4px 9px}
-.song-layout .songimg{order:1;flex:0 1 auto;width:min(891px,78%)}
-.home h1{font-size:clamp(3rem,7.5vw,6rem);font-weight:900;letter-spacing:.035em;color:#ffe15b;-webkit-text-stroke:2px #173d2f;text-shadow:4px 5px 0 #d44719,8px 9px 0 #102d25,0 0 24px #ffd34e}
-.home .sub{color:#fff2a6;text-shadow:2px 3px 0 #173d2f,0 0 8px #000}
-.home p:not(.sub){color:#fff;text-shadow:2px 2px 3px #102d25;background:rgba(10,40,28,.62);border-radius:12px;padding:7px 12px}
-.home .btn{border:2px solid #fff1a8}
-.word{font-size:clamp(3rem,8vw,5rem);font-family:'Noto Serif Javanese',serif}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#153f34;color:white;padding:10px 18px;border-radius:14px;z-index:20;box-shadow:var(--shadow)}
+.topbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 2vw;background:#104d40e8;color:white;box-shadow:0 4px 12px #0002;z-index:5}.topbar button,.pill{border-radius:999px;padding:7px 13px;background:#fff;color:#155443;font-weight:800}.pill{background:#ffdf70}.topbar .spacer{flex:1}.topbar button:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
+main{width:min(1200px,96vw);margin:auto;flex:1;display:flex;align-items:center;justify-content:center;padding:22px 0}.screen{width:100%;background:rgba(255,249,233,.58);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border:4px solid rgba(255,255,255,.72);border-radius:28px;padding:clamp(18px,3vw,36px);box-shadow:var(--shadow);text-align:center;max-height:calc(100vh - 105px);overflow:auto;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1,h2,h3{margin:0 0 12px;color:#155744;line-height:1.1}h1{font-size:clamp(2rem,5vw,4rem);font-weight:800}h2{font-size:clamp(1.5rem,3vw,2.5rem)}p{font-size:clamp(1rem,1.8vw,1.25rem)}.sub{font-size:clamp(1rem,2vw,1.5rem);color:#a24e24;font-weight:700}.btn{background:var(--green2);color:white;border-radius:16px;padding:12px 23px;margin:7px;font-weight:800;font-size:1.05rem;box-shadow:0 5px 0 #10503f;transition:.15s}.btn.gold{background:var(--yellow);color:#533b05;box-shadow:0 5px 0 #d6a92c}.btn.light{background:#fff;color:var(--green);box-shadow:0 4px 0 #d7e8dc}.btn.danger{background:var(--red);box-shadow:0 5px 0 #a83232}.btn.small{padding:7px 12px;font-size:.92rem;margin:3px}.hero{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}.hero img.guide{width:min(210px,34vw);max-height:260px;object-fit:contain;animation:bob 2.2s infinite ease-in-out}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}.guidewrap{display:inline-flex;align-items:center;gap:8px}.guidewrap img{width:85px;height:100px;object-fit:contain;animation:bob 2s infinite}.talk{animation:talk .22s infinite alternate}@keyframes talk{to{transform:scaleY(.97) rotate(-2deg)}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}.card{background:white;border:2px solid #e5d9b8;border-radius:18px;padding:15px;box-shadow:0 5px 12px #0000000c}.card strong{display:block;color:#155744}.script{font-family:'Noto Serif Javanese',serif;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.5}.script.smallscript{font-size:clamp(1.8rem,4vw,2.7rem)}.letter{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:120px}.letter button{width:100%;height:100%;background:#fff3c5;border:2px solid #f0c95e;border-radius:16px;color:#183d35}.letter button:hover{background:#ffe58d}.choices{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;max-width:700px;margin:20px auto}.choice{min-height:72px;background:#fff;border:3px solid #e7ca71;border-radius:18px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#175a48;padding:10px}.choice:hover{background:#fff0b6}.choice.correct{background:#b9edc9;border-color:#249b56}.choice.wrong{background:#ffd0c9;border-color:#d94b4b}.question{background:#fff0bb;border-radius:24px;padding:18px;margin:14px auto;max-width:600px}.progress{height:12px;background:#e4e5d7;border-radius:20px;overflow:hidden;margin:12px auto;max-width:650px}.progress span{display:block;height:100%;background:#36a879;transition:width .2s}.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.stat{background:#e9f6e9;padding:8px 14px;border-radius:14px;font-weight:800}.levelmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.level{background:#fff;border:3px solid #e6d48b;border-radius:22px;padding:20px 10px}.level.locked{filter:grayscale(.7);opacity:.75}.level .emoji{font-size:2.5rem}.feedback{font-size:1.25rem;font-weight:800;min-height:34px;margin:10px;color:#16714d}.timer{font-size:1.5rem;font-weight:800;color:#b33}.row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.hidden{display:none!important}input[type=text],input[type=password]{padding:10px 14px;border:2px solid #b6d6c5;border-radius:12px;font-size:1rem;max-width:100%}.settings{max-width:600px;margin:10px auto;text-align:left;background:#fff;padding:18px;border-radius:18px}.settings label{display:block;margin:10px 0;font-weight:700}.settings input[type=range]{width:100%}.badge{display:inline-block;background:#ffdf70;border-radius:99px;padding:8px 16px;font-weight:800}.footer-note{font-size:.85rem;color:#58746a}.songimg{width:min(891px,90%);max-height:594px;object-fit:contain;border-radius:18px}.song-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-wrap:nowrap}.song-layout .guidewrap{order:2;flex:0 0 auto}.song-layout .guidewrap img{width:clamp(50px,8vw,85px);height:auto;max-height:115px}.song-layout .guidewrap .badge{font-size:.75rem;padding:4px 9px}.song-layout .songimg{order:1;flex:0 1 auto;width:min(891px,78%)}.home h1{font-size:clamp(3rem,7.5vw,6rem);font-weight:900;letter-spacing:.035em;color:#ffe15b;-webkit-text-stroke:2px #173d2f;text-shadow:4px 5px 0 #d44719,8px 9px 0 #102d25,0 0 24px #ffd34e}.home .sub{color:#fff2a6;text-shadow:2px 3px 0 #173d2f,0 0 8px #000}.home p:not(.sub){color:#fff;text-shadow:2px 2px 3px #102d25;background:rgba(10,40,28,.62);border-radius:12px;padding:7px 12px}.home .btn{border:2px solid #fff1a8}.word{font-size:clamp(3rem,8vw,5rem);font-family:'Noto Serif Javanese',serif}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#153f34;color:white;padding:10px 18px;border-radius:14px;z-index:20;box-shadow:var(--shadow)}
 @media(max-width:650px){.topbar{justify-content:center}.topbar .spacer{display:none}.levelmap{grid-template-columns:1fr}.screen{max-height:calc(100vh - 150px)}main{padding:12px 0}.choices{gap:8px}.choice{min-height:62px}.hero img.guide{width:120px}}
+
 /* ===== REVISI TAMPILAN RESPONSIF DAN KETERBACAAN ===== */
 .screen{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-radius:0!important}
 .screen h1,.screen h2,.screen h3,.screen p,.screen .sub,.screen .footer-note,.screen .word,.screen .prompttext,.screen .badge,.screen .stat,.screen .feedback,.screen>strong{display:table;max-width:100%;margin:8px auto;padding:5px 12px;border-radius:12px;background:rgba(255,255,255,.91);color:#123d32;text-shadow:none}
 .screen .card,.screen .question,.screen .choice,.screen .level,.screen .settings,.screen .letter button{background:#fff9e9;color:#183d35}
 .screen .card strong,.screen .letter button strong{color:#124b3b}
+/* Kabeh tulisan nduweni alas padhang dhewe supaya cetha ing saben latar */
 .screen .card,.screen .question,.screen .choice,.screen .level,.screen .settings,.screen .name-panel,.screen .leaderboard-wrap{background:rgba(255,255,255,.96)!important;color:#183d35!important}
 .screen .question p,.screen .question b,.screen .card p,.screen .level p,.screen .settings label,.screen .name-panel label{color:#183d35}
 .screen .footer-note{background:rgba(255,255,255,.92)!important;color:#315b4c!important}
 .screen .progress{background:#fff}
 .screen .progress span{background:#24866b}
 .screen .card p,.screen .card small,.screen .question b,.screen .question p,.screen .level p,.screen .level span,.screen .settings label,.screen .settings p{display:table;max-width:100%;margin:6px auto;padding:4px 9px;border-radius:9px;background:rgba(255,255,255,.94);color:#123d32}
-.screen .btn,.topbar button,.topbar .pill{text-shadow:none}
+.screen .btn,.topbar button,.topbar .pill{ text-shadow:none }
 .aksara-gambar{display:inline-block;width:85px;height:85px;object-fit:contain;object-position:center;background:transparent;mix-blend-mode:multiply;margin:0 auto;vertical-align:middle}
 .word .aksara-gambar{display:inline-block!important;width:.9em;height:.9em;max-width:.9em;max-height:.9em;flex:0 0 .9em;object-fit:contain;vertical-align:middle;margin:0 .015em}
 .question .soal-gambar{display:inline-block!important;width:96px;height:96px;vertical-align:middle}
@@ -108,42 +39,455 @@ input[type=text],input[type=password]{padding:10px 14px;border:2px solid #b6d6c5
 .name-panel{background:rgba(255,255,255,.95);border:2px solid #e5d9b8;border-radius:16px;padding:14px;margin:14px auto;max-width:480px}
 .name-panel label{display:block;color:#153f34}
 .name-panel input{width:100%;margin-top:8px}
-.leaderboard-wrap{width:100%;max-width:100%;overflow:auto;border-radius:16px;background:rgba(255,255,255,.96);padding:10px;margin:12px auto}
-.leaderboard-wrap table{width:100%;border-collapse:collapse;min-width:600px}
-.leaderboard-wrap th,.leaderboard-wrap td{padding:9px 10px;border-bottom:1px solid #dce9df;text-align:center}
-.leaderboard-wrap th{background:#176b55;color:#fff;position:sticky;top:0}
-.leaderboard-wrap tr:nth-child(even){background:#f1f8f1}
-@media(max-width:650px){.leaderboard-wrap{overflow-x:auto}.leaderboard-wrap table{min-width:560px}}
+.material-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;width:100%;margin:18px auto;justify-content:center;align-items:stretch}
+.material-grid .card{min-width:0;min-height:220px;display:flex;align-items:stretch;justify-content:stretch;padding:10px}
+.material-grid .letter button{width:100%;min-height:195px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px}
+.leaderboard-wrap{width:100%;overflow-x:auto;background:rgba(255,255,255,.96);border-radius:14px;padding:8px;margin:12px auto}
+.leaderboard{width:100%;border-collapse:collapse;min-width:500px;color:#183d35}
+.leaderboard th,.leaderboard td{padding:8px 6px;border:1px solid #d7e4d9;text-align:center}
+.leaderboard th{background:#176b55;color:white}.leaderboard tr:nth-child(even){background:#fff3c5}
+@media(max-width:800px){main{width:100%;padding:8px}.screen{max-height:none;overflow:visible;padding:12px 8px}.material-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.material-grid .card{min-height:180px}.material-grid .letter button{min-height:165px}.levelmap{grid-template-columns:1fr}.topbar{justify-content:center}.topbar .spacer{display:none}}
+@media(min-width:801px) and (max-width:1100px){.material-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1101px){.material-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+
+
+/* Tata letak pas siji layar, tanpa gulung vertikal */
+html,body{height:100%;height:100dvh;overflow:hidden}
+#app{height:100%;height:100dvh;min-height:0;overflow:hidden}
+.topbar{flex:0 0 auto;padding:5px 1vw;gap:5px}
+.topbar button,.topbar .pill{padding:5px 9px;font-size:.85rem}
+main{width:min(1200px,98vw);min-height:0;height:auto;flex:1;padding:6px 0;overflow:hidden}
+.screen{height:100%;max-height:100%;min-height:0;overflow:hidden;padding:clamp(8px,1.3vw,16px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px}
+.screen>h1,.screen>h2,.screen>h3,.screen>p{flex:0 0 auto}
+.screen .cards{margin:6px auto;gap:7px;width:100%}
+.screen .card{padding:7px;min-width:0}
+.screen .levelmap{gap:8px;margin:8px 0;width:100%}
+.screen .level{padding:9px 6px}
+.screen .level .emoji{font-size:1.7rem}
+.screen .name-panel{padding:7px;margin:5px auto}
+.screen .guidewrap img{max-height:65px}
+.screen .btn{padding:7px 13px;margin:4px;font-size:.95rem}
+.screen .question{padding:8px;margin:5px auto}
+.screen .choices{margin:6px auto;gap:7px}
+.screen .choice{min-height:48px;padding:5px}
+.screen .material-grid{flex:1;min-height:0;grid-template-rows:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:6px;margin:5px auto;overflow:hidden}
+.screen .material-grid .card{min-height:0;padding:4px}
+.screen .material-grid .letter button{min-height:0;padding:3px;gap:2px}
+.screen .material-grid .aksara-gambar{width:48px;height:48px;max-width:48px;max-height:48px;flex:0 0 48px}
+.screen .material-grid .script{font-size:clamp(1.3rem,3vw,2rem)}
+.screen .material-grid small{font-size:.72rem}
+.screen .leaderboard-wrap{max-height:35vh;overflow:hidden}
+.home .hero{gap:12px}
+.home .hero img.guide{width:min(170px,25vw);max-height:35vh}
+.song-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex:0 0 auto;min-height:0;width:100%;position:relative}
+.song-layout .songimg{width:auto;max-width:80%;height:auto;max-height:48vh}
+@media(max-width:800px){
+ .topbar{justify-content:center;flex-wrap:wrap}
+ .topbar .spacer{display:none}
+ main{padding:3px;width:100%}
+ .screen{padding:5px;gap:2px}
+ .screen h1{font-size:clamp(1.8rem,7vw,3rem)}
+ .screen h2{font-size:clamp(1.1rem,4vw,1.7rem);margin:3px auto;padding:3px 7px}
+ .screen p{font-size:.88rem;margin:3px auto;padding:3px 6px}
+ .screen .levelmap{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+ .screen .level{border-width:2px;padding:5px 2px}
+ .screen .level p{font-size:.72rem}
+ .screen .level .emoji{font-size:1.25rem}
+ .screen .btn{font-size:.78rem;padding:5px 7px;margin:2px}
+ .screen .name-panel{width:95%;font-size:.8rem}
+ .screen .guidewrap img{width:42px;height:48px}
+ .screen .guidewrap .badge{font-size:.7rem;padding:3px 6px}
+ .screen .material-grid{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:3px}
+ .screen .material-grid .aksara-gambar{width:30px;height:30px;max-width:30px;max-height:30px;flex-basis:30px}
+ .screen .material-grid .script{font-size:1.15rem}
+ .screen .material-grid .letter strong{font-size:.72rem}
+ .screen .material-grid small{display:none}
+ .screen .choices{gap:4px;margin:4px auto}
+ .screen .choice{min-height:38px;font-size:1rem;padding:3px;border-width:2px}
+ .screen .question .word{font-size:clamp(2rem,9vw,3.2rem)}
+ .home .hero img.guide{width:90px;max-height:22vh}
+ .song-layout .songimg{max-width:92%;max-height:42vh}
+}
+@media(max-height:650px){
+ .topbar{padding:2px;gap:3px}.topbar button,.topbar .pill{padding:3px 6px;font-size:.72rem}
+ .screen{padding:3px;gap:1px}.screen .btn{padding:4px 8px;margin:2px}
+ .screen .cards{margin:3px auto}.screen .card{padding:4px}
+ .screen .levelmap{margin:3px 0}.screen .name-panel{padding:4px;margin:2px auto}
+ .screen .question{padding:4px;margin:2px auto}.screen .choices{margin:3px auto}
+ .song-layout .songimg{max-height:36vh}
+}
+
+
+/* Papan skor pungkasan bisa digulung; kaca liyane tetep pas siji layar. */
+main:has(#screen.final-screen){overflow-y:auto;overflow-x:hidden;align-items:flex-start}
+#screen.final-screen{height:auto;max-height:none;min-height:100%;overflow:visible;justify-content:flex-start;padding-bottom:28px}
+#screen.final-screen .leaderboard-wrap{max-height:none;overflow:visible;width:100%}
+#screen.final-screen .cards{flex:0 0 auto}
+
+/* Ra lan Da kudu padha ukuran karo aksara gambar liyane ing pitakon. */
+.aksara-gambar{display:inline-block;width:1.15em;height:1.15em;max-width:1.15em;max-height:1.15em;object-fit:contain;object-position:center;vertical-align:middle;flex:0 0 auto;image-rendering:auto;filter:contrast(1.12) drop-shadow(0 0 .35px #183d35)}.question .soal-gambar{width:1.15em!important;height:1.15em!important;max-width:1.15em!important;max-height:1.15em!important;object-fit:contain;object-position:center;vertical-align:middle;margin:0 4px;flex:0 0 1.15em}
+
+/* Gambar tembang digedhekake 50% saka wates dhuwur sadurunge. */
+.song-layout .songimg{order:1;display:block;position:relative;max-width:100%;max-height:48vh;width:auto;height:auto;object-fit:contain;margin:0 auto 6px}.song-layout .guidewrap{order:2;display:flex;position:relative;align-items:center;justify-content:center;gap:8px;margin:0 auto;animation:none;transform:none}.song-layout .guidewrap img{width:clamp(42px,6vw,70px);height:auto;max-height:76px;object-fit:contain;animation:none;transform:none}.song-layout .guidewrap .badge{font-size:.8rem;padding:4px 9px}.screen:has(.song-layout)>div:not(.song-layout){position:relative;z-index:2;margin-top:6px}
+
+/* Materi: aksara lan jeneng pas ing tengah kothak, kothak ngisi layar kanthi proporsional. */
+.screen .material-grid-half{grid-template-rows:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(0,1fr)}
+.screen .material-grid{align-content:stretch;align-items:stretch;justify-items:stretch;gap:8px}
+.screen .material-grid .card{display:flex;align-items:stretch;justify-content:stretch;padding:6px}
+.screen .material-grid .letter{align-items:stretch;justify-content:stretch}
+.screen .material-grid .letter button{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:100%;height:100%;min-height:0;gap:5px;padding:5px}
+.screen .material-grid .aksara-gambar{width:clamp(48px,5vw,76px);height:clamp(48px,5vw,76px);max-width:76px;max-height:76px;flex:0 0 auto;object-fit:contain;object-position:center;margin:0 auto}
+.screen .material-grid .script{display:flex;align-items:center;justify-content:center;line-height:1.1}
+@media(max-width:800px){
+ .song-layout .songimg{max-width:100%;max-height:46vh}
+ .screen .material-grid{gap:4px}
+ .screen .material-grid .card{padding:3px}
+ .screen .material-grid .letter button{gap:3px;padding:2px}
+ .screen .material-grid .aksara-gambar{width:clamp(28px,7vw,52px);height:clamp(28px,7vw,52px);max-width:52px;max-height:52px}
+ .question .soal-gambar{width:1.15em!important;height:1.15em!important;max-width:1.15em!important;max-height:1.15em!important;flex-basis:1.15em}
+}
+@media(max-height:650px){.song-layout .songimg{max-height:38vh}.song-layout .guidewrap img{max-height:52px}}
+
+
+/* Revisi materi kabeh level: kothak rata lan aksara pas ing tengah. */
+.screen .material-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);width:100%;flex:1 1 auto;min-height:0;max-height:calc(100% - 90px);align-content:stretch;justify-content:stretch;align-items:stretch;justify-items:stretch;gap:clamp(4px,1vw,10px);margin:6px auto;overflow:hidden}
+.screen .material-grid.material-grid-half{grid-template-rows:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(0,1fr)}
+.screen .material-grid .card{display:flex;align-items:stretch;justify-content:stretch;min-width:0;min-height:0;padding:clamp(3px,.7vw,9px)}
+.screen .material-grid .letter{display:flex;align-items:stretch;justify-content:stretch;width:100%;height:100%;min-height:0}
+.screen .material-grid .letter button{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:clamp(2px,.5vw,6px);width:100%;height:100%;min-width:0;min-height:0;padding:4px;line-height:1.15}
+.screen .material-grid .aksara-gambar{display:block;width:clamp(22px,3vw,34px);height:clamp(22px,3vw,34px);max-width:100%;max-height:100%;flex:0 1 auto;object-fit:contain;object-position:center;margin:0 auto;filter:contrast(1.12) drop-shadow(0 0 .35px #183d35)}
+.screen .material-grid .script{display:flex;align-items:center;justify-content:center;line-height:1.1;font-size:clamp(1.15rem,2.5vw,2rem);margin:0 auto}
+.screen .material-grid .letter strong{display:block;text-align:center;line-height:1.1;font-size:clamp(.72rem,1.3vw,1rem);margin:0;padding:0;background:transparent}
+.screen .material-grid small{font-size:clamp(.58rem,.9vw,.75rem);line-height:1}
+@media(max-width:800px){.screen .material-grid{gap:3px;max-height:calc(100% - 75px)}.screen .material-grid .aksara-gambar{width:clamp(20px,3vw,26px);height:clamp(20px,3vw,26px)}.screen .material-grid .script{font-size:clamp(1rem,3vw,1.35rem)}.screen .material-grid .letter strong{font-size:.7rem}.screen .material-grid small{display:none}}
+
+
+
+/* REVISI: ukuran gambar aksara Ra/Da mengikuti ukuran aksara teks di konteks yang sama. */
+.screen img.aksara-gambar.script,
+.screen img.aksara-gambar.smallscript,
+.screen img.aksara-gambar.script.smallscript{
+  width:1em!important;height:1em!important;min-width:0!important;min-height:0!important;
+  max-width:1em!important;max-height:1em!important;flex:0 0 1em!important;
+  object-fit:contain!important;object-position:center!important;vertical-align:middle!important;
+  margin:0 .025em!important;padding:0!important;border:0!important;background:transparent!important;
+}
+.screen .word img.aksara-gambar{
+  width:.95em!important;height:.95em!important;max-width:.95em!important;max-height:.95em!important;
+  flex:0 0 .95em!important;object-fit:contain!important;vertical-align:middle!important;
+}
+.screen .question img.aksara-gambar.soal-gambar{
+  width:1em!important;height:1em!important;max-width:1em!important;max-height:1em!important;
+  object-fit:contain!important;vertical-align:middle!important;
+}
+.screen .choice img.aksara-gambar{
+  width:1.15em!important;height:1.15em!important;max-width:1.15em!important;max-height:1.15em!important;
+  object-fit:contain!important;vertical-align:middle!important;
+}
+.screen .material-grid img.aksara-gambar{
+  width:clamp(2.1rem,5vw,3.6rem)!important;height:clamp(2.1rem,5vw,3.6rem)!important;
+  max-width:100%!important;max-height:none!important;flex:0 0 auto!important;
+  object-fit:contain!important;object-position:center!important;margin:0 auto!important;
+}
+/* Paraga ing kaca tembang obah kanthi lembut, tanpa nutupi gambar utawa tombol. */
+.screen.song .song-layout{gap:14px;overflow:visible}
+.screen.song .song-layout .guidewrap{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;z-index:1;isolation:isolate;transform-origin:center bottom;
+}
+.screen.song .song-layout .guidewrap img{
+  display:block;position:relative;z-index:1;width:clamp(72px,10vw,120px)!important;
+  max-width:100%;max-height:18vh;height:auto;object-fit:contain;
+  animation: songCharacterMove 1.8s ease-in-out infinite!important;
+  will-change:transform;
+}
+.screen.song .song-layout .guidewrap .badge{position:relative;z-index:2;margin:0}
+.screen.song .song-layout + div{position:relative;z-index:3;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+@keyframes songCharacterMove{
+  0%,100%{transform:translateY(0) rotate(0deg) scale(1)}
+  25%{transform:translateY(-7px) rotate(-3deg) scale(1.025)}
+  50%{transform:translateY(-2px) rotate(2deg) scale(1.04)}
+  75%{transform:translateY(-8px) rotate(-1.5deg) scale(1.02)}
+}
+@media(prefers-reduced-motion:reduce){
+ .screen.song .song-layout .guidewrap img{animation:none!important}
+}
+
+/* Aksara Ra/Da tetap memakai gambar asli GitHub; hanya ukuran, posisi, dan perpaduan latar yang diselaraskan. */
+.screen img.aksara-ra-da{
+  display:inline-block!important;box-sizing:border-box!important;
+  object-fit:contain!important;object-position:center center!important;
+  width:1.15em!important;height:1.15em!important;max-width:1.15em!important;max-height:1.15em!important;
+  background:transparent!important;border:0!important;outline:0!important;box-shadow:none!important;
+  /* Latar putih JPG menyatu dengan permukaan terang tanpa mengubah bentuk aksara. */
+  mix-blend-mode:multiply!important;filter:none!important;clip-path:none!important;
+  padding:0!important;vertical-align:middle!important;margin:0 .02em!important;image-rendering:auto;
+}
+/* Ukuran materi mengikuti ukuran glyph aksara lain dan selalu tepat di tengah kartu. */
+.screen .material-grid img.aksara-ra-da{
+  display:block!important;width:clamp(1.15rem,2.5vw,2rem)!important;height:clamp(1.15rem,2.5vw,2rem)!important;
+  max-width:100%!important;max-height:100%!important;flex:0 0 auto!important;
+  object-fit:contain!important;object-position:center center!important;margin:0 auto!important;
+}
+.screen.material1 .material-grid .letter button,
+.screen.material3 .material-grid .letter button{align-items:center!important;justify-content:center!important;text-align:center!important;}
+.screen.material1 .material-grid .letter img.aksara-ra-da,
+.screen.material3 .material-grid .letter img.aksara-ra-da{align-self:center!important;justify-self:center!important;margin:0 auto!important;}
+.screen .question img.aksara-ra-da{width:1em!important;height:1em!important;max-width:1em!important;max-height:1em!important;flex:0 0 1em!important;object-fit:contain!important;}
+.screen .choice img.aksara-ra-da{width:1.15em!important;height:1.15em!important;max-width:1.15em!important;max-height:1.15em!important;flex:0 0 1.15em!important;object-fit:contain!important;}
+.screen .word img.aksara-ra-da{width:.95em!important;height:.95em!important;max-width:.95em!important;max-height:.95em!important;flex:0 0 .95em!important;object-fit:contain!important;}
+
+/* Ra lan Da nggunakake glyph Unicode sing padha karo aksara liyane: tanpa bingkai JPG. */
+.aksara-unicode{font-family:'Noto Serif Javanese','Noto Sans Javanese',serif!important;font-weight:400!important;line-height:1.35!important;display:inline-block;vertical-align:middle;box-sizing:border-box}
+.question .aksara-unicode{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.25!important}
+.choice .aksara-unicode{font-size:1em;line-height:1.25!important}
+.material-grid .aksara-unicode{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.2!important}
+.word .aksara-unicode{font-size:1em;line-height:1.2!important}
+
+
+/* PERBAIKAN TERARAH: Ra/Da di soal Level 1 dan Level 3 mengikuti skala aksara lain. */
+.screen .question img.aksara-ra-da,
+.screen .question .word img.aksara-ra-da{
+  display:inline-block!important;box-sizing:border-box!important;
+  width:1em!important;height:1em!important;min-width:1em!important;min-height:1em!important;
+  max-width:1em!important;max-height:1em!important;flex:0 0 1em!important;
+  object-fit:contain!important;object-position:center!important;
+  vertical-align:middle!important;margin:0 .02em!important;padding:0!important;
+  border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;
+  mix-blend-mode:multiply!important;filter:none!important;
+}
+.screen .choices .choice img.aksara-ra-da{
+  width:1.15em!important;height:1.15em!important;min-width:1.15em!important;min-height:1.15em!important;
+  max-width:1.15em!important;max-height:1.15em!important;flex:0 0 1.15em!important;
+  object-fit:contain!important;object-position:center!important;margin:0 .02em!important;
+}
+/* Materi Level 3 memakai tinggi alami dan dapat digulir; kartu tidak dipaksa masuk satu layar. */
+.screen.material3 .material-grid{
+  grid-template-rows:none!important;grid-auto-rows:minmax(105px,auto)!important;
+  max-height:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;
+  overflow:visible!important;align-content:start!important;gap:clamp(6px,1vw,12px)!important;
+}
+.screen.material3 .material-grid .card{min-height:105px!important;height:auto!important;padding:8px!important;}
+.screen.material3 .material-grid .letter button{min-height:90px!important;height:auto!important;padding:8px!important;gap:6px!important;}
+.screen.material3 .material-grid img.aksara-ra-da{
+  width:clamp(2.1rem,5vw,3.6rem)!important;height:clamp(2.1rem,5vw,3.6rem)!important;
+  max-width:100%!important;max-height:none!important;flex:0 0 auto!important;object-fit:contain!important;
+}
+@media(max-width:800px){
+ .screen.material3 .material-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(100px,auto)!important;}
+ .screen.material3 .material-grid .card{min-height:100px!important;}
+ .screen.material3 .material-grid .letter button{min-height:86px!important;}
+}
+
+/* Perbaikan akhir: Ra/Da di soal memakai kotak ukuran yang sama dengan glyph aksara lain. */
+.screen .question img.aksara-ra-da,
+.screen .question .word img.aksara-ra-da,
+.screen .question .choices .choice img.aksara-ra-da {
+  display:inline-block!important;
+  box-sizing:border-box!important;
+  width:1em!important;height:1em!important;
+  min-width:1em!important;min-height:1em!important;
+  max-width:1em!important;max-height:1em!important;
+  flex:0 0 1em!important;
+  object-fit:contain!important;object-position:center!important;
+  vertical-align:middle!important;margin:0 .025em!important;padding:0!important;
+  border:0!important;outline:0!important;box-shadow:none!important;
+  background:transparent!important;mix-blend-mode:multiply!important;filter:none!important;
+}
+/* Materi Level 3: kartu proporsional, tinggi mengikuti isi, seluruh kartu dapat digulir. */
+.screen.material3 .material-grid {
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-rows:none!important;
+  grid-auto-rows:minmax(112px,auto)!important;
+  width:100%!important;max-width:100%!important;
+  height:auto!important;max-height:none!important;min-height:0!important;
+  flex:0 0 auto!important;overflow:visible!important;
+  align-content:start!important;align-items:stretch!important;justify-items:stretch!important;
+  gap:clamp(7px,1.2vw,14px)!important;margin:10px auto 16px!important;
+}
+.screen.material3 .material-grid .card,
+.screen.material3 .material-grid .letter,
+.screen.material3 .material-grid .letter button {
+  min-width:0!important;min-height:112px!important;height:auto!important;
+}
+.screen.material3 .material-grid .card {padding:8px!important;}
+.screen.material3 .material-grid .letter button {
+  width:100%!important;padding:10px 6px!important;gap:7px!important;
+  align-items:center!important;justify-content:center!important;text-align:center!important;
+}
+.screen.material3 .material-grid img.aksara-ra-da,
+.screen.material3 .material-grid .aksara-gambar {
+  display:block!important;width:clamp(2.1rem,4.5vw,3.4rem)!important;
+  height:clamp(2.1rem,4.5vw,3.4rem)!important;
+  min-width:0!important;min-height:0!important;max-width:100%!important;max-height:none!important;
+  flex:0 0 auto!important;object-fit:contain!important;object-position:center!important;margin:0 auto!important;
+}
+.screen.material3 .material-grid .letter strong {text-align:center!important;line-height:1.15!important;}
+@media(max-width:800px){
+ .screen.material3 .material-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(100px,auto)!important;gap:8px!important;}
+ .screen.material3 .material-grid .card,
+ .screen.material3 .material-grid .letter,
+ .screen.material3 .material-grid .letter button {min-height:100px!important;}
+ .screen.material3 .material-grid .letter button {padding:8px 5px!important;}
+ .screen.material3 .material-grid img.aksara-ra-da,
+ .screen.material3 .material-grid .aksara-gambar {width:clamp(2rem,8vw,2.8rem)!important;height:clamp(2rem,8vw,2.8rem)!important;}
+}
+
+
+/* Perbaikan khusus soal Level 1: gambar Ra/Da memakai aset GitHub asli,
+   dengan bidang ukuran setara glyph besar lain dan tanpa bingkai tambahan. */
+.screen .question > img.aksara-ra-da.soal-gambar,
+.screen .question > img.aksara-ra-da.script {
+  display:block!important;
+  width:clamp(2.4rem,6vw,4.2rem)!important;
+  height:clamp(2.4rem,6vw,4.2rem)!important;
+  min-width:clamp(2.4rem,6vw,4.2rem)!important;
+  min-height:clamp(2.4rem,6vw,4.2rem)!important;
+  max-width:clamp(2.4rem,6vw,4.2rem)!important;
+  max-height:clamp(2.4rem,6vw,4.2rem)!important;
+  object-fit:contain!important; object-position:center!important;
+  margin:8px auto!important; padding:0!important;
+  border:0!important; outline:0!important; box-shadow:none!important;
+  background:transparent!important; mix-blend-mode:multiply!important; filter:none!important;
+}
+
+/* Perbaikan khusus gambar Ra pada pertanyaan Level 1 */
+.screen .question img.aksara-ra-soal{
+ display:block!important;
+ width:clamp(2.5rem,6vw,4rem)!important;
+ height:clamp(2.5rem,6vw,4rem)!important;
+ min-width:0!important;min-height:0!important;
+ max-width:100%!important;max-height:none!important;
+ object-fit:contain!important;object-position:center!important;
+ margin:8px auto!important;padding:0!important;
+ border:0!important;outline:0!important;box-shadow:none!important;
+ background:transparent!important;mix-blend-mode:multiply!important;filter:none!important;
+ flex:none!important;vertical-align:middle!important;
+}
+
+/* FIX MATERI LEVEL 3: gambar utuh, kartu tidak terpotong, dan tombol lanjut dapat dijangkau dengan scroll. */
+main:has(.screen.material3){align-items:stretch!important;justify-content:flex-start!important;overflow-y:auto!important;overflow-x:hidden!important;min-height:0!important;height:auto!important;-webkit-overflow-scrolling:touch;}
+.screen.material3{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;width:100%!important;height:auto!important;min-height:100%!important;max-height:none!important;overflow-x:hidden!important;overflow-y:visible!important;flex:0 0 auto!important;padding:clamp(10px,2vw,22px)!important;gap:8px!important;}
+.screen.material3>h2,.screen.material3>p{flex:0 0 auto!important;}
+.screen.material3 .material-grid{flex:0 0 auto!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;grid-template-rows:none!important;grid-auto-rows:minmax(112px,auto)!important;align-content:start!important;margin:8px auto 14px!important;}
+.screen.material3 .material-grid .card,.screen.material3 .material-grid .letter,.screen.material3 .material-grid .letter button{min-height:112px!important;height:auto!important;overflow:visible!important;}
+.screen.material3 .material-grid .letter button{padding:10px 6px!important;gap:7px!important;}
+.screen.material3 .material-grid img.aksara-gambar,.screen.material3 .material-grid img.aksara-ra-da{display:block!important;width:clamp(42px,5vw,64px)!important;height:clamp(42px,5vw,64px)!important;min-width:0!important;min-height:0!important;max-width:100%!important;max-height:none!important;flex:0 0 auto!important;object-fit:contain!important;object-position:center!important;overflow:visible!important;margin:0 auto!important;}
+.screen.material3>.btn{flex:0 0 auto!important;align-self:center!important;margin:12px auto 18px!important;position:relative!important;z-index:2;}
+@media(max-width:800px){main:has(.screen.material3){padding:4px!important;}.screen.material3{padding:8px 6px 18px!important;}.screen.material3 .material-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(100px,auto)!important;gap:7px!important;}.screen.material3 .material-grid .card,.screen.material3 .material-grid .letter,.screen.material3 .material-grid .letter button{min-height:100px!important;}.screen.material3 .material-grid img.aksara-gambar,.screen.material3 .material-grid img.aksara-ra-da{width:clamp(38px,10vw,54px)!important;height:clamp(38px,10vw,54px)!important;}}
+
+
+
+/* Level 3: Ra/Da menggunakan glyph Unicode, jadi ukuran dan ketebalan seragam. */
+.screen.material3 .material-grid .letter button > .aksara-unicode {
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;width:clamp(1.3rem,3vw,2rem)!important;
+ height:clamp(1.3rem,3vw,2rem)!important;min-width:0!important;min-height:0!important;
+ margin:0 auto!important;padding:0!important;font-family:'Noto Serif Javanese','Noto Sans Javanese',serif!important;
+ font-weight:400!important;line-height:1.1!important;transform:none!important;
+}
+.screen .question .word .aksara-unicode {
+ display:inline-block!important;font-family:'Noto Serif Javanese','Noto Sans Javanese',serif!important;
+ font-weight:400!important;line-height:1.2!important;vertical-align:middle!important;
+ transform:none!important;margin:0 .02em!important;
+}
+/* NORMALISASI FINAL LEVEL 3: tetap memakai gambarra.jpg dan gambarda.jpg dari GitHub.
+   Kotak gambar disamakan, ruang putih gambar tidak dipaksa memenuhi kotak, dan opacity
+   sedikit diturunkan agar bobot visualnya tidak terlalu tebal dibanding glyph di sebelahnya. */
+.screen.material3 .material-grid img.aksara-ra-da {
+  display:block!important; box-sizing:border-box!important;
+  width:clamp(1.7rem,4vw,2.6rem)!important;
+  height:clamp(1.7rem,4vw,2.6rem)!important;
+  min-width:clamp(1.7rem,4vw,2.6rem)!important;
+  min-height:clamp(1.7rem,4vw,2.6rem)!important;
+  max-width:clamp(1.7rem,4vw,2.6rem)!important;
+  max-height:clamp(1.7rem,4vw,2.6rem)!important;
+  flex:0 0 clamp(1.7rem,4vw,2.6rem)!important;
+  object-fit:contain!important; object-position:center!important;
+  transform:none!important; filter:grayscale(1) contrast(.92)!important;
+  opacity:.84!important; mix-blend-mode:multiply!important;
+  margin:0 auto!important; padding:0!important; border:0!important;
+  border-radius:0!important; box-shadow:none!important; background:transparent!important;
+}
+.screen.material3 .material-grid .letter button {gap:7px!important;}
+/* Gambar Ra/Da di kata soal Level 3 perlu sedikit lebih besar karena JPG memiliki ruang tepi. */
+.screen.material3 .question .word img.aksara-ra-da,
+.screen .question .word img.aksara-ra-da {
+  display:inline-block!important; box-sizing:border-box!important;
+  width:1.85em!important; height:1.85em!important;
+  min-width:1.85em!important; min-height:1.85em!important;
+  max-width:1.85em!important; max-height:1.85em!important;
+  flex:0 0 1.85em!important;
+  object-fit:contain!important; object-position:center!important;
+  vertical-align:middle!important; transform:none!important;
+  filter:grayscale(1) contrast(1.08)!important; opacity:1!important;
+  mix-blend-mode:multiply!important; margin:0 .015em!important;
+  padding:0!important; border:0!important; border-radius:0!important;
+  outline:0!important; box-shadow:none!important; background:transparent!important;
+}
+@media(max-width:800px){
+ .screen.material3 .material-grid img.aksara-ra-da {
+  width:clamp(1.5rem,7vw,2.1rem)!important;height:clamp(1.5rem,7vw,2.1rem)!important;
+  min-width:clamp(1.5rem,7vw,2.1rem)!important;min-height:clamp(1.5rem,7vw,2.1rem)!important;
+  max-width:clamp(1.5rem,7vw,2.1rem)!important;max-height:clamp(1.5rem,7vw,2.1rem)!important;
+  flex-basis:clamp(1.5rem,7vw,2.1rem)!important;
+ }
+}
+
+/* Latar JPG Ra/Da dicampurkan dengan warna latar soal; putihnya tidak tampak seperti kotak. */
+.screen .question img.aksara-ra-da {
+  background:transparent!important; mix-blend-mode:multiply!important;
+  filter:grayscale(1) contrast(1.08)!important; opacity:1!important;
+}
+/* PENYESUAIAN AKHIR: Ra/Da Level 3 dibesarkan 25% dan latar JPG menyatu dengan kartu/soal. */
+.screen.material3 .material-grid img.aksara-ra-da {
+  width:clamp(2.125rem,5vw,3.25rem)!important;
+  height:clamp(2.125rem,5vw,3.25rem)!important;
+  min-width:clamp(2.125rem,5vw,3.25rem)!important;
+  min-height:clamp(2.125rem,5vw,3.25rem)!important;
+  max-width:clamp(2.125rem,5vw,3.25rem)!important;
+  max-height:clamp(2.125rem,5vw,3.25rem)!important;
+  flex:0 0 clamp(2.125rem,5vw,3.25rem)!important;
+  object-fit:contain!important;object-position:center!important;
+  background:transparent!important;mix-blend-mode:multiply!important;
+  filter:grayscale(1) contrast(.95)!important;opacity:.96!important;
+}
+.screen.material3 .question .word img.aksara-ra-da,
+.screen.material3 .question img.aksara-ra-da {
+  width:2.31em!important;height:2.31em!important;
+  min-width:2.31em!important;min-height:2.31em!important;
+  max-width:2.31em!important;max-height:2.31em!important;
+  flex:0 0 2.31em!important;object-fit:contain!important;
+  object-position:center!important;vertical-align:middle!important;
+  background:transparent!important;mix-blend-mode:multiply!important;
+  filter:grayscale(1) contrast(1.05)!important;opacity:1!important;
+  margin:0 .015em!important;padding:0!important;border:0!important;
+  box-shadow:none!important;outline:0!important;
+}
+@media(max-width:800px){
+ .screen.material3 .material-grid img.aksara-ra-da {
+  width:clamp(1.875rem,8.75vw,2.625rem)!important;
+  height:clamp(1.875rem,8.75vw,2.625rem)!important;
+  min-width:clamp(1.875rem,8.75vw,2.625rem)!important;
+  min-height:clamp(1.875rem,8.75vw,2.625rem)!important;
+  max-width:clamp(1.875rem,8.75vw,2.625rem)!important;
+  max-height:clamp(1.875rem,8.75vw,2.625rem)!important;
+  flex-basis:clamp(1.875rem,8.75vw,2.625rem)!important;
+ }
+}
 </style></head>
-<body>
-<div id="app">
-<header class="topbar" id="topbar" hidden>
-<button onclick="goBack()">↩ Mbalik</button>
-<button class="pill" onclick="editName()">👤 <span id="playerName">Jeneng</span></button>
-<span class="pill">⭐ Skor: <b id="scoreTop">0</b></span>
-<span class="pill">✨ <b id="starTop">0</b></span>
-<button onclick="showLeaderboard()">🏆 Papan Skor</button>
-<button onclick="toggleMusic()" id="musicToggle">Pateni Musik</button>
-<button onclick="openSettings()">⚙ Setelan</button>
-<span class="spacer"></span>
-</header>
-
-<main>
-<section id="screen" class="screen"></section>
-</main>
-</div>
-
-<audio id="bgm" loop></audio>
-<audio id="sfx"></audio>
-<div id="toast" class="toast hidden"></div>
-
+<body><div id="app"><header class="topbar" id="topbar" hidden>
+<button onclick="goBack()">↩ Mbalik</button><button class="pill" onclick="editName()">👤 <span id="playerName">Jeneng</span></button><span class="pill">⭐ Skor: <b id="scoreTop">0</b></span><span class="pill">✨ <b id="starTop">0</b></span><button onclick="showLeaderboard()">🏆 Papan Skor</button><button onclick="toggleMusic()" id="musicToggle">Pateni Musik</button><button onclick="openSettings()">⚙ Setelan</button><span class="spacer"></span>
+</header><main><section id="screen" class="screen"></section></main></div>
+<audio id="bgm" loop></audio><audio id="sfx"></audio><div id="toast" class="toast hidden"></div>
 <script>
 'use strict';
-
 const GITHUB_BASE='https://raw.githubusercontent.com/erwinwahyudi18-commits/myproject-/main/';
 const asset=name=>GITHUB_BASE+encodeURIComponent(name);
-
 function aksaraView(g,extraClass='script'){
+ // Ra lan Da nggunakake gambar asli saka repositori supaya wujude cocog karo aset sekolah.
+ // CSS ing ngisor nyawijikake latar JPG karo latar kaca lan nyepetake pinggir gambar.
  if(g==='ꦫ' || g==='ꦢ'){
    const file=g==='ꦫ'?'gambarra.jpg':'gambarda.jpg';
    const label=g==='ꦫ'?'Aksara Ra':'Aksara Da';
@@ -151,1081 +495,146 @@ function aksaraView(g,extraClass='script'){
  }
  return `<span class="${extraClass} aksara-unicode">${g}</span>`;
 }
-
+// Level 3 tetep nggunakake gambar asli saka GitHub kanggo Ra lan Da.
+// Ukuran lan tampilan gambar diseragamake nganggo CSS khusus ing pungkasan stylesheet.
 function aksaraViewLevel3(g,extraClass='script'){
  return aksaraView(g,extraClass);
 }
-
 function aksaraLineViewLevel3(text){
  return Array.from(String(text)).map(ch=>
-  aksara.some(a=>a[0]===ch)
-   ?aksaraViewLevel3(ch,'script smallscript')
-   :`<span class="script smallscript aksara-unicode">${ch}</span>`
+  aksara.some(a=>a[0]===ch)?aksaraViewLevel3(ch,'script smallscript'):`<span class="script smallscript aksara-unicode">${ch}</span>`
  ).join('');
 }
-
 function aksaraLineView(text){
  return Array.from(String(text)).map(ch=>
-  aksara.some(a=>a[0]===ch)
-   ?aksaraView(ch,'script smallscript')
-   :`<span class="script smallscript aksara-unicode">${ch}</span>`
+  aksara.some(a=>a[0]===ch)?aksaraView(ch,'script smallscript'):`<span class="script smallscript aksara-unicode">${ch}</span>`
  ).join('');
 }
-
-function escapeHTML(value){
- return String(value).replace(/[&<>"']/g,c=>({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
- }[c]));
-}
-
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 let sharedLeaderboard=null;
-
-function getLeaderboard(){
- try{
-  return JSON.parse(localStorage.getItem('sc_leaderboard')||'[]');
- }catch(e){
-  return [];
- }
-}
-
+function getLeaderboard(){try{return JSON.parse(localStorage.getItem('sc_leaderboard')||'[]')}catch(e){return []}}
 function recordLeaderboard(){
  const board=getLeaderboard();
-
- const result={
-  name:state.name.trim()||'Tanpa Jeneng',
-  total:total(),
-  stars:reward(),
-  date:new Date().toISOString()
- };
-
- const old=board.findIndex(x=>
-  String(x.name).trim().toLowerCase()===result.name.toLowerCase()
- );
-
- if(old>=0){
-  if(Number(board[old].total)>result.total)return;
-  board.splice(old,1);
- }
-
- board.push(result);
- board.sort((a,b)=>Number(b.total)-Number(a.total));
-
- localStorage.setItem(
-  'sc_leaderboard',
-  JSON.stringify(board.slice(0,60))
- );
+ const result={name:state.name.trim()||'Tanpa Jeneng',total:total(),stars:reward(),date:new Date().toISOString()};
+ const old=board.findIndex(x=>String(x.name).toLowerCase()===result.name.toLowerCase());
+ if(old>=0){if(Number(board[old].total)>result.total)return;board.splice(old,1)}
+ board.push(result);board.sort((a,b)=>Number(b.total)-Number(a.total));
+ localStorage.setItem('sc_leaderboard',JSON.stringify(board.slice(0,10)));
 }
-
-function trophyForRank(rank){
- return rank===1?'🥇 Piala Emas':
-        rank===2?'🥈 Piala Perak':
-        rank===3?'🥉 Piala Perunggu':'-';
-}
-
-function currentPlayerRank(){
- const board=getLeaderboard();
- const ix=board.findIndex(x=>
-  String(x.name).toLowerCase()===String(state.name).trim().toLowerCase()
- );
- return ix<0?0:ix+1;
-}
-
+function trophyForRank(rank){return rank===1?'🥇 Piala Emas':rank===2?'🥈 Piala Perak':rank===3?'🥉 Piala Perunggu':'-'}
+function currentPlayerRank(){const board=getLeaderboard();const ix=board.findIndex(x=>String(x.name).toLowerCase()===String(state.name).trim().toLowerCase());return ix<0?0:ix+1}
 function leaderboardHTML(){
- const board=sharedLeaderboard ||
-  getLeaderboard().map((x,i)=>({
-   nama:x.name,
-   skor:x.total,
-   bintang:x.stars,
-   peringkat:i+1,
-   piala:i<3?3-i:0
-  }));
-
- const rows=Array.from({length:60},(_,i)=>{
-  const x=board[i];
-  const rank=x?(Number(x.peringkat)||i+1):'-';
-  const stars=x?(Number(x.bintang)||0):0;
-
-  const cup=x?
-   (Number(x.piala)===3?'🥇 Piala Emas':
-    Number(x.piala)===2?'🥈 Piala Perak':
-    Number(x.piala)===1?'🥉 Piala Perunggu':'-')
-   :'-';
-
-  return `<tr>
-   <td>${x?i+1:'-'}</td>
-   <td>${x?escapeHTML(x.nama??x.name??'-'):'-'}</td>
-   <td>${x?(x.skor??x.total??'-'):'-'}</td>
-   <td>${x?'Juara '+rank:'-'}</td>
-   <td>${x?(stars?'⭐ '.repeat(stars):'0'):'-'}</td>
-   <td>${cup}</td>
-  </tr>`;
- }).join('');
-
- return `
- <h2>Papan Skor Akhir — 60 Murid</h2>
- <p class="footer-note">
-  Papan skor iki bisa nampung nganti 60 murid.
-  Data bebarengan dijupuk saka Google Sheets yen sambungan aktif.
- </p>
- <div class="leaderboard-wrap">
-  <table class="leaderboard">
-   <thead>
-    <tr>
-     <th>No.</th>
-     <th>Jeneng Siswa</th>
-     <th>Skor</th>
-     <th>Peringkat</th>
-     <th>Lintang</th>
-     <th>Piala</th>
-    </tr>
-   </thead>
-   <tbody>${rows}</tbody>
-  </table>
- </div>`;
+ const board=sharedLeaderboard || getLeaderboard().map((x,i)=>({nama:x.name,skor:x.total,bintang:x.stars,peringkat:i+1,piala:i<3?3-i:0}));
+ return `<h2>Papan Skor Akhir — 10 Murid</h2><p class="footer-note">Papan iki nyimpen nganti 10 murid kanthi skor paling dhuwur ing piranti iki. Yen Google Sheets wis disambungake, peringkat bebarengan uga bisa ditampilake.</p><div class="leaderboard-wrap"><table class="leaderboard"><thead><tr><th>No.</th><th>Jeneng Siswa</th><th>Skor</th><th>Peringkat</th><th>Lintang</th><th>Piala</th></tr></thead><tbody>${Array.from({length:10},(_,i)=>{const x=board[i],rank=x?Number(x.peringkat)||i+1:i+1,stars=x?Number(x.bintang)||0:0,cup=x?(Number(x.piala)===3?'🥇 Piala Emas':Number(x.piala)===2?'🥈 Piala Perak':Number(x.piala)===1?'🥉 Piala Perunggu':(i===0?'🥇 Piala Emas':i===1?'🥈 Piala Perak':i===2?'🥉 Piala Perunggu':'-')):'-';return `<tr><td>${x?rank:'-'}</td><td>${x?escapeHTML(x.nama??x.name??'-'):'-'}</td><td>${x?(x.skor??x.total??'-'):'-'}</td><td>${x?'Juara '+rank:'-'}</td><td>${x?(stars?'⭐ '.repeat(stars):'0'):'-'}</td><td>${cup}</td></tr>`}).join('')}</tbody></table></div>`;
 }
-
-function showLeaderboard(){
- sharedLeaderboard=null;
- show(
-  `${leaderboardHTML()}
-   <div class="center">
-    <button class="btn gold" onclick="go('map')">↩ Mbalik Peta</button>
-   </div>`,
-  'leaderboard'
- );
- playBg('menuutama.mp3');
- loadSharedLeaderboard();
-}
-
+function showLeaderboard(){sharedLeaderboard=null;show(`${leaderboardHTML()}<div class="center"><button class="btn gold" onclick="go('map')">↩ Mbalik Peta</button></div>`,'leaderboard');playBg('menuutama.mp3');loadSharedLeaderboard()}
 function loadSharedLeaderboard(){
  const callbackName='siCakrawalaRanking_'+Date.now()+'_'+Math.floor(Math.random()*100000);
  const script=document.createElement('script');
  let finished=false;
-
- const cleanup=()=>{
-  if(finished)return;
-  finished=true;
-
-  try{
-   delete window[callbackName];
-  }catch(e){
-   window[callbackName]=undefined;
-  }
-
-  if(script.parentNode)script.parentNode.removeChild(script);
- };
-
+ const cleanup=()=>{if(finished)return;finished=true;try{delete window[callbackName]}catch(e){window[callbackName]=undefined}if(script.parentNode)script.parentNode.removeChild(script)};
  window[callbackName]=function(result){
-  if(result&&result.ok&&Array.isArray(result.ranking)){
-   sharedLeaderboard=result.ranking;
-
-   if(state.page==='final'||state.page==='leaderboard'){
-    const holder=document.createElement('div');
-    holder.innerHTML=leaderboardHTML();
-
-    const newWrap=holder.querySelector('.leaderboard-wrap');
-    const oldWrap=screen.querySelector('.leaderboard-wrap');
-
-    if(oldWrap&&newWrap)oldWrap.replaceWith(newWrap);
+   if(result&&result.ok&&Array.isArray(result.ranking)){
+     sharedLeaderboard=result.ranking;
+     if(state.page==='final'||state.page==='leaderboard'){
+       const holder=document.createElement('div');holder.innerHTML=leaderboardHTML();
+       const newWrap=holder.querySelector('.leaderboard-wrap');
+       const oldWrap=screen.querySelector('.leaderboard-wrap');
+       if(oldWrap&&newWrap)oldWrap.replaceWith(newWrap);
+     }
    }
-  }
-
-  cleanup();
+   cleanup();
  };
-
  script.onerror=cleanup;
-
- script.src=APPS_SCRIPT_URL+
-  '?action=ranking&callback='+
-  encodeURIComponent(callbackName)+
-  '&_='+Date.now();
-
+ script.src=APPS_SCRIPT_URL+'?action=ranking&callback='+encodeURIComponent(callbackName)+'&_='+Date.now();
  document.head.appendChild(script);
  setTimeout(cleanup,12000);
 }
 
-// URL Web App Google Apps Script
+// URL Web App Google Apps Script sing diwenehake pangguna.
 const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbzxWNaRMcCfZTq-9IOpwkbkSdMk3whQMxBIJBLONwFVw1QcLEZN55gbuqXDELxke_Tk/exec';
-
 const PASSWORD_GURU='NAYA';
+const aksara=[['ꦲ','Ha','ha.mp3'],['ꦤ','Na','na.mp3'],['ꦕ','Ca','ca.mp3'],['ꦫ','Ra','ra.mp3'],['ꦏ','Ka','ka.mp3'],['ꦢ','Da','da.mp3'],['ꦠ','Ta','ta.mp3'],['ꦱ','Sa','sa.mp3'],['ꦮ','Wa','wa.mp3'],['ꦭ','La','la.mp3'],['ꦥ','Pa','pa.mp3'],['ꦝ','Dha','dha.mp3'],['ꦗ','Ja','ja.mp3'],['ꦪ','Ya','ya.mp3'],['ꦚ','Nya','nya.mp3'],['ꦩ','Ma','ma.mp3'],['ꦒ','Ga','ga.mp3'],['ꦧ','Ba','ba.mp3'],['ꦛ','Tha','tha.mp3'],['ꦔ','Nga','nga.mp3']];
+const q1=[['ꦲ',['Ha','Na','Ca','Ra'],'Ha'],['ꦤ',['Ca','Na','Ka','Ra'],'Na'],['ꦕ',['Ra','Ka','Ca','Da'],'Ca'],['ꦫ',['Ra','Ha','Na','Ta'],'Ra'],['ꦏ',['Ca','Ka','Sa','Wa'],'Ka'],['ꦢ',['La','Ta','Da','Ra'],'Da'],['ꦠ',['Sa','Ta','Wa','Ha'],'Ta'],['ꦱ',['Na','La','Sa','Ka'],'Sa'],['ꦮ',['Wa','Ca','Da','Ha'],'Wa'],['ꦭ',['Ra','La','Sa','Ta'],'La']];
+const q2=[['HA',['ꦲ','ꦤ','ꦕ','ꦫ'],'ꦲ'],['NA',['ꦕ','ꦤ','ꦏ','ꦫ'],'ꦤ'],['CA',['ꦫ','ꦏ','ꦕ','ꦢ'],'ꦕ'],['RA',['ꦫ','ꦲ','ꦤ','ꦠ'],'ꦫ'],['KA',['ꦕ','ꦏ','ꦱ','ꦮ'],'ꦏ'],['DA',['ꦭ','ꦠ','ꦢ','ꦫ'],'ꦢ'],['TA',['ꦱ','ꦠ','ꦮ','ꦲ'],'ꦠ'],['SA',['ꦤ','ꦭ','ꦱ','ꦏ'],'ꦱ'],['WA',['ꦮ','ꦕ','ꦢ','ꦲ'],'ꦮ'],['LA',['ꦫ','ꦭ','ꦱ','ꦠ'],'ꦭ']];
+const q3=[['ꦥ',['Pa','Dha','Ja','Ya'],'Pa'],['ꦝ',['Ma','Dha','Nya','Ga'],'Dha'],['ꦗ',['Ya','Ba','Ja','Tha'],'Ja'],['ꦪ',['Ya','Pa','Nga','Ma'],'Ya'],['ꦚ',['Ga','Nya','Dha','Ba'],'Nya'],['ꦩ',['Tha','Ja','Ma','Pa'],'Ma'],['ꦒ',['Ga','Nga','Ya','Nya'],'Ga'],['ꦧ',['Dha','Ba','Ja','Tha'],'Ba'],['ꦛ',['Ma','Pa','Tha','Nga'],'Tha'],['ꦔ',['Nga','Nya','Ga','Ya'],'Nga']];
+const q4=[['PA',['ꦥ','ꦝ','ꦗ','ꦪ'],'ꦥ'],['DHA',['ꦩ','ꦝ','ꦚ','ꦒ'],'ꦝ'],['JA',['ꦪ','ꦧ','ꦗ','ꦛ'],'ꦗ'],['YA',['ꦪ','ꦥ','ꦔ','ꦩ'],'ꦪ'],['NYA',['ꦒ','ꦚ','ꦝ','ꦧ'],'ꦚ'],['MA',['ꦛ','ꦗ','ꦩ','ꦥ'],'ꦩ'],['GA',['ꦒ','ꦔ','ꦪ','ꦚ'],'ꦒ'],['BA',['ꦝ','ꦧ','ꦗ','ꦛ'],'ꦧ'],['THA',['ꦩ','ꦥ','ꦛ','ꦔ'],'ꦛ'],['NGA',['ꦔ','ꦚ','ꦒ','ꦪ'],'ꦔ']];
+const q5=[['ꦧꦠ',['Bata','Gaga','Lara','Kaca'],'Bata'],['ꦩꦠ',['Mata','Rasa','Mala','Raga'],'Mata'],['ꦱꦥ',['Sapa','Bata','Dada','Kaca'],'Sapa'],['ꦫꦱ',['Rasa','Raga','Baba','Mala'],'Rasa'],['ꦏꦕ',['Kaca','Lara','Mata','Gaga'],'Kaca'],['ꦭꦫ',['Lara','Bata','Sapa','Rasa'],'Lara'],['ꦢꦢ',['Dada','Gaga','Kaca','Raga'],'Dada'],['ꦒꦒ',['Gaga','Baba','Mata','Bata'],'Gaga'],['ꦫꦒ',['Raga','Rasa','Lara','Sapa'],'Raga'],['ꦩꦭ',['Mala','Mata','Kaca','Dada'],'Mala']];
+const state={page:'home',history:[],name:localStorage.getItem('sc_name')||'Kanca Sinau',scores:[0,0,0,0,0],correct:[0,0,0,0,0],wrong:[0,0,0,0,0],unlocked:[true,false,false],musicOn:true,musicVol:.35,voiceVol:.9,questionSet:[],qIndex:0,answered:false,currentSet:0,level:0,teacherOpen:false,teacherAction:false,timer:null,seconds:15,feedback:''};
+const $=id=>document.getElementById(id), screen=$('screen'), topbar=$('topbar');
+function total(){return state.scores.reduce((a,b)=>a+b,0)}function right(){return state.correct.reduce((a,b)=>a+b,0)}function wrong(){return state.wrong.reduce((a,b)=>a+b,0)}function stars(){return reward()}function reward(){let s=total();if(s>=900)return 5;if(s>=800)return 4;if(s>=700)return 3;if(s>=600)return 2;if(s>=500)return 1;return 0}
+function updateTop(){ $('playerName').textContent=state.name;$('scoreTop').textContent=total();$('starTop').textContent=reward();$('musicToggle').textContent=state.musicOn?'Pateni Musik':'Uripake Musik'; }
+function show(html,page){if(state.timer){clearInterval(state.timer);state.timer=null}state.page=page;screen.className='screen '+page+(page==='final'?' final-screen':'');screen.innerHTML=html+`<div class="page-footer">Mufidatul inayah</div>`;topbar.hidden=['home'].includes(page);updateTop();}
+function guide(){return `<div class="guidewrap"><img src="${asset('kartunjawa.png')}" alt="Paraga pemandu" onerror="this.style.display='none'"><span class="badge">Ayo semangat!</span></div>`}
+function playBg(file){const a=$('bgm');if(!state.musicOn){a.pause();return}if(!file){a.pause();return}const url=asset(file);if(a.src!==url)a.src=url;const reduce=state.page.startsWith('example')||state.page.startsWith('quiz');a.volume=state.musicVol*(reduce?0.25:1);a.play().catch(()=>{});}
+function playSound(file){const bg=$('bgm'),resume=!bg.paused;bg.pause();const a=$('sfx');a.pause();a.loop=false;a.src=asset(file);a.volume=state.voiceVol;a.currentTime=0;a.onended=()=>{if(resume&&state.musicOn&&state.page!=='song')bg.play().catch(()=>{});};a.play().catch(()=>{});}
+function toggleMusic(){state.musicOn=!state.musicOn;if(state.musicOn){playBg(currentMusic());toast('Musik diuripake')}else{$('bgm').pause();toast('Musik dipateni')}updateTop()}
+function currentMusic(){return ({home:'pembukaan.mp3',objectives:'tujuan.mp3',instructions:'musik semangat.mp3',song:'tujuan.mp3',map:'menuutama.mp3',material1:'level1.mp3',material2:'level2.mp3',material3:'level3.mp3',score1:'level1.mp3',score2:'level2.mp3',final:'tepuktanganpanjang.mp3'})[state.page]||'menuutama.mp3'}
+function toast(t){$('toast').textContent=t;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2200)}
+function go(page){state.history.push(state.page);render(page)}function goBack(){if(state.history.length){const p=state.history.pop();render(p)}else render('map')}
+function editName(){const n=prompt('Sapa jenengmu?',state.name);if(n&&n.trim()){state.name=n.trim().slice(0,24);localStorage.setItem('sc_name',state.name);updateTop();toast('Jeneng kasil kasimpen')}}
+function render(page){switch(page){case'home':home();break;case'objectives':objectives();break;case'instructions':instructions();break;case'song':song();break;case'map':mapPage();break;case'material1':material(1);break;case'example11':example(1,1);break;case'quiz11':startQuiz(1,1);break;case'example12':example(1,2);break;case'quiz12':startQuiz(1,2);break;case'score1':scoreLevel(1);break;case'material2':material(2);break;case'example21':example(2,1);break;case'quiz21':startQuiz(2,1);break;case'example22':example(2,2);break;case'quiz22':startQuiz(2,2);break;case'score2':scoreLevel(2);break;case'material3':material(3);break;case'example3':example(3,1);break;case'quiz3':startQuiz(3,1);break;case'final':finalPage();break;case'settings':settings();break;case'locks':locksPage();break;default:home()}}
+function home(){show(`<div class="hero home"><div><p class="sub">Sugeng Rawuh!</p><h1>SI CAKRAWALA</h1><p class="sub">Sinau Maca Aksara Jawa Lancar</p><p>Ayo njelajah budaya Jawa lan sinau maca aksara Jawa!</p><button class="btn gold" onclick="go('objectives')">AYO WIWITI</button></div><img class="guide" src="${asset('kartunjawa.png')}" alt="Kartun Jawa"></div>`,'home');playBg('pembukaan.mp3')}
+function objectives(){
+ const tujuan=['Bocah bisa ngenali, nyebutake jeneng, lan ngucapake 20 aksara dhasar Hanacaraka kanthi bener.','Bocah bisa maca tembung nganggo aksara Jawa lan sandhangan kanthi trep.','Bocah bisa maca ukara prasaja nganggo aksara Jawa kanthi lancar.'];
+ show(`<h2>Tujuwan Pasinaon</h2><div class="cards">${tujuan.map((x,i)=>`<div class="card"><strong>Tujuwan ${i+1}</strong><p>${x}</p></div>`).join('')}</div>${guide()}<div><button class="btn light" onclick="goBack()">Mbalik</button><button class="btn" onclick="go('instructions')">Sabanjure</button></div>`,'objectives');playBg('tujuan.mp3')}
 
-// Data 20 aksara dasar Hanacaraka
-const aksara=[
- ['ꦲ','Ha','ha.mp3'],
- ['ꦤ','Na','na.mp3'],
- ['ꦕ','Ca','ca.mp3'],
- ['ꦫ','Ra','ra.mp3'],
- ['ꦏ','Ka','ka.mp3'],
- ['ꦢ','Da','da.mp3'],
- ['ꦠ','Ta','ta.mp3'],
- ['ꦱ','Sa','sa.mp3'],
- ['ꦮ','Wa','wa.mp3'],
- ['ꦭ','La','la.mp3'],
- ['ꦥ','Pa','pa.mp3'],
- ['ꦝ','Dha','dha.mp3'],
- ['ꦗ','Ja','ja.mp3'],
- ['ꦪ','Ya','ya.mp3'],
- ['ꦚ','Nya','nya.mp3'],
- ['ꦩ','Ma','ma.mp3'],
- ['ꦒ','Ga','ga.mp3'],
- ['ꦧ','Ba','ba.mp3'],
- ['ꦛ','Tha','tha.mp3'],
- ['ꦔ','Nga','nga.mp3']
-];
 
-const q1=[
- ['ꦭ',['Ra','La','Sa','Ta'],'La'],
- ['ꦤ',['Ca','Ka','Ra','Na'],'Na'],
- ['ꦱ',['Na','La','Sa','Ka'],'Sa'],
- ['ꦫ',['Ra','Ha','Na','Ta'],'Ra'],
- ['ꦢ',['La','Ta','Da','Ra'],'Da'],
- ['ꦏ',['Ca','Ka','Sa','Wa'],'Ka'],
- ['ꦠ',['Sa','Wa','Ta','Ha'],'Ta'],
- ['ꦮ',['Wa','Ca','Da','Ha'],'Wa'],
- ['ꦕ',['Ra','Ka','Ca','Da'],'Ca'],
- ['ꦲ',['Ha','Na','Ca','Ra'],'Ha']
-];
+function instructions(){const rules=['Wacanen materi kanthi premati.','Klik aksara Jawa kanggo ngrungokake swarane.','Wacanen tuladha pitakon sadurunge dolanan.','Pilih salah siji wangsulan sing paling trep.','Saben wangsulan bener oleh 20 skor.','Wangsulan kliru ora oleh skor.','Rampungna tantangan supaya bisa mbukak level sabanjure.','Gatekna wektune nalika dolanan ing level 3.'];show(`<h2>Pituduh lan Tata Cara Dolanan</h2><div class="cards">${rules.map((x,i)=>`<div class="card"><strong>${i+1}.</strong>${x}</div>`).join('')}</div>${guide()}<button class="btn light" onclick="goBack()">Mbalik</button><button class="btn" onclick="go('song')">Sabanjure</button>`,'instructions');playBg('musik semangat.mp3')}
+function song(){show(`<div class="song-layout">${guide()}<img class="songimg" src="${asset('laguaksarajwa.jpg')}" alt="Lagu Aksara Jawa"></div><div><button class="btn gold" onclick="playSong()">▶ Puter Tembang</button><button class="btn danger" onclick="stopSong()">■ Mandheg</button><button class="btn" onclick="go('map')">Sabanjure</button></div>`,'song');playBg('tujuan.mp3')}
+function playSong(){playBg('');playSound('laguaksarajawa.mp3');$('sfx').loop=true}function stopSong(){$('sfx').pause();$('sfx').loop=false;playBg('menuutama.mp3')}
+function saveStudentName(value){state.name=value.trim().slice(0,24);localStorage.setItem('sc_name',state.name);updateTop()}
+function enterLevel(page){if(!state.name.trim()||state.name==='Kanca Sinau'){toast('Tulisen jenengmu dhisik!');$('studentName').focus();return}go(page)}
+function mapPage(){state.name='';localStorage.removeItem('sc_name');updateTop();show(`<h2>Peta Lelakon</h2><p>Pilihen papan dolananmu. Rampungna saben tantangan supaya dalan sabanjure kabukak.</p><div class="name-panel"><label for="studentName"><strong>Jeneng siswa:</strong></label><input type="text" id="studentName" maxlength="24" placeholder="Ketik jenengmu ing kene..." value="" oninput="saveStudentName(this.value)"></div>${guide()}<div class="levelmap"><div class="level"><div class="emoji">🌱</div><h3>Level 1</h3><p>Pangenalan Aksara Jawa</p><span class="badge">Kabukak</span><br><button class="btn" onclick="enterLevel('material1')">Miwiti</button></div><div class="level ${state.unlocked[1]?'':'locked'}"><div class="emoji">${state.unlocked[1]?'🌳':'🔒'}</div><h3>Level 2</h3><p>Maca Tembung nganggo Sandhangan</p><span class="badge">${state.unlocked[1]?'Kabukak':'Dikunci'}</span><br><button class="btn" ${state.unlocked[1]?'':'disabled'} onclick="enterLevel('material2')">Miwiti</button></div><div class="level ${state.unlocked[2]?'':'locked'}"><div class="emoji">${state.unlocked[2]?'🏆':'🔒'}</div><h3>Level 3</h3><p>Maca Ukara Prasaja</p><span class="badge">${state.unlocked[2]?'Kabukak':'Dikunci'}</span><br><button class="btn" ${state.unlocked[2]?'':'disabled'} onclick="enterLevel('material3')">Miwiti</button></div></div><button class="btn light" onclick="openSettings()">Setelan</button>`,'map');playBg('menuutama.mp3')}
 
-const q2=[
- ['TA',['ꦱ','ꦠ','ꦮ','ꦲ'],'ꦠ'],
- ['NA',['ꦕ','ꦤ','ꦏ','ꦫ'],'ꦤ'],
- ['KA',['ꦕ','ꦏ','ꦱ','ꦮ'],'ꦏ'],
- ['RA',['ꦫ','ꦲ','ꦤ','ꦠ'],'ꦫ'],
- ['DA',['ꦭ','ꦠ','ꦢ','ꦫ'],'ꦢ'],
- ['CA',['ꦫ','ꦏ','ꦕ','ꦢ'],'ꦕ'],
- ['SA',['ꦱ','ꦤ','ꦭ','ꦏ'],'ꦱ'],
- ['HA',['ꦲ','ꦤ','ꦕ','ꦫ'],'ꦲ'],
- ['LA',['ꦫ','ꦭ','ꦱ','ꦠ'],'ꦭ'],
- ['WA',['ꦮ','ꦕ','ꦢ','ꦲ'],'ꦮ']
-];
+function material(level){
+ const list=level===1?aksara.slice(0,10):level===2?aksara.slice(10):aksara;
+ const title=level===1?'Sinau Aksara Jawa':level===2?'Sinau Aksara Jawa Lanjutan':'Sinau Maca Ukara';
+ const cards=list.map(([g,l,a])=>`<div class="card letter"><button onclick="playSound('${a}')">${level===3?aksaraViewLevel3(g):aksaraView(g)}<strong>${l}</strong><small>🔊 Rungokna</small></button></div>`).join('');
+ show(`<h2>${title}</h2><p>Pencetna aksara kanggo ngrungokake swarane.</p><div class="material-grid ${list.length<=10?'material-grid-half':''}">${cards}</div><button class="btn" onclick="go('${level===1?'example11':level===2?'example21':'example3'}')">Tuladha Pitakon</button>`,'material'+level);playBg('level'+level+'.mp3')}
 
-const q3=[
- ['ꦛ',['Ma','Pa','Tha','Nga'],'Tha'],
- ['ꦝ',['Ma','Dha','Nya','Ga'],'Dha'],
- ['ꦧ',['Dha','Ja','Tha','Ba'],'Ba'],
- ['ꦚ',['Ga','Nya','Dha','Ba'],'Nya'],
- ['ꦩ',['Tha','Ja','Ma','Pa'],'Ma'],
- ['ꦒ',['Ga','Nga','Ya','Nya'],'Ga'],
- ['ꦪ',['Pa','Nga','Ya','Ma'],'Ya'],
- ['ꦥ',['Pa','Dha','Ja','Ya'],'Pa'],
- ['ꦗ',['Ya','Ba','Ja','Tha'],'Ja'],
- ['ꦔ',['Nga','Nya','Ga','Ya'],'Nga']
-];
+function example(level,game){let html='';
+ if(level===1&&game===1)html=`<div class="question"><p>Wacanen aksara iki!</p>${aksaraView('ꦲ')}<div class="choices">${['Ha','Na','Ca','Ra'].map(x=>`<div class="choice">${x}</div>`).join('')}</div><b>Wangsulan sing trep yaiku Ha.</b></div>`;
+ else if(level===1&&game===2)html=`<div class="question"><p>Tulisan Latin: <b>HA</b></p><div class="choices">${['ꦲ','ꦤ','ꦕ','ꦫ'].map(x=>`<div class="choice">${aksaraView(x,'script smallscript')}</div>`).join('')}</div><b>Wangsulan sing trep yaiku ꦲ.</b></div>`;
+ else if(level===2&&game===1)html=`<div class="question"><p>Wacanen aksara iki!</p>${aksaraView('ꦥ')}<div class="choices">${['Pa','Dha','Ja','Ya'].map(x=>`<div class="choice">${x}</div>`).join('')}</div><b>Wangsulan sing trep yaiku Pa.</b></div>`;
+ else if(level===2)html=`<div class="question"><p>Tulisan Latin: <b>PA</b></p><div class="choices">${['ꦥ','ꦝ','ꦗ','ꦪ'].map(x=>`<div class="choice">${aksaraView(x,'script smallscript')}</div>`).join('')}</div><b>Wangsulan sing trep yaiku ꦥ.</b></div>`;
+ else html=`<div class="question"><div class="word">${aksaraLineView('ꦧꦠ')}</div><div class="choices">${['Bata','Gaga','Lara','Kaca'].map(x=>`<div class="choice">${x}</div>`).join('')}</div><b>Wangsulan sing trep yaiku Bata.</b></div>`;
+ let next=level===1?(game===1?'quiz11':'quiz12'):level===2?(game===1?'quiz21':'quiz22'):'quiz3';show(`<h2>Tuladha Pitakon</h2>${html}<button class="btn" onclick="go('${next}')">${level===3?'Miwiti Dolanan':game===2?'Miwiti Dolanan Kapindho':'Miwiti Dolanan'}</button>`,'example'+level+game);playBg('level'+level+'.mp3')}
 
-const q4=[
- ['PA',['ꦥ','ꦝ','ꦗ','ꦪ'],'ꦥ'],
- ['BA',['ꦝ','ꦧ','ꦗ','ꦛ'],'ꦧ'],
- ['JA',['ꦪ','ꦧ','ꦗ','ꦛ'],'ꦗ'],
- ['MA',['ꦛ','ꦗ','ꦩ','ꦥ'],'ꦩ'],
- ['NYA',['ꦒ','ꦚ','ꦝ','ꦧ'],'ꦚ'],
- ['GA',['ꦒ','ꦔ','ꦪ','ꦚ'],'ꦒ'],
- ['YA',['ꦪ','ꦥ','ꦔ','ꦩ'],'ꦪ'],
- ['THA',['ꦩ','ꦥ','ꦛ','ꦔ'],'ꦛ'],
- ['DHA',['ꦩ','ꦝ','ꦚ','ꦒ'],'ꦝ'],
- ['NGA',['ꦔ','ꦚ','ꦒ','ꦪ'],'ꦔ']
-];
-
-const q5=[
- ['ꦧꦠ',['Bata','Gaga','Lara','Kaca'],'Bata'],
- ['ꦩꦠ',['Mata','Rasa','Mala','Raga'],'Mata'],
- ['ꦱꦥ',['Sapa','Bata','Dada','Kaca'],'Sapa'],
- ['ꦢꦢ',['Dada','Gaga','Kaca','Raga'],'Dada'],
- ['ꦫꦱ',['Rasa','Raga','Baba','Mala'],'Rasa'],
- ['ꦏꦕ',['Kaca','Lara','Mata','Gaga'],'Kaca'],
- ['ꦭꦫ',['Lara','Bata','Sapa','Rasa'],'Lara'],
- ['ꦒꦒ',['Gaga','Baba','Mata','Bata'],'Gaga'],
- ['ꦫꦒ',['Raga','Rasa','Lara','Sapa'],'Raga'],
- ['ꦩꦭ',['Mala','Mata','Kaca','Dada'],'Mala']
-];<script>
-const state={
- page:'home',
- name:localStorage.getItem('sc_name')||'',
- level:1,
- question:0,
- score:0,
- correct:0,
- wrong:0,
- lives:3,
- stars:0,
- unlocked:1,
- answers:[],
- current:null,
- music:true,
- voice:true,
- sound:true,
- teacher:false,
- finished:false
-};
-
-const screen=document.getElementById('screen');
-const topbar=document.getElementById('topbar');
-
-function total(){
- return Number(state.score)||0;
-}
-
-function reward(){
- return Math.max(0,Math.min(5,Math.floor(total()/200)));
-}
-
-function show(html,page){
- state.page=page||state.page;
- screen.innerHTML=html;
- topbar.hidden=page==='home'||page==='name';
- updateTop();
-}
-
-function updateTop(){
- document.getElementById('playerName').textContent=state.name||'Jeneng';
- document.getElementById('scoreTop').textContent=total();
- document.getElementById('starTop').textContent=reward();
- document.getElementById('musicToggle').textContent=
-  state.music?'Pateni Musik':'Urip Musik';
-}
-
-function toast(message){
- const el=document.getElementById('toast');
- el.textContent=message;
- el.classList.remove('hidden');
- clearTimeout(window.toastTimer);
- window.toastTimer=setTimeout(()=>el.classList.add('hidden'),2200);
-}
-
-function shuffle(arr){
- const result=[...arr];
-
- for(let i=result.length-1;i>0;i--){
-  const j=Math.floor(Math.random()*(i+1));
-  [result[i],result[j]]=[result[j],result[i]];
- }
-
- return result;
-}
-
-function playSound(file){
- if(!state.sound||!file)return;
-
- const audio=document.getElementById('sfx');
- audio.src=asset(file);
- audio.currentTime=0;
- audio.play().catch(()=>{});
-}
-
-function playBg(file){
- if(!state.music)return;
-
- const audio=document.getElementById('bgm');
- const src=asset(file);
-
- if(audio.src!==src){
-  audio.src=src;
-  audio.play().catch(()=>{});
- }
-}
-
-function toggleMusic(){
- state.music=!state.music;
- const audio=document.getElementById('bgm');
-
- if(state.music){
-  audio.play().catch(()=>{});
+function startQuiz(level,game){let set=level===1?(game===1?q1:q2):level===2?(game===1?q3:q4):q5;state.level=level;state.currentSet=(level===1?game-1:level===2?game+1:4);state.questionSet=set;state.qIndex=0;state.answered=false;state.feedback='';quizPage();}
+function quizPage(){const q=state.questionSet[state.qIndex],level=state.level,game=state.currentSet;let isLatin=(level===1&&game===0)||(level===2&&game===2);let prompt=q[0],opts=q[1],timed=level===3&&state.qIndex>=5;
+ let promptHtml;
+ // Soal Level 1: tampilkan Ra langsung dari aset GitHub, bukan glyph Unicode.
+ if(level===1 && prompt==='ꦫ'){
+  promptHtml=`<img src="${asset('gambarra.jpg')}" class="aksara-gambar aksara-ra-soal" alt="Aksara Ra" loading="eager" decoding="async">`;
+ }else if(isLatin){
+  promptHtml=`<div class="script">${prompt}</div>`;
+ }else if(level===3){
+  promptHtml=`<div class="word">${aksaraLineViewLevel3(prompt)}</div>`;
  }else{
-  audio.pause();
+  promptHtml=aksaraView(prompt,'script soal-gambar');
  }
-
- updateTop();
-}
-
-function say(text){
- if(!state.voice||!('speechSynthesis' in window))return;
-
- window.speechSynthesis.cancel();
-
- const utterance=new SpeechSynthesisUtterance(text);
- utterance.lang='id-ID';
- utterance.rate=.85;
-
- window.speechSynthesis.speak(utterance);
-}
-
-function editName(){
- const value=prompt('Ketik jenengmu:',state.name);
-
- if(value===null)return;
-
- if(!value.trim()){
-  toast('Jeneng ora kena kosong!');
-  return;
- }
-
- state.name=value.trim();
- localStorage.setItem('sc_name',state.name);
- updateTop();
- toast('Jeneng kasil diganti!');
-}
-
-function enterGame(){
- if(!state.name.trim()){
-  showName();
-  return;
- }
-
- go('map');
-}
-
-function showName(){
- show(`
-  <h1>👋 Sugeng Rawuh!</h1>
-  <p>Jenengmu sapa?</p>
-  <div class="name-panel">
-   <label>Jeneng siswa
-    <input type="text" id="nameInput"
-     placeholder="Tulis jenengmu..."
-     maxlength="30">
-   </label>
-  </div>
-  <button class="btn gold" onclick="saveName()">Miwiti Dolanan</button>
- `,'name');
-}
-
-function saveName(){
- const value=document.getElementById('nameInput').value.trim();
-
- if(!value){
-  toast('Tulisen jeneng dhisik!');
-  return;
- }
-
- state.name=value;
- localStorage.setItem('sc_name',value);
- go('map');
-}
-
-function go(page){
- if(page==='home'){
-  showHome();
-  return;
- }
-
- if(page==='map'){
-  showMap();
-  return;
- }
-
- if(page==='settings'){
-  openSettings();
-  return;
- }
-
- if(page==='leaderboard'){
-  showLeaderboard();
-  return;
- }
-}
-
-function goBack(){
- if(state.page==='home')return;
-
- if(state.page==='game'){
-  if(confirm('Arep metu saka dolanan iki?')){
-   showMap();
-  }
-  return;
- }
-
- if(state.page==='settings'){
-  showMap();
-  return;
- }
-
- if(state.page==='leaderboard'){
-  showMap();
-  return;
- }
-
- showHome();
-}
-
-function showHome(){
- topbar.hidden=true;
-
- show(`
-  <div class="home">
-   <div class="hero">
-    <div>
-     <h1>SI CAKRAWALA</h1>
-     <p class="sub">Petualangan Sinau Aksara Jawa</p>
-     <p>Jelajahi budaya lokal Undaan kanthi nyenengake!</p>
-     <button class="btn gold" onclick="enterGame()">🎮 MIWITI</button>
-     <button class="btn light" onclick="showLeaderboard()">🏆 PAPAN SKOR</button>
-     <button class="btn light" onclick="openSettings()">⚙ SETELAN</button>
-    </div>
-    <img class="guide" src="${asset('karakter.png')}"
-     alt="Karakter Si Cakrawala">
-   </div>
-  </div>
- `,'home');
-
- playBg('menuutama.mp3');
-}
-
-function showMap(){
- const levels=[
-  {
-   title:'Pengenalan Aksara',
-   desc:'Sinau lan ngrungokake 20 aksara dasar Hanacaraka.',
-   emoji:'📚'
-  },
-  {
-   title:'Maca Tembung',
-   desc:'Sinau maca tembung nganggo sandhangan.',
-   emoji:'🔤'
-  },
-  {
-   title:'Maca Ukara',
-   desc:'Sinau maca ukara prasaja basa Jawa.',
-   emoji:'📖'
-  }
- ];
-
- const html=levels.map((level,i)=>{
-  const number=i+1;
-  const locked=number>state.unlocked;
-
-  return `
-   <div class="level ${locked?'locked':''}">
-    <div class="emoji">${level.emoji}</div>
-    <h3>Level ${number}</h3>
-    <strong>${level.title}</strong>
-    <p>${level.desc}</p>
-    <button class="btn ${locked?'light':'gold'}"
-     ${locked?'disabled':''}
-     onclick="startLevel(${number})">
-     ${locked?'🔒 Durung Dibukak':'▶ Bukak Level'}
-    </button>
-   </div>
-  `;
- }).join('');
-
- show(`
-  <h1>🗺️ Peta Petualangan</h1>
-  <p>Sinaua kanthi runtut saka level siji nganti level telu.</p>
-  <div class="levelmap">${html}</div>
-  <button class="btn light" onclick="showLeaderboard()">🏆 Papan Skor</button>
-  <button class="btn light" onclick="openSettings()">⚙ Setelan</button>
- `,'map');
-
- playBg('menuutama.mp3');
-}
-
-function startLevel(level){
- if(level>state.unlocked){
-  toast('Level iki durung kabukak!');
-  return;
- }
-
- state.level=level;
- state.question=0;
- state.correct=0;
- state.wrong=0;
- state.lives=3;
- state.answers=[];
- state.finished=false;
-
- if(level===1){
-  showLevelIntroduction();
- }else if(level===2){
-  showLevel2Introduction();
- }else{
-  showLevel3Introduction();
- }
-}
-
-function showLevelIntroduction(){
- show(`
-  <h1>📚 Level 1</h1>
-  <h2>Pengenalan lan Pengucapan Aksara</h2>
-  <p>Ayo sinau ngenali lan ngucapake 20 aksara dasar Hanacaraka.</p>
-  <div class="cards">
-   <div class="card">📖<strong>Sinau</strong><p>Ngenali wujud aksara.</p></div>
-   <div class="card">🔊<strong>Rungokake</strong><p>Rungokake pangucapane.</p></div>
-   <div class="card">⭐<strong>Latihan</strong><p>Wangsulana pitakon.</p></div>
-  </div>
-  <button class="btn gold" onclick="showLearning()">Ayo Sinau!</button>
- `,'intro');
-}
-
-function showLearning(){
- const cards=aksara.map(a=>`
-  <div class="card letter">
-   ${aksaraView(a[0])}
-   <strong>${a[1]}</strong>
-   <button class="btn small light"
-    onclick="say('${a[1]}');playSound('${a[2]}')">
-    🔊 Rungokake
-   </button>
-  </div>
- `).join('');
-
- show(`
-  <h1>Sinau 20 Aksara Dasar</h1>
-  <p>Pencet tombol swara kanggo ngrungokake pangucapane.</p>
-  <div class="cards material-grid">${cards}</div>
-  <button class="btn gold" onclick="beginQuestions()">▶ Wiwiti Latihan</button>
- `,'learning');
-}
-
-function beginQuestions(){
- state.question=0;
- state.correct=0;
- state.wrong=0;
- state.lives=3;
- showQuestion();
-}
-
-function getQuestions(){
- if(state.level===1)return [...q1,...q3];
- if(state.level===2)return [...q2,...q4];
- return [...q5];
-}
-
-function showQuestion(){
- const questions=getQuestions();
-
- if(state.question>=questions.length||state.lives<=0){
-  finishLevel();
-  return;
- }
-
- const q=questions[state.question];
- state.current=q;
-
- const options=shuffle(q[1]);
-
- const buttons=options.map(option=>`
-  <button class="choice"
-   onclick="answerQuestion(this,'${escapeHTML(option)}')">
-   ${state.level===1?escapeHTML(option):
-     (state.level===2?aksaraLineView(option):escapeHTML(option))}
-  </button>
- `).join('');
-
- const questionText=state.level===1?
-  `Apa jeneng aksara iki?`:
-  state.level===2?
-  `Pilih aksara sing cocog karo swara iki:`:
-  `Apa wacane tembung iki?`;
-
- const prompt=state.level===1?
-  aksaraView(q[0],'word'):
-  state.level===2?
-  `<span class="word">${escapeHTML(q[0])}</span>`:
-  `<span class="word">${aksaraLineViewLevel3(q[0])}</span>`;
-
- show(`
-  <h2>Level ${state.level}</h2>
-  <div class="stats">
-   <span class="stat">❤️ Nyawa: ${state.lives}</span>
-   <span class="stat">⭐ Skor: ${total()}</span>
-   <span class="stat">Soal: ${state.question+1}/${questions.length}</span>
-  </div>
-  <div class="progress">
-   <span style="width:${state.question/questions.length*100}%"></span>
-  </div>
-  <div class="question">
-   <p>${questionText}</p>
-   ${prompt}
-  </div>
-  <div class="choices">${buttons}</div>
-  <div id="feedback" class="feedback"></div>
- `,'game');
-
- playBg('musikpermainan.mp3');
-}
-
-function answerQuestion(button,answer){
- if(state.finished)return;
-
- const q=state.current;
- if(!q)return;
-
- const buttons=[...document.querySelectorAll('.choice')];
- buttons.forEach(b=>b.disabled=true);
-
- const correct=String(answer)===String(q[2]);
-
- if(correct){
-  state.correct++;
-  state.score+=10;
-  button.classList.add('correct');
-  document.getElementById('feedback').textContent='🎉 Bener! Apik banget!';
-  playSound('benar.mp3');
-  say('Bener. Apik banget!');
- }else{
-  state.wrong++;
-  state.lives--;
-  button.classList.add('wrong');
-
-  document.getElementById('feedback').textContent=
-   'Durung trep. Ayo sinau maneh!';
-
-  const correctButton=buttons.find(b=>{
-   const text=b.textContent.trim();
-   return text===String(q[2]);
-  });
-
-  if(correctButton)correctButton.classList.add('correct');
-
-  playSound('salah.mp3');
- }
-
- state.answers.push({
-  question:q[0],
-  answer:answer,
-  correct:correct
- });
-
- updateTop();
-
- setTimeout(()=>{
-  state.question++;
-  showQuestion();
- },1200);
-}
-
-function finishLevel(){
- state.finished=true;
-
- const questions=getQuestions();
- const passed=state.correct>=Math.ceil(questions.length*.6);
-
- if(passed){
-  state.unlocked=Math.max(state.unlocked,Math.min(3,state.level+1));
- }
-
- const earned=Math.min(5,Math.floor(state.correct/4));
-
- show(`
-  <h1>${passed?'🎉 Sugeng!':'💪 Aja Nyerah!'}</h1>
-  <h2>Level ${state.level} Rampung</h2>
-  <div class="cards">
-   <div class="card"><strong>${state.correct}</strong><p>Jawaban Bener</p></div>
-   <div class="card"><strong>${state.wrong}</strong><p>Jawaban Salah</p></div>
-   <div class="card"><strong>${state.score}</strong><p>Skor Total</p></div>
-   <div class="card"><strong>${earned} ⭐</strong><p>Bintang</p></div>
-  </div>
-  <p>${passed?'Level sabanjure wis kabukak!':'Coba maneh supaya bisa mbukak level sabanjure.'}</p>
-  <button class="btn gold" onclick="showMap()">Peta Petualangan</button>
-  <button class="btn light" onclick="startLevel(${state.level})">Baleni Level</button>
- `,'result');
-
- playSound(passed?'menang.mp3':'selesai.mp3');
-}
-</script><script>
-// ========================================
-// PENGENALAN LEVEL 2
-// ========================================
-
-function showLevel2Introduction(){
- show(`
-  <h1>🔤 Level 2</h1>
-  <h2>Maca Tembung nganggo Sandhangan</h2>
-  <p>Ayo sinau maca tembung aksara Jawa kanthi nggatekake sandhangan.</p>
-  <div class="cards">
-   <div class="card">📖<strong>Sinau</strong><p>Ngenali sandhangan.</p></div>
-   <div class="card">🔊<strong>Wacanen</strong><p>Gladhen maca tembung.</p></div>
-   <div class="card">⭐<strong>Latihan</strong><p>Pilih wacan sing bener.</p></div>
-  </div>
-  <button class="btn gold" onclick="beginQuestions()">Ayo Miwiti!</button>
- `,'intro');
-}
-
-// ========================================
-// PENGENALAN LEVEL 3
-// ========================================
-
-function showLevel3Introduction(){
- show(`
-  <h1>📖 Level 3</h1>
-  <h2>Maca Ukara Prasaja</h2>
-  <p>Ayo gladhen maca ukara prasaja nganggo aksara Jawa.</p>
-  <div class="cards">
-   <div class="card">📚<strong>Wacanen</strong><p>Wacanen ukara kanthi tliti.</p></div>
-   <div class="card">🧠<strong>Pahami</strong><p>Gatekna saben tembung.</p></div>
-   <div class="card">🏆<strong>Rampungake</strong><p>Wangsulana pitakon kanthi bener.</p></div>
-  </div>
-  <button class="btn gold" onclick="beginQuestions()">Ayo Miwiti!</button>
- `,'intro');
-}
-
-// ========================================
-// HASIL AKHIR PERMAINAN
-// ========================================
-
-function finishLevel(){
- state.finished=true;
-
- const questions=getQuestions();
- const passed=state.correct>=Math.ceil(questions.length*.6);
-
- if(passed){
-  state.unlocked=Math.max(
-   state.unlocked,
-   Math.min(3,state.level+1)
-  );
- }
-
- const earned=Math.min(5,Math.floor(state.correct/4));
-
- if(state.level===3){
-  recordLeaderboard();
-  saveResult('final');
-
-  show(`
-   <h1>🏆 Sugeng! Petualangan Rampung!</h1>
-   <h2>Sampeyan wis ngrampungake kabeh level.</h2>
-   <div class="cards">
-    <div class="card"><strong>${state.correct}</strong><p>Jawaban Bener</p></div>
-    <div class="card"><strong>${state.wrong}</strong><p>Jawaban Salah</p></div>
-    <div class="card"><strong>${total()}</strong><p>Skor Akhir</p></div>
-    <div class="card"><strong>${reward()} ⭐</strong><p>Bintang</p></div>
-   </div>
-   <p>Matur nuwun wis sinau bebarengan Si Cakrawala!</p>
-   <button class="btn gold" onclick="showLeaderboard()">🏆 Deleng Papan Skor</button>
-   <button class="btn light" onclick="showMap()">Peta Petualangan</button>
-  `,'final');
-
-  playSound('menang.mp3');
-  loadSharedLeaderboard();
-  return;
- }
-
- show(`
-  <h1>${passed?'🎉 Sugeng!':'💪 Aja Nyerah!'}</h1>
-  <h2>Level ${state.level} Rampung</h2>
-  <div class="cards">
-   <div class="card"><strong>${state.correct}</strong><p>Jawaban Bener</p></div>
-   <div class="card"><strong>${state.wrong}</strong><p>Jawaban Salah</p></div>
-   <div class="card"><strong>${total()}</strong><p>Skor Total</p></div>
-   <div class="card"><strong>${earned} ⭐</strong><p>Bintang</p></div>
-  </div>
-  <p>${passed?'Level sabanjure wis kabukak!':'Coba maneh supaya bisa mbukak level sabanjure.'}</p>
-  <button class="btn gold" onclick="showMap()">Peta Petualangan</button>
-  <button class="btn light" onclick="startLevel(${state.level})">Baleni Level</button>
- `,'result');
-
- playSound(passed?'menang.mp3':'selesai.mp3');
-}
-
-// ========================================
-// SIMPAN SKOR KE GOOGLE SHEETS
-// ========================================
-
-function saveResult(stage){
- if(stage!=='final')return;
-
- const payload={
-  stage:'final',
-  name:state.name||'Tanpa Jeneng',
-  score:total(),
-  scores:state.score,
-  correct:state.correct,
-  wrong:state.wrong,
-  stars:reward(),
-  time:new Date().toISOString()
- };
-
- fetch(APPS_SCRIPT_URL,{
-  method:'POST',
-  mode:'no-cors',
-  headers:{
-   'Content-Type':'text/plain;charset=UTF-8'
-  },
-  body:JSON.stringify(payload)
- }).catch(error=>{
-  console.error('Gagal mengirim skor:',error);
- });
-}
-
-// ========================================
-// HAPUS PAPAN SKOR GOOGLE SHEETS
-// ========================================
-
-function clearLeaderboard(){
- const password=prompt('Lebokna password guru kanggo mbusak papan skor:');
-
- if(password===null)return;
-
- if(password!==PASSWORD_GURU){
-  alert('Password guru salah!');
-  return;
- }
-
- if(!confirm('Apa sampeyan yakin arep mbusak kabeh data papan skor?')){
-  return;
- }
-
- localStorage.removeItem('sc_leaderboard');
- sharedLeaderboard=[];
-
- const payload={
-  action:'clear',
-  password:PASSWORD_GURU
- };
-
- fetch(APPS_SCRIPT_URL,{
-  method:'POST',
-  mode:'no-cors',
-  headers:{
-   'Content-Type':'text/plain;charset=UTF-8'
-  },
-  body:JSON.stringify(payload)
- }).then(()=>{
-  toast('Panyuwunan mbusak papan skor wis dikirim.');
-  setTimeout(()=>{
-   sharedLeaderboard=null;
-   loadSharedLeaderboard();
-   showLeaderboard();
-  },1500);
- }).catch(error=>{
-  console.error('Gagal mengirim perintah hapus:',error);
-  alert('Ora bisa ngirim panyuwunan. Priksa sambungan internet lan URL Apps Script.');
- });
-}
-
-// ========================================
-// PENGATURAN GAME
-// ========================================
-
-function openSettings(){
- show(`
-  <h1>⚙ Setelan Game</h1>
-  <div class="settings">
-
-   <label>
-    <input type="checkbox" id="musicSetting"
-     ${state.music?'checked':''}
-     onchange="changeSetting('music',this.checked)">
-    Musik Latar
-   </label>
-
-   <label>
-    <input type="checkbox" id="soundSetting"
-     ${state.sound?'checked':''}
-     onchange="changeSetting('sound',this.checked)">
-    Efek Suara
-   </label>
-
-   <label>
-    <input type="checkbox" id="voiceSetting"
-     ${state.voice?'checked':''}
-     onchange="changeSetting('voice',this.checked)">
-    Swara Karakter
-   </label>
-
-   <hr>
-
-   <h3>🔊 Swara Karakter</h3>
-   <p>Gunakake tombol ing ngisor iki kanggo nyoba swara karakter.</p>
-
-   <button class="btn gold" onclick="say('Sugeng rawuh ing game Si Cakrawala! Ayo sinau aksara Jawa!')">
-    ▶ Coba Swara Karakter
-   </button>
-
-   <label>Unggah file swara karakter (MP3/WAV)
-    <input type="file" id="characterVoiceFile"
-     accept="audio/*"
-     onchange="loadCharacterVoice(event)">
-   </label>
-
-   <button class="btn light" onclick="playCharacterVoice()">
-    🔊 Putar Swara Karakter
-   </button>
-
-   <hr>
-
-   <h3>👩‍🏫 Setelan Guru</h3>
-   <button class="btn danger" onclick="clearLeaderboard()">
-    🗑 Busak Kabeh Papan Skor
-   </button>
-
-  </div>
-
-  <button class="btn gold" onclick="showMap()">↩ Mbalik</button>
- `,'settings');
-}
-
-function changeSetting(setting,value){
- state[setting]=value;
-
- if(setting==='music'){
-  const audio=document.getElementById('bgm');
-
-  if(value){
-   audio.play().catch(()=>{});
-  }else{
-   audio.pause();
-  }
- }
-
- updateTop();
-}
-
-let characterVoiceURL=null;
-
-function loadCharacterVoice(event){
- const file=event.target.files[0];
-
- if(!file)return;
-
- if(characterVoiceURL){
-  URL.revokeObjectURL(characterVoiceURL);
- }
-
- characterVoiceURL=URL.createObjectURL(file);
- toast('File swara karakter kasil dimuat!');
-}
-
-function playCharacterVoice(){
- if(!characterVoiceURL){
-  toast('Unggah file swara karakter luwih dhisik!');
-  return;
- }
-
- const audio=document.getElementById('sfx');
- audio.src=characterVoiceURL;
- audio.currentTime=0;
- audio.play().catch(()=>{
-  toast('Swara ora bisa diputer.');
- });
-}
-
-// ========================================
-// INISIALISASI GAME
-// ========================================
-
-function initGame(){
- const savedName=localStorage.getItem('sc_name');
-
- if(savedName){
-  state.name=savedName;
- }
-
- showHome();
- updateTop();
-}
-
-window.addEventListener('DOMContentLoaded',initGame);
-
-</script>
-
-<footer class="page-footer">
- Si Cakrawala • Game Edukasi Aksara Jawa
-</footer>
-
-</body>
-</html>
+ const shuffled=[...opts];for(let j=shuffled.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[shuffled[j],shuffled[k]]=[shuffled[k],shuffled[j]];}state.displayOptions=shuffled;let pilihanHtml=shuffled.map((o,i)=>{const isGlyph=aksara.some(a=>a[0]===o);return `<button class="choice ${isLatin&& !isGlyph?'script smallscript':''}" onclick="answerQuestion(${i})">${isGlyph?aksaraView(o,'script smallscript'):o}</button>`}).join('');
+ show(`<div class="stats"><span class="stat">Soal ${state.qIndex+1} / 10</span><span class="stat">Skor: ${state.scores[game]}</span>${timed?`<span class="stat" id="timer">⏱ ${state.seconds}</span>`:''}</div><div class="progress"><span style="width:${state.qIndex*10}%"></span></div><h2>${level===3?'Maca Ukara':'Pilihen Wangsulan sing Trep'}</h2><div class="question"><p>${isLatin?'Pilihen aksara Jawa sing trep!':level===3?'Wacanen tembung iki!':'Wacanen aksara Jawa iki!'}</p>${promptHtml}</div><div class="choices">${pilihanHtml}</div><div class="feedback" id="feedback">${state.feedback}</div><p class="footer-note">Wangsulan bener oleh 20 skor. Wangsulan kliru ora oleh skor.</p>`,'quiz');playBg('level'+level+'.mp3');if(timed)startTimer()}
+
+function startTimer(){state.seconds=15;let el=$('timer');if(el)el.textContent='⏱ 15';state.timer=setInterval(()=>{state.seconds--;let t=$('timer');if(t)t.textContent='⏱ '+state.seconds;if(state.seconds<=0){clearInterval(state.timer);state.timer=null;if(!state.answered)answerQuestion(-1,true)}},1000)}
+function answerQuestion(index,timeout=false){if(state.answered)return;state.answered=true;if(state.timer){clearInterval(state.timer);state.timer=null}const q=state.questionSet[state.qIndex],game=state.currentSet,shown=state.displayOptions||q[1],correct=index>=0&&shown[index]===q[2];let buttons=[...screen.querySelectorAll('.choice')];if(index>=0&&buttons[index])buttons[index].classList.add(correct?'correct':'wrong');buttons.forEach((b,i)=>{if(shown[i]===q[2])b.classList.add('correct');b.disabled=true});if(correct){state.scores[game]+=20;state.correct[game]++;state.feedback='Pinter! Wangsulanmu Bener!';playSound('jawabanbenar.mp3')}else{state.wrong[game]++;state.feedback=(timeout?'Wektune entek. ':'Durung bener. ')+'Wangsulan sing trep yaiku '+q[2]+'.';playSound('jawabansalah.mp3')}let f=$('feedback');if(f)f.textContent=state.feedback;updateTop();setTimeout(()=>{state.qIndex++;if(state.qIndex<10){state.answered=false;quizPage()}else finishSet()},1450)}
+function finishSet(){if(state.level===1&&state.currentSet===0){go('example12')}else if(state.level===1){go('score1')}else if(state.level===2&&state.currentSet===2){go('example22')}else if(state.level===2){go('score2')}else go('final')}
+function scoreLevel(level){let ix=level===1?[0,1]:[2,3],sc=ix.reduce((a,i)=>a+state.scores[i],0),co=ix.reduce((a,i)=>a+state.correct[i],0),wr=ix.reduce((a,i)=>a+state.wrong[i],0);let pass=level===1?sc>=280:co>=14;if(level===1&&pass)state.unlocked[1]=true;if(level===2&&pass)state.unlocked[2]=true;let msg=level===1?(pass?'Sugeng! Kowe Wis Bisa Mbukak Level 2!':'Ayo Sinau Maneh Supaya Bisa Mbukak Level 2!'):(pass?'Apik! Kowe Wis Bisa Mbukak Level 3!':'Ayo Semangat Maneh! Sinaua Supaya Bisa Mbukak Level 3!');let next=level===1?'material2':'material3';show(`<h2>Skor Level ${level}</h2><div class="cards"><div class="card"><strong>Dolanan 1</strong>${state.scores[ix[0]]} skor</div><div class="card"><strong>Dolanan 2</strong>${state.scores[ix[1]]} skor</div><div class="card"><strong>Gunggung Skor</strong><h2>${sc}</h2></div><div class="card"><strong>Wangsulan Bener</strong>${co}</div><div class="card"><strong>Wangsulan Kliru</strong>${wr}</div></div><h2>${msg}</h2>${pass?`<button class="btn gold" onclick="go('${next}')">Terusake Level ${level+1}</button>`:`<button class="btn" onclick="go('${level===1?'map':'material2'}')">${level===1?'Mbalik menyang Peta':'Mbalik menyang Level 2'}</button>`}<p><button class="btn light" onclick="resetProgress()">Mbalik menyang Peta (Baleni Progres)</button></p>`,'score'+level);playBg('level'+level+'.mp3');saveResult('level'+level)}
+function finalPage(){let s=total(),r=reward();recordLeaderboard();let rank=currentPlayerRank(),trophy=rank>0&&rank<=3;let msg=s>=900?'Hebat! Kowe Entuk Lima Lintang!':s>=700?'Pinter! Terusna Semangat Sinau!':s>=500?'Apik! Terusna Latihan!':'Aja Gampang Nyerah, Ayo Sinau Maneh!';show(`<h2>Sugeng! Petualanganmu Wis Rampung!</h2><div class="badge">⭐ ${r} Lintang${trophy?' · '+trophyForRank(rank):''}</div><div class="cards"><div class="card"><strong>Jeneng Siswa</strong>${escapeHTML(state.name)}</div><div class="card"><strong>Skor Level 1</strong>${state.scores[0]+state.scores[1]}</div><div class="card"><strong>Skor Level 2</strong>${state.scores[2]+state.scores[3]}</div><div class="card"><strong>Skor Level 3</strong>${state.scores[4]}</div><div class="card"><strong>Gunggung Skor</strong><h2>${s} / 1.000</h2></div><div class="card"><strong>Wangsulan Bener</strong>${right()}</div><div class="card"><strong>Wangsulan Kliru</strong>${wrong()}</div></div><h2>${msg}</h2><p>${'⭐ '.repeat(r)}${trophy?' '+trophyForRank(rank):''}</p>${leaderboardHTML()}<button class="btn gold" onclick="newGame()">Dolanan Maneh</button>`,'final');playBg('tepuktanganpanjang.mp3');saveResult('final')}
+
+function clearScores(){state.scores=[0,0,0,0,0];state.correct=[0,0,0,0,0];state.wrong=[0,0,0,0,0];state.unlocked=[true,false,false];state.name='';localStorage.removeItem('sc_name');updateTop()}
+function resetProgress(){clearScores();state.history=[];render('map');toast('Progres wis direset. Tulisen jeneng maneh.')}
+function resetAll(){if(!confirm('Apa kowe yakin arep mbusak kabeh skor lan kemajuan dolanan?'))return;clearScores();state.history=[];render('map');toast('Kabeh progres wis direset. Tulisen jeneng maneh.')}
+function newGame(){clearScores();state.history=[];render('home');toast('Dolanan anyar. Jeneng bakal diketik maneh.')}
+function openSettings(){go('settings')}
+function settings(){show(`<h2>Setelan</h2><div class="settings"><label>Swara Musik Latar: <span id="mv">${Math.round(state.musicVol*100)}%</span><input type="range" min="0" max="100" value="${state.musicVol*100}" oninput="setVolume('music',this.value)"></label><label>Swara Paraga: <span id="vv">${Math.round(state.voiceVol*100)}%</span><input type="range" min="0" max="100" value="${state.voiceVol*100}" oninput="setVolume('voice',this.value)"></label><hr><h3>Kunci Level</h3><p>Ketik sandhi guru, banjur pencet Enter kanggo nampilake tombol.</p><input type="password" id="teacherPass" placeholder="Sandhi guru" onkeydown="if(event.key==='Enter'){verifyTeacher('check')}"><button class="btn" onclick="verifyTeacher('check')">Priksa Sandhi</button><div id="lockActions" class="row hidden"><button class="btn" onclick="verifyTeacher('unlock')">Bukak Level 2 lan 3</button><button class="btn danger" onclick="verifyTeacher('lock')">Kunci Level 2 lan 3</button><button class="btn danger" onclick="clearLeaderboard()">Busak Papan Skor</button></div><p class="footer-note">Tombol bakal katon yen sandhi bener.</p></div><button class="btn light" onclick="goBack()">Mbalik</button>`,'settings');playBg(currentMusic())}
+function setVolume(which,v){let n=Number(v)/100;if(which==='music'){state.musicVol=n;$('mv').textContent=v+'%';$('bgm').volume=n}else{state.voiceVol=n;$('vv').textContent=v+'%';$('sfx').volume=n}}
+function clearLeaderboard(){if(!confirm('Busak kabeh 10 peringkat pemain ing papan skor? Data skor lan progres level ora diowahi.'))return;localStorage.removeItem('sc_leaderboard');toast('Papan skor 10 pemain wis dibusak');if(state.page==='final')finalPage()}
+function verifyTeacher(action){let p=$('teacherPass').value;if(p!==PASSWORD_GURU){toast('Sandhi kliru!');$('lockActions').classList.add('hidden');$('teacherPass').value='';return}if(action==='check'){ $('lockActions').classList.remove('hidden');toast('Sandhi bener. Pilih prentahmu.');return }if(action==='unlock'){state.unlocked=[true,true,true];toast('Level 2 lan 3 wis kabukak')}else if(action==='lock'){state.unlocked=[true,false,false];toast('Level 2 lan 3 wis dikunci')} $('lockActions').classList.add('hidden');$('teacherPass').value='';updateTop()}
+function showLocks(){go('locks')}
+function locksPage(){show(`<h2>Status Kunci Level</h2><div class="cards">${state.unlocked.map((v,i)=>`<div class="card"><strong>Level ${i+1}</strong>${v?'🔓 Kabukak':'🔒 Dikunci'}</div>`).join('')}</div><p>Level 1 tansah kabukak. Level sabanjure kudu dirampungake utawa dibukak dening guru.</p><button class="btn" onclick="goBack()">Mbalik</button>`,'locks')}
+async function saveResult(stage){const data={name:state.name,stage,score:total(),scores:state.scores,correct:right(),wrong:wrong(),stars:reward(),time:new Date().toISOString()};try{localStorage.setItem('siCakrawalaProgress',JSON.stringify(data));if(APPS_SCRIPT_URL){try{await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(data)});}catch(e){console.warn('Skor durung bisa dikirim menyang Google Sheets',e)}if(stage==='final'){setTimeout(loadSharedLeaderboard,1200)}}}catch(e){console.warn('Panyimpenan lokal gagal',e)}}
+// Pulihake jeneng lan skor ringkes yen kaca dibukak maneh. Dolanan anyar diwiwiti saka pambuka.
+updateTop();render('home');
+</script></body></html>
