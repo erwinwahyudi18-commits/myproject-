@@ -476,6 +476,24 @@ main:has(.screen.material3){align-items:stretch!important;justify-content:flex-s
   flex-basis:clamp(1.875rem,8.75vw,2.625rem)!important;
  }
 }
+
+/* ===== FIX FINAL: tata letak ora motong isi lan kabeh kontrol bisa diklik ===== */
+html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+#app{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+.topbar{position:relative!important;z-index:50!important;pointer-events:auto!important}
+main{width:min(1200px,98vw)!important;height:auto!important;min-height:0!important;min-height:calc(100dvh - 70px)!important;overflow:visible!important;align-items:stretch!important;justify-content:flex-start!important;padding:10px 0!important}
+.screen{position:relative!important;z-index:1!important;width:100%!important;height:auto!important;min-height:calc(100dvh - 100px)!important;max-height:none!important;overflow:visible!important;pointer-events:auto!important;justify-content:flex-start!important;padding:clamp(12px,2vw,26px)!important}
+.screen button,.screen input,.topbar button{position:relative;z-index:3;pointer-events:auto!important;touch-action:manipulation}
+.screen .leaderboard-wrap{display:block!important;width:100%!important;max-height:58vh!important;overflow:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain}
+.screen .leaderboard{width:100%;min-width:560px;border-collapse:collapse}
+.screen .leaderboard th{position:sticky;top:0;z-index:2}
+.screen .leaderboard th,.screen .leaderboard td{padding:8px 10px;white-space:nowrap}
+.screen .cards,.screen .levelmap,.screen .material-grid{flex:0 0 auto!important;overflow:visible!important;max-height:none!important}
+.screen.material3 .material-grid{overflow:visible!important}
+.page-footer{pointer-events:none!important;z-index:0!important}
+@media(max-width:800px){main{width:100%!important;padding:6px!important}.screen{padding:10px 7px 24px!important}.screen .levelmap{grid-template-columns:repeat(3,minmax(0,1fr))!important}.screen .leaderboard-wrap{max-height:55vh!important}}
+@media(max-width:520px){.screen .levelmap{grid-template-columns:1fr!important}.screen .leaderboard{min-width:540px}}
+
 </style></head>
 <body><div id="app"><header class="topbar" id="topbar" hidden>
 <button onclick="goBack()">↩ Mbalik</button><button class="pill" onclick="editName()">👤 <span id="playerName">Jeneng</span></button><span class="pill">⭐ Skor: <b id="scoreTop">0</b></span><span class="pill">✨ <b id="starTop">0</b></span><button onclick="showLeaderboard()">🏆 Papan Skor</button><button onclick="toggleMusic()" id="musicToggle">Pateni Musik</button><button onclick="openSettings()">⚙ Setelan</button><span class="spacer"></span>
@@ -519,13 +537,14 @@ function recordLeaderboard(){
  const old=board.findIndex(x=>String(x.name).toLowerCase()===result.name.toLowerCase());
  if(old>=0){if(Number(board[old].total)>result.total)return;board.splice(old,1)}
  board.push(result);board.sort((a,b)=>Number(b.total)-Number(a.total));
- localStorage.setItem('sc_leaderboard',JSON.stringify(board.slice(0,10)));
+ localStorage.setItem('sc_leaderboard',JSON.stringify(board.slice(0,60)));
 }
 function trophyForRank(rank){return rank===1?'🥇 Piala Emas':rank===2?'🥈 Piala Perak':rank===3?'🥉 Piala Perunggu':'-'}
 function currentPlayerRank(){const board=getLeaderboard();const ix=board.findIndex(x=>String(x.name).toLowerCase()===String(state.name).trim().toLowerCase());return ix<0?0:ix+1}
 function leaderboardHTML(){
  const board=sharedLeaderboard || getLeaderboard().map((x,i)=>({nama:x.name,skor:x.total,bintang:x.stars,peringkat:i+1,piala:i<3?3-i:0}));
- return `<h2>Papan Skor Akhir — 10 Murid</h2><p class="footer-note">Papan iki nyimpen nganti 10 murid kanthi skor paling dhuwur ing piranti iki. Yen Google Sheets wis disambungake, peringkat bebarengan uga bisa ditampilake.</p><div class="leaderboard-wrap"><table class="leaderboard"><thead><tr><th>No.</th><th>Jeneng Siswa</th><th>Skor</th><th>Peringkat</th><th>Lintang</th><th>Piala</th></tr></thead><tbody>${Array.from({length:10},(_,i)=>{const x=board[i],rank=x?Number(x.peringkat)||i+1:i+1,stars=x?Number(x.bintang)||0:0,cup=x?(Number(x.piala)===3?'🥇 Piala Emas':Number(x.piala)===2?'🥈 Piala Perak':Number(x.piala)===1?'🥉 Piala Perunggu':(i===0?'🥇 Piala Emas':i===1?'🥈 Piala Perak':i===2?'🥉 Piala Perunggu':'-')):'-';return `<tr><td>${x?rank:'-'}</td><td>${x?escapeHTML(x.nama??x.name??'-'):'-'}</td><td>${x?(x.skor??x.total??'-'):'-'}</td><td>${x?'Juara '+rank:'-'}</td><td>${x?(stars?'⭐ '.repeat(stars):'0'):'-'}</td><td>${cup}</td></tr>`}).join('')}</tbody></table></div>`;
+ const sorted=[...board].sort((a,b)=>Number(b.skor??b.total??0)-Number(a.skor??a.total??0));
+ return `<h2>Papan Skor Akhir</h2><div class="leaderboard-wrap" role="region" aria-label="Daftar papan skor" tabindex="0"><table class="leaderboard"><thead><tr><th>No.</th><th>Jeneng Siswa</th><th>Skor</th><th>Peringkat</th><th>Lintang</th><th>Piala</th></tr></thead><tbody>${Array.from({length:60},(_,i)=>{const x=sorted[i],rank=x?Number(x.peringkat)||i+1:'-',stars=x?Number(x.bintang??x.stars)||0:0,cup=x?(Number(x.piala)===3?'🥇 Piala Emas':Number(x.piala)===2?'🥈 Piala Perak':Number(x.piala)===1?'🥉 Piala Perunggu':(i===0?'🥇 Piala Emas':i===1?'🥈 Piala Perak':i===2?'🥉 Piala Perunggu':'-')):'-';return `<tr><td>${x?i+1:'-'}</td><td>${x?escapeHTML(x.nama??x.name??'-'):'-'}</td><td>${x?(x.skor??x.total??'-'):'-'}</td><td>${x?'Juara '+rank:'-'}</td><td>${x?(stars?'⭐ '.repeat(stars):'0'):'-'}</td><td>${cup}</td></tr>`}).join('')}</tbody></table></div>`;
 }
 function showLeaderboard(){sharedLeaderboard=null;show(`${leaderboardHTML()}<div class="center"><button class="btn gold" onclick="go('map')">↩ Mbalik Peta</button></div>`,'leaderboard');playBg('menuutama.mp3');loadSharedLeaderboard()}
 function loadSharedLeaderboard(){
@@ -630,7 +649,7 @@ function newGame(){clearScores();state.history=[];render('home');toast('Dolanan 
 function openSettings(){go('settings')}
 function settings(){show(`<h2>Setelan</h2><div class="settings"><label>Swara Musik Latar: <span id="mv">${Math.round(state.musicVol*100)}%</span><input type="range" min="0" max="100" value="${state.musicVol*100}" oninput="setVolume('music',this.value)"></label><label>Swara Paraga: <span id="vv">${Math.round(state.voiceVol*100)}%</span><input type="range" min="0" max="100" value="${state.voiceVol*100}" oninput="setVolume('voice',this.value)"></label><hr><h3>Kunci Level</h3><p>Ketik sandhi guru, banjur pencet Enter kanggo nampilake tombol.</p><input type="password" id="teacherPass" placeholder="Sandhi guru" onkeydown="if(event.key==='Enter'){verifyTeacher('check')}"><button class="btn" onclick="verifyTeacher('check')">Priksa Sandhi</button><div id="lockActions" class="row hidden"><button class="btn" onclick="verifyTeacher('unlock')">Bukak Level 2 lan 3</button><button class="btn danger" onclick="verifyTeacher('lock')">Kunci Level 2 lan 3</button><button class="btn danger" onclick="clearLeaderboard()">Busak Papan Skor</button></div><p class="footer-note">Tombol bakal katon yen sandhi bener.</p></div><button class="btn light" onclick="goBack()">Mbalik</button>`,'settings');playBg(currentMusic())}
 function setVolume(which,v){let n=Number(v)/100;if(which==='music'){state.musicVol=n;$('mv').textContent=v+'%';$('bgm').volume=n}else{state.voiceVol=n;$('vv').textContent=v+'%';$('sfx').volume=n}}
-function clearLeaderboard(){if(!confirm('Busak kabeh 10 peringkat pemain ing papan skor? Data skor lan progres level ora diowahi.'))return;localStorage.removeItem('sc_leaderboard');toast('Papan skor 10 pemain wis dibusak');if(state.page==='final')finalPage()}
+function clearLeaderboard(){if(!confirm('Busak kabeh data papan skor ing piranti iki? Data progres level ora diowahi.'))return;localStorage.removeItem('sc_leaderboard');sharedLeaderboard=null;toast('Papan skor wis dibusak');if(state.page==='final')finalPage()}
 function verifyTeacher(action){let p=$('teacherPass').value;if(p!==PASSWORD_GURU){toast('Sandhi kliru!');$('lockActions').classList.add('hidden');$('teacherPass').value='';return}if(action==='check'){ $('lockActions').classList.remove('hidden');toast('Sandhi bener. Pilih prentahmu.');return }if(action==='unlock'){state.unlocked=[true,true,true];toast('Level 2 lan 3 wis kabukak')}else if(action==='lock'){state.unlocked=[true,false,false];toast('Level 2 lan 3 wis dikunci')} $('lockActions').classList.add('hidden');$('teacherPass').value='';updateTop()}
 function showLocks(){go('locks')}
 function locksPage(){show(`<h2>Status Kunci Level</h2><div class="cards">${state.unlocked.map((v,i)=>`<div class="card"><strong>Level ${i+1}</strong>${v?'🔓 Kabukak':'🔒 Dikunci'}</div>`).join('')}</div><p>Level 1 tansah kabukak. Level sabanjure kudu dirampungake utawa dibukak dening guru.</p><button class="btn" onclick="goBack()">Mbalik</button>`,'locks')}
