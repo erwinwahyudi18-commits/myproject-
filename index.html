@@ -685,6 +685,7 @@ async function clearLeaderboard(){
   // Password diverifikasi kembali di server melalui ADMIN_PASSWORD_SHA256.
   await fetch(APPS_SCRIPT_URL,{
    method:'POST',
+   mode:'no-cors',
    headers:{'Content-Type':'text/plain;charset=UTF-8'},
    body:JSON.stringify({action:'reset',password:password})
   });
@@ -704,7 +705,7 @@ async function clearLeaderboard(){
   }
  }catch(error){
   console.error('Gagal mbusak papan skor:',error);
-  alert('Penghapusan durung bisa diverifikasi. Priksa sandhi admin ing Apps Script, deployment Web App, URL, lan sambungan internet.');
+  alert('Panyuwunan penghapusan wis dikirim, nanging asil durung bisa diverifikasi. Priksa sheet Skor lan pasthekake deployment Apps Script versi anyar wis aktif. Yen data isih ana, kirim asil action=health lan isi sheet Skor.');
  }finally{
   btns.forEach(b=>b.disabled=false);
   clearingLeaderboardNow=false;
