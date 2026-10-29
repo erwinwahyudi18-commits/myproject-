@@ -546,7 +546,7 @@ function leaderboardHTML(){
  const sorted=[...board].sort((a,b)=>Number(b.skor??b.total??0)-Number(a.skor??a.total??0));
  return `<h2>Papan Skor Akhir</h2><div class="leaderboard-wrap" role="region" aria-label="Daftar papan skor" tabindex="0"><table class="leaderboard"><thead><tr><th>No.</th><th>Jeneng Siswa</th><th>Skor</th><th>Peringkat</th><th>Lintang</th><th>Piala</th></tr></thead><tbody>${Array.from({length:60},(_,i)=>{const x=sorted[i],rank=x?Number(x.peringkat)||i+1:'-',stars=x?Number(x.bintang??x.stars)||0:0,cup=x?(Number(x.piala)===3?'🥇 Piala Emas':Number(x.piala)===2?'🥈 Piala Perak':Number(x.piala)===1?'🥉 Piala Perunggu':(i===0?'🥇 Piala Emas':i===1?'🥈 Piala Perak':i===2?'🥉 Piala Perunggu':'-')):'-';return `<tr><td>${x?i+1:'-'}</td><td>${x?escapeHTML(x.nama??x.name??'-'):'-'}</td><td>${x?(x.skor??x.total??'-'):'-'}</td><td>${x?'Juara '+rank:'-'}</td><td>${x?(stars?'⭐ '.repeat(stars):'0'):'-'}</td><td>${cup}</td></tr>`}).join('')}</tbody></table></div>`;
 }
-function showLeaderboard(){sharedLeaderboard=null;show(`${leaderboardHTML()}<div class="center"><button class="btn gold" onclick="go('map')">↩ Mbalik Peta</button></div>`,'leaderboard');playBg('menuutama.mp3');loadSharedLeaderboard()}
+function showLeaderboard(){sharedLeaderboard=null;show(`${leaderboardHTML()}<div class="center"><button class="btn danger" onclick="clearLeaderboard()">🗑 Busak Papan Skor</button><button class="btn gold" onclick="go('map')">↩ Mbalik Peta</button></div>`,'leaderboard');playBg('menuutama.mp3');loadSharedLeaderboard()}
 function loadSharedLeaderboard(){
  const callbackName='siCakrawalaRanking_'+Date.now()+'_'+Math.floor(Math.random()*100000);
  const script=document.createElement('script');
@@ -649,7 +649,45 @@ function newGame(){clearScores();state.history=[];render('home');toast('Dolanan 
 function openSettings(){go('settings')}
 function settings(){show(`<h2>Setelan</h2><div class="settings"><label>Swara Musik Latar: <span id="mv">${Math.round(state.musicVol*100)}%</span><input type="range" min="0" max="100" value="${state.musicVol*100}" oninput="setVolume('music',this.value)"></label><label>Swara Paraga: <span id="vv">${Math.round(state.voiceVol*100)}%</span><input type="range" min="0" max="100" value="${state.voiceVol*100}" oninput="setVolume('voice',this.value)"></label><hr><h3>Kunci Level</h3><p>Ketik sandhi guru, banjur pencet Enter kanggo nampilake tombol.</p><input type="password" id="teacherPass" placeholder="Sandhi guru" onkeydown="if(event.key==='Enter'){verifyTeacher('check')}"><button class="btn" onclick="verifyTeacher('check')">Priksa Sandhi</button><div id="lockActions" class="row hidden"><button class="btn" onclick="verifyTeacher('unlock')">Bukak Level 2 lan 3</button><button class="btn danger" onclick="verifyTeacher('lock')">Kunci Level 2 lan 3</button><button class="btn danger" onclick="clearLeaderboard()">Busak Papan Skor</button></div><p class="footer-note">Tombol bakal katon yen sandhi bener.</p></div><button class="btn light" onclick="goBack()">Mbalik</button>`,'settings');playBg(currentMusic())}
 function setVolume(which,v){let n=Number(v)/100;if(which==='music'){state.musicVol=n;$('mv').textContent=v+'%';$('bgm').volume=n}else{state.voiceVol=n;$('vv').textContent=v+'%';$('sfx').volume=n}}
-function clearLeaderboard(){if(!confirm('Busak kabeh data papan skor ing piranti iki? Data progres level ora diowahi.'))return;localStorage.removeItem('sc_leaderboard');sharedLeaderboard=null;toast('Papan skor wis dibusak');if(state.page==='final')finalPage()}
+async function clearLeaderboard(){
+ if(!confirm('Apa sampeyan yakin arep mbusak KABEH data papan skor saka Google Sheets lan piranti iki? Data kemajuan level ora diowahi.'))return;
+ const password=prompt('Lebokna sandhi guru kanggo mbusak papan skor:');
+ if(password===null)return;
+ if(password!==PASSWORD_GURU){alert('Sandhi guru salah. Data ora dibusak.');return;}
+ // Busak salinan lokal supaya ora katon maneh ing piranti iki.
+ localStorage.removeItem('sc_leaderboard');
+ sharedLeaderboard=[];
+ const payload={action:'clear',password:PASSWORD_GURU};
+ toast('Ngirim prentah mbusak menyang Google Sheets...');
+ try{
+  // Apps Script sing digunakake kudu nduweni doPost(e) kanggo action:'clear'.
+  // no-cors dibutuhake amarga endpoint Google Apps Script biasane redirect lintas domain.
+  await fetch(APPS_SCRIPT_URL,{
+   method:'POST',mode:'no-cors',
+   headers:{'Content-Type':'text/plain;charset=UTF-8'},
+   body:JSON.stringify(payload),keepalive:true
+  });
+  sharedLeaderboard=[];
+  if(state.page==='leaderboard'){
+   const wrap=screen.querySelector('.leaderboard-wrap');
+   if(wrap){
+    const body=wrap.querySelector('tbody');
+    if(body)body.innerHTML=Array.from({length:60},()=>'<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>').join('');
+   }
+  }else if(state.page==='final'){
+   showLeaderboard();
+  }
+  toast('Prentah mbusak wis dikirim. Muat maneh papan skor kanggo mriksa Google Sheets.');
+  // Muat ulang data dari server setelah Apps Script memproses permintaan.
+  setTimeout(()=>{
+   sharedLeaderboard=null;
+   if(state.page==='leaderboard')loadSharedLeaderboard();
+  },1800);
+ }catch(error){
+  console.error('Gagal ngirim prentah mbusak papan skor:',error);
+  alert('Ora bisa ngirim prentah mbusak. Priksa internet lan URL Web App Apps Script.');
+ }
+}
 function verifyTeacher(action){let p=$('teacherPass').value;if(p!==PASSWORD_GURU){toast('Sandhi kliru!');$('lockActions').classList.add('hidden');$('teacherPass').value='';return}if(action==='check'){ $('lockActions').classList.remove('hidden');toast('Sandhi bener. Pilih prentahmu.');return }if(action==='unlock'){state.unlocked=[true,true,true];toast('Level 2 lan 3 wis kabukak')}else if(action==='lock'){state.unlocked=[true,false,false];toast('Level 2 lan 3 wis dikunci')} $('lockActions').classList.add('hidden');$('teacherPass').value='';updateTop()}
 function showLocks(){go('locks')}
 function locksPage(){show(`<h2>Status Kunci Level</h2><div class="cards">${state.unlocked.map((v,i)=>`<div class="card"><strong>Level ${i+1}</strong>${v?'🔓 Kabukak':'🔒 Dikunci'}</div>`).join('')}</div><p>Level 1 tansah kabukak. Level sabanjure kudu dirampungake utawa dibukak dening guru.</p><button class="btn" onclick="goBack()">Mbalik</button>`,'locks')}
