@@ -925,4 +925,307 @@ function finishLevel(){
 
  playSound(passed?'menang.mp3':'selesai.mp3');
 }
+</script><script>
+// ========================================
+// PENGENALAN LEVEL 2
+// ========================================
+
+function showLevel2Introduction(){
+ show(`
+  <h1>🔤 Level 2</h1>
+  <h2>Maca Tembung nganggo Sandhangan</h2>
+  <p>Ayo sinau maca tembung aksara Jawa kanthi nggatekake sandhangan.</p>
+  <div class="cards">
+   <div class="card">📖<strong>Sinau</strong><p>Ngenali sandhangan.</p></div>
+   <div class="card">🔊<strong>Wacanen</strong><p>Gladhen maca tembung.</p></div>
+   <div class="card">⭐<strong>Latihan</strong><p>Pilih wacan sing bener.</p></div>
+  </div>
+  <button class="btn gold" onclick="beginQuestions()">Ayo Miwiti!</button>
+ `,'intro');
+}
+
+// ========================================
+// PENGENALAN LEVEL 3
+// ========================================
+
+function showLevel3Introduction(){
+ show(`
+  <h1>📖 Level 3</h1>
+  <h2>Maca Ukara Prasaja</h2>
+  <p>Ayo gladhen maca ukara prasaja nganggo aksara Jawa.</p>
+  <div class="cards">
+   <div class="card">📚<strong>Wacanen</strong><p>Wacanen ukara kanthi tliti.</p></div>
+   <div class="card">🧠<strong>Pahami</strong><p>Gatekna saben tembung.</p></div>
+   <div class="card">🏆<strong>Rampungake</strong><p>Wangsulana pitakon kanthi bener.</p></div>
+  </div>
+  <button class="btn gold" onclick="beginQuestions()">Ayo Miwiti!</button>
+ `,'intro');
+}
+
+// ========================================
+// HASIL AKHIR PERMAINAN
+// ========================================
+
+function finishLevel(){
+ state.finished=true;
+
+ const questions=getQuestions();
+ const passed=state.correct>=Math.ceil(questions.length*.6);
+
+ if(passed){
+  state.unlocked=Math.max(
+   state.unlocked,
+   Math.min(3,state.level+1)
+  );
+ }
+
+ const earned=Math.min(5,Math.floor(state.correct/4));
+
+ if(state.level===3){
+  recordLeaderboard();
+  saveResult('final');
+
+  show(`
+   <h1>🏆 Sugeng! Petualangan Rampung!</h1>
+   <h2>Sampeyan wis ngrampungake kabeh level.</h2>
+   <div class="cards">
+    <div class="card"><strong>${state.correct}</strong><p>Jawaban Bener</p></div>
+    <div class="card"><strong>${state.wrong}</strong><p>Jawaban Salah</p></div>
+    <div class="card"><strong>${total()}</strong><p>Skor Akhir</p></div>
+    <div class="card"><strong>${reward()} ⭐</strong><p>Bintang</p></div>
+   </div>
+   <p>Matur nuwun wis sinau bebarengan Si Cakrawala!</p>
+   <button class="btn gold" onclick="showLeaderboard()">🏆 Deleng Papan Skor</button>
+   <button class="btn light" onclick="showMap()">Peta Petualangan</button>
+  `,'final');
+
+  playSound('menang.mp3');
+  loadSharedLeaderboard();
+  return;
+ }
+
+ show(`
+  <h1>${passed?'🎉 Sugeng!':'💪 Aja Nyerah!'}</h1>
+  <h2>Level ${state.level} Rampung</h2>
+  <div class="cards">
+   <div class="card"><strong>${state.correct}</strong><p>Jawaban Bener</p></div>
+   <div class="card"><strong>${state.wrong}</strong><p>Jawaban Salah</p></div>
+   <div class="card"><strong>${total()}</strong><p>Skor Total</p></div>
+   <div class="card"><strong>${earned} ⭐</strong><p>Bintang</p></div>
+  </div>
+  <p>${passed?'Level sabanjure wis kabukak!':'Coba maneh supaya bisa mbukak level sabanjure.'}</p>
+  <button class="btn gold" onclick="showMap()">Peta Petualangan</button>
+  <button class="btn light" onclick="startLevel(${state.level})">Baleni Level</button>
+ `,'result');
+
+ playSound(passed?'menang.mp3':'selesai.mp3');
+}
+
+// ========================================
+// SIMPAN SKOR KE GOOGLE SHEETS
+// ========================================
+
+function saveResult(stage){
+ if(stage!=='final')return;
+
+ const payload={
+  stage:'final',
+  name:state.name||'Tanpa Jeneng',
+  score:total(),
+  scores:state.score,
+  correct:state.correct,
+  wrong:state.wrong,
+  stars:reward(),
+  time:new Date().toISOString()
+ };
+
+ fetch(APPS_SCRIPT_URL,{
+  method:'POST',
+  mode:'no-cors',
+  headers:{
+   'Content-Type':'text/plain;charset=UTF-8'
+  },
+  body:JSON.stringify(payload)
+ }).catch(error=>{
+  console.error('Gagal mengirim skor:',error);
+ });
+}
+
+// ========================================
+// HAPUS PAPAN SKOR GOOGLE SHEETS
+// ========================================
+
+function clearLeaderboard(){
+ const password=prompt('Lebokna password guru kanggo mbusak papan skor:');
+
+ if(password===null)return;
+
+ if(password!==PASSWORD_GURU){
+  alert('Password guru salah!');
+  return;
+ }
+
+ if(!confirm('Apa sampeyan yakin arep mbusak kabeh data papan skor?')){
+  return;
+ }
+
+ localStorage.removeItem('sc_leaderboard');
+ sharedLeaderboard=[];
+
+ const payload={
+  action:'clear',
+  password:PASSWORD_GURU
+ };
+
+ fetch(APPS_SCRIPT_URL,{
+  method:'POST',
+  mode:'no-cors',
+  headers:{
+   'Content-Type':'text/plain;charset=UTF-8'
+  },
+  body:JSON.stringify(payload)
+ }).then(()=>{
+  toast('Panyuwunan mbusak papan skor wis dikirim.');
+  setTimeout(()=>{
+   sharedLeaderboard=null;
+   loadSharedLeaderboard();
+   showLeaderboard();
+  },1500);
+ }).catch(error=>{
+  console.error('Gagal mengirim perintah hapus:',error);
+  alert('Ora bisa ngirim panyuwunan. Priksa sambungan internet lan URL Apps Script.');
+ });
+}
+
+// ========================================
+// PENGATURAN GAME
+// ========================================
+
+function openSettings(){
+ show(`
+  <h1>⚙ Setelan Game</h1>
+  <div class="settings">
+
+   <label>
+    <input type="checkbox" id="musicSetting"
+     ${state.music?'checked':''}
+     onchange="changeSetting('music',this.checked)">
+    Musik Latar
+   </label>
+
+   <label>
+    <input type="checkbox" id="soundSetting"
+     ${state.sound?'checked':''}
+     onchange="changeSetting('sound',this.checked)">
+    Efek Suara
+   </label>
+
+   <label>
+    <input type="checkbox" id="voiceSetting"
+     ${state.voice?'checked':''}
+     onchange="changeSetting('voice',this.checked)">
+    Swara Karakter
+   </label>
+
+   <hr>
+
+   <h3>🔊 Swara Karakter</h3>
+   <p>Gunakake tombol ing ngisor iki kanggo nyoba swara karakter.</p>
+
+   <button class="btn gold" onclick="say('Sugeng rawuh ing game Si Cakrawala! Ayo sinau aksara Jawa!')">
+    ▶ Coba Swara Karakter
+   </button>
+
+   <label>Unggah file swara karakter (MP3/WAV)
+    <input type="file" id="characterVoiceFile"
+     accept="audio/*"
+     onchange="loadCharacterVoice(event)">
+   </label>
+
+   <button class="btn light" onclick="playCharacterVoice()">
+    🔊 Putar Swara Karakter
+   </button>
+
+   <hr>
+
+   <h3>👩‍🏫 Setelan Guru</h3>
+   <button class="btn danger" onclick="clearLeaderboard()">
+    🗑 Busak Kabeh Papan Skor
+   </button>
+
+  </div>
+
+  <button class="btn gold" onclick="showMap()">↩ Mbalik</button>
+ `,'settings');
+}
+
+function changeSetting(setting,value){
+ state[setting]=value;
+
+ if(setting==='music'){
+  const audio=document.getElementById('bgm');
+
+  if(value){
+   audio.play().catch(()=>{});
+  }else{
+   audio.pause();
+  }
+ }
+
+ updateTop();
+}
+
+let characterVoiceURL=null;
+
+function loadCharacterVoice(event){
+ const file=event.target.files[0];
+
+ if(!file)return;
+
+ if(characterVoiceURL){
+  URL.revokeObjectURL(characterVoiceURL);
+ }
+
+ characterVoiceURL=URL.createObjectURL(file);
+ toast('File swara karakter kasil dimuat!');
+}
+
+function playCharacterVoice(){
+ if(!characterVoiceURL){
+  toast('Unggah file swara karakter luwih dhisik!');
+  return;
+ }
+
+ const audio=document.getElementById('sfx');
+ audio.src=characterVoiceURL;
+ audio.currentTime=0;
+ audio.play().catch(()=>{
+  toast('Swara ora bisa diputer.');
+ });
+}
+
+// ========================================
+// INISIALISASI GAME
+// ========================================
+
+function initGame(){
+ const savedName=localStorage.getItem('sc_name');
+
+ if(savedName){
+  state.name=savedName;
+ }
+
+ showHome();
+ updateTop();
+}
+
+window.addEventListener('DOMContentLoaded',initGame);
+
 </script>
+
+<footer class="page-footer">
+ Si Cakrawala • Game Edukasi Aksara Jawa
+</footer>
+
+</body>
+</html>
