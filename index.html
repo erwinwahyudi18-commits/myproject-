@@ -649,72 +649,96 @@ function newGame(){clearScores();state.history=[];render('home');toast('Dolanan 
 function openSettings(){go('settings')}
 function settings(){show(`<h2>Setelan</h2><div class="settings"><label>Swara Musik Latar: <span id="mv">${Math.round(state.musicVol*100)}%</span><input type="range" min="0" max="100" value="${state.musicVol*100}" oninput="setVolume('music',this.value)"></label><label>Swara Paraga: <span id="vv">${Math.round(state.voiceVol*100)}%</span><input type="range" min="0" max="100" value="${state.voiceVol*100}" oninput="setVolume('voice',this.value)"></label><hr><h3>Kunci Level</h3><p>Ketik sandhi guru, banjur pencet Enter kanggo nampilake tombol.</p><input type="password" id="teacherPass" placeholder="Sandhi guru" onkeydown="if(event.key==='Enter'){verifyTeacher('check')}"><button class="btn" onclick="verifyTeacher('check')">Priksa Sandhi</button><div id="lockActions" class="row hidden"><button class="btn" onclick="verifyTeacher('unlock')">Bukak Level 2 lan 3</button><button class="btn danger" onclick="verifyTeacher('lock')">Kunci Level 2 lan 3</button><button class="btn danger" onclick="clearLeaderboard()">Busak Papan Skor</button></div><p class="footer-note">Tombol bakal katon yen sandhi bener.</p></div><button class="btn light" onclick="goBack()">Mbalik</button>`,'settings');playBg(currentMusic())}
 function setVolume(which,v){let n=Number(v)/100;if(which==='music'){state.musicVol=n;$('mv').textContent=v+'%';$('bgm').volume=n}else{state.voiceVol=n;$('vv').textContent=v+'%';$('sfx').volume=n}}
+let clearingLeaderboardNow = false;
+
 async function clearLeaderboard(){
- if(!confirm('Apa sampeyan yakin arep mbusak KABEH data papan skor saka Google Sheets lan piranti iki? Data kemajuan level ora diowahi.'))return;
+ if(clearingLeaderboardNow) return;
+ if(!confirm('Apa sampeyan yakin arep mbusak KABEH data papan skor saka Google Sheets lan piranti iki? Data kemajuan level ora diowahi.')) return;
 
  const password=prompt('Lebokna sandhi guru kanggo mbusak papan skor:');
- if(password===null)return;
+ if(password===null) return;
  if(password!==PASSWORD_GURU){
   alert('Sandhi guru salah. Data ora dibusak.');
   return;
  }
 
+ clearingLeaderboardNow=true;
  const btns=[...screen.querySelectorAll('button')];
  btns.forEach(b=>b.disabled=true);
  toast('Ngirim prentah mbusak menyang Google Sheets...');
 
- // Kirim POST minangka form supaya Apps Script bisa maca e.parameter.payload.
- // Ora nggunakake fetch mode:no-cors amarga respons kasebut ora bisa diverifikasi.
- let iframe=document.getElementById('scClearFrame');
- if(!iframe){
-  iframe=document.createElement('iframe');
-  iframe.id='scClearFrame';
-  iframe.name='scClearFrame';
-  iframe.style.display='none';
-  document.body.appendChild(iframe);
- }
-
- const form=document.createElement('form');
- form.method='POST';
- form.action=APPS_SCRIPT_URL;
- form.target='scClearFrame';
- form.style.display='none';
-
- const payload=document.createElement('input');
- payload.type='hidden';
- payload.name='payload';
- payload.value=JSON.stringify({action:'clear',password:password});
- form.appendChild(payload);
- document.body.appendChild(form);
-
  try{
+  // Gunakake field formulir langsung, dudu payload JSON.
+  // Apps Script bakal nampa data iki liwat e.parameter.action
+  // lan e.parameter.password.
+  let iframe=document.getElementById('scClearFrame');
+  if(!iframe){
+   iframe=document.createElement('iframe');
+   iframe.id='scClearFrame';
+   iframe.name='scClearFrame';
+   iframe.style.display='none';
+   document.body.appendChild(iframe);
+  }
+
+  const oldForm=document.getElementById('scClearForm');
+  if(oldForm) oldForm.remove();
+
+  const form=document.createElement('form');
+  form.id='scClearForm';
+  form.method='POST';
+  form.action=APPS_SCRIPT_URL;
+  form.target='scClearFrame';
+  form.acceptCharset='UTF-8';
+  form.style.display='none';
+
+  const actionInput=document.createElement('input');
+  actionInput.type='hidden';
+  actionInput.name='action';
+  actionInput.value='clear';
+
+  const passwordInput=document.createElement('input');
+  passwordInput.type='hidden';
+  passwordInput.name='password';
+  passwordInput.value=password;
+
+  form.appendChild(actionInput);
+  form.appendChild(passwordInput);
+  document.body.appendChild(form);
+
+  // Submit formulir menyang Apps Script.
   form.submit();
-  form.remove();
 
-  // Menehi wektu supaya Apps Script ngrampungake penghapusan ing Google Sheets.
-  await new Promise(resolve=>setTimeout(resolve,1800));
+  // Wenehi wektu kanggo Google Sheets ngrampungake proses.
+  await new Promise(resolve=>setTimeout(resolve,2500));
 
-  // Verifikasi kanthi maca ulang ranking saka server liwat JSONP.
+  // Priksa saka server, ora mung saka tampilan lokal.
   const result=await verifyLeaderboardEmpty(8);
 
   if(result.ok && result.total===0){
    localStorage.removeItem('sc_leaderboard');
    sharedLeaderboard=[];
 
-   if(state.page==='final' || state.page==='leaderboard'){
+   if(state.page==='leaderboard' || state.page==='final'){
     showLeaderboard();
    }
+
    toast('Papan skor Google Sheets kasil dikosongake.');
   }else{
    sharedLeaderboard=null;
-   if(state.page==='leaderboard' || state.page==='final')loadSharedLeaderboard();
-   alert('Papan skor durung kosong ing Google Sheets. Priksa deployment Code.gs lan pasthekake wis nggunakake versi paling anyar.');
+   if(state.page==='leaderboard' || state.page==='final'){
+    loadSharedLeaderboard();
+   }
+   alert('Server isih nuduhake '+result.total+' data. Priksa manawa deployment Apps Script wis nggunakake versi paling anyar lan URL ing HTML wis bener.');
   }
+
  }catch(error){
   console.error('Gagal mbusak papan skor:',error);
-  alert('Ora bisa verifikasi penghapusan. Priksa internet, URL Web App, lan deployment Apps Script.');
+  alert('Penghapusan durung bisa diverifikasi. Priksa deployment Apps Script, URL Web App, lan sambungan internet.');
  }finally{
+  const form=document.getElementById('scClearForm');
+  if(form) form.remove();
   btns.forEach(b=>b.disabled=false);
+  clearingLeaderboardNow=false;
  }
 }
 
