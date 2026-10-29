@@ -651,42 +651,131 @@ function settings(){show(`<h2>Setelan</h2><div class="settings"><label>Swara Mus
 function setVolume(which,v){let n=Number(v)/100;if(which==='music'){state.musicVol=n;$('mv').textContent=v+'%';$('bgm').volume=n}else{state.voiceVol=n;$('vv').textContent=v+'%';$('sfx').volume=n}}
 async function clearLeaderboard(){
  if(!confirm('Apa sampeyan yakin arep mbusak KABEH data papan skor saka Google Sheets lan piranti iki? Data kemajuan level ora diowahi.'))return;
+
  const password=prompt('Lebokna sandhi guru kanggo mbusak papan skor:');
  if(password===null)return;
- if(password!==PASSWORD_GURU){alert('Sandhi guru salah. Data ora dibusak.');return;}
- // Busak salinan lokal supaya ora katon maneh ing piranti iki.
- localStorage.removeItem('sc_leaderboard');
- sharedLeaderboard=[];
- const payload={action:'clear',password:PASSWORD_GURU};
- toast('Ngirim prentah mbusak menyang Google Sheets...');
- try{
-  // Apps Script sing digunakake kudu nduweni doPost(e) kanggo action:'clear'.
-  // no-cors dibutuhake amarga endpoint Google Apps Script biasane redirect lintas domain.
-  await fetch(APPS_SCRIPT_URL,{
-   method:'POST',mode:'no-cors',
-   headers:{'Content-Type':'text/plain;charset=UTF-8'},
-   body:JSON.stringify(payload),keepalive:true
-  });
-  sharedLeaderboard=[];
-  if(state.page==='leaderboard'){
-   const wrap=screen.querySelector('.leaderboard-wrap');
-   if(wrap){
-    const body=wrap.querySelector('tbody');
-    if(body)body.innerHTML=Array.from({length:60},()=>'<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>').join('');
-   }
-  }else if(state.page==='final'){
-   showLeaderboard();
-  }
-  toast('Prentah mbusak wis dikirim. Muat maneh papan skor kanggo mriksa Google Sheets.');
-  // Muat ulang data dari server setelah Apps Script memproses permintaan.
-  setTimeout(()=>{
-   sharedLeaderboard=null;
-   if(state.page==='leaderboard')loadSharedLeaderboard();
-  },1800);
- }catch(error){
-  console.error('Gagal ngirim prentah mbusak papan skor:',error);
-  alert('Ora bisa ngirim prentah mbusak. Priksa internet lan URL Web App Apps Script.');
+ if(password!==PASSWORD_GURU){
+  alert('Sandhi guru salah. Data ora dibusak.');
+  return;
  }
+
+ const btns=[...screen.querySelectorAll('button')];
+ btns.forEach(b=>b.disabled=true);
+ toast('Ngirim prentah mbusak menyang Google Sheets...');
+
+ // Kirim POST minangka form supaya Apps Script bisa maca e.parameter.payload.
+ // Ora nggunakake fetch mode:no-cors amarga respons kasebut ora bisa diverifikasi.
+ let iframe=document.getElementById('scClearFrame');
+ if(!iframe){
+  iframe=document.createElement('iframe');
+  iframe.id='scClearFrame';
+  iframe.name='scClearFrame';
+  iframe.style.display='none';
+  document.body.appendChild(iframe);
+ }
+
+ const form=document.createElement('form');
+ form.method='POST';
+ form.action=APPS_SCRIPT_URL;
+ form.target='scClearFrame';
+ form.style.display='none';
+
+ const payload=document.createElement('input');
+ payload.type='hidden';
+ payload.name='payload';
+ payload.value=JSON.stringify({action:'clear',password:password});
+ form.appendChild(payload);
+ document.body.appendChild(form);
+
+ try{
+  form.submit();
+  form.remove();
+
+  // Menehi wektu supaya Apps Script ngrampungake penghapusan ing Google Sheets.
+  await new Promise(resolve=>setTimeout(resolve,1800));
+
+  // Verifikasi kanthi maca ulang ranking saka server liwat JSONP.
+  const result=await verifyLeaderboardEmpty(8);
+
+  if(result.ok && result.total===0){
+   localStorage.removeItem('sc_leaderboard');
+   sharedLeaderboard=[];
+
+   if(state.page==='final' || state.page==='leaderboard'){
+    showLeaderboard();
+   }
+   toast('Papan skor Google Sheets kasil dikosongake.');
+  }else{
+   sharedLeaderboard=null;
+   if(state.page==='leaderboard' || state.page==='final')loadSharedLeaderboard();
+   alert('Papan skor durung kosong ing Google Sheets. Priksa deployment Code.gs lan pasthekake wis nggunakake versi paling anyar.');
+  }
+ }catch(error){
+  console.error('Gagal mbusak papan skor:',error);
+  alert('Ora bisa verifikasi penghapusan. Priksa internet, URL Web App, lan deployment Apps Script.');
+ }finally{
+  btns.forEach(b=>b.disabled=false);
+ }
+}
+
+function verifyLeaderboardEmpty(maxAttempts=8){
+ return new Promise((resolve,reject)=>{
+  let attempts=0;
+
+  function check(){
+   attempts++;
+   const callbackName='siCakrawalaClearCheck_'+Date.now()+'_'+Math.floor(Math.random()*100000);
+   const script=document.createElement('script');
+   let finished=false;
+
+   const cleanup=()=>{
+    if(finished)return;
+    finished=true;
+    try{delete window[callbackName]}catch(e){window[callbackName]=undefined}
+    if(script.parentNode)script.parentNode.removeChild(script);
+   };
+
+   const timeout=setTimeout(()=>{
+    cleanup();
+    if(attempts<maxAttempts){
+     setTimeout(check,700);
+    }else{
+     reject(new Error('Server ora menehi tanggapan nalika verifikasi papan skor.'));
+    }
+   },7000);
+
+   window[callbackName]=function(data){
+    clearTimeout(timeout);
+    cleanup();
+
+    if(data && data.ok && Array.isArray(data.ranking)){
+     if(data.ranking.length===0){
+      resolve({ok:true,total:0});
+     }else if(attempts<maxAttempts){
+      setTimeout(check,700);
+     }else{
+      resolve({ok:true,total:data.ranking.length});
+     }
+    }else{
+     if(attempts<maxAttempts)setTimeout(check,700);
+     else reject(new Error('Data ranking saka server ora valid.'));
+    }
+   };
+
+   script.onerror=()=>{
+    clearTimeout(timeout);
+    cleanup();
+    if(attempts<maxAttempts)setTimeout(check,700);
+    else reject(new Error('Ora bisa nyambung menyang server ranking.'));
+   };
+
+   script.src=APPS_SCRIPT_URL+'?action=ranking&callback='+
+     encodeURIComponent(callbackName)+'&_='+Date.now();
+   document.head.appendChild(script);
+  }
+
+  check();
+ });
 }
 function verifyTeacher(action){let p=$('teacherPass').value;if(p!==PASSWORD_GURU){toast('Sandhi kliru!');$('lockActions').classList.add('hidden');$('teacherPass').value='';return}if(action==='check'){ $('lockActions').classList.remove('hidden');toast('Sandhi bener. Pilih prentahmu.');return }if(action==='unlock'){state.unlocked=[true,true,true];toast('Level 2 lan 3 wis kabukak')}else if(action==='lock'){state.unlocked=[true,false,false];toast('Level 2 lan 3 wis dikunci')} $('lockActions').classList.add('hidden');$('teacherPass').value='';updateTop()}
 function showLocks(){go('locks')}
