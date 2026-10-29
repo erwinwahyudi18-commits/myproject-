@@ -478,7 +478,7 @@ main:has(.screen.material3){align-items:stretch!important;justify-content:flex-s
 }
 </style></head>
 <body><div id="app"><header class="topbar" id="topbar" hidden>
-<button onclick="goBack()">↩ Mbalik</button><button class="pill" onclick="editName()">👤 <span id="playerName">Jeneng</span></button><span class="pill">⭐ Skor: <b id="scoreTop">0</b></span><span class="pill">✨ <b id="starTop">0</b></span><button onclick="showLocks()">🔐 Kunci Level</button><button onclick="toggleMusic()" id="musicToggle">Pateni Musik</button><button onclick="openSettings()">⚙ Setelan</button><span class="spacer"></span>
+<button onclick="goBack()">↩ Mbalik</button><button class="pill" onclick="editName()">👤 <span id="playerName">Jeneng</span></button><span class="pill">⭐ Skor: <b id="scoreTop">0</b></span><span class="pill">✨ <b id="starTop">0</b></span><button onclick="showLeaderboard()">🏆 Papan Skor</button><button onclick="toggleMusic()" id="musicToggle">Pateni Musik</button><button onclick="openSettings()">⚙ Setelan</button><span class="spacer"></span>
 </header><main><section id="screen" class="screen"></section></main></div>
 <audio id="bgm" loop></audio><audio id="sfx"></audio><div id="toast" class="toast hidden"></div>
 <script>
@@ -525,8 +525,9 @@ function trophyForRank(rank){return rank===1?'🥇 Piala Emas':rank===2?'🥈 Pi
 function currentPlayerRank(){const board=getLeaderboard();const ix=board.findIndex(x=>String(x.name).toLowerCase()===String(state.name).trim().toLowerCase());return ix<0?0:ix+1}
 function leaderboardHTML(){
  const board=sharedLeaderboard || getLeaderboard().map((x,i)=>({nama:x.name,skor:x.total,bintang:x.stars,peringkat:i+1,piala:i<3?3-i:0}));
- return `<h2>Papan Panggunggungan 10 Siswa</h2><p class="footer-note">Papan peringkat bersama saka Google Sheets. Piala adhedhasar peringkat.</p><div class="leaderboard-wrap"><table class="leaderboard"><thead><tr><th>No.</th><th>Jeneng Siswa</th><th>Skor</th><th>Urutan</th><th>Lintang</th><th>Piala</th></tr></thead><tbody>${Array.from({length:10},(_,i)=>{const x=board[i],rank=x?Number(x.peringkat)||i+1:i+1,stars=x?Number(x.bintang)||0:0,cup=x?(Number(x.piala)===3?'🥇 Piala Emas':Number(x.piala)===2?'🥈 Piala Perak':Number(x.piala)===1?'🥉 Piala Perunggu':'-'):'-';return `<tr><td>${x?rank:'-'}</td><td>${x?escapeHTML(x.nama??x.name??'-'):'-'}</td><td>${x?(x.skor??x.total??'-'):'-'}</td><td>${x?'Juara '+rank:'-'}</td><td>${x?(stars?'⭐ '.repeat(stars):'0'):'-'}</td><td>${cup}</td></tr>`}).join('')}</tbody></table></div>`;
+ return `<h2>Papan Skor Akhir — 10 Murid</h2><p class="footer-note">Papan iki nyimpen nganti 10 murid kanthi skor paling dhuwur ing piranti iki. Yen Google Sheets wis disambungake, peringkat bebarengan uga bisa ditampilake.</p><div class="leaderboard-wrap"><table class="leaderboard"><thead><tr><th>No.</th><th>Jeneng Siswa</th><th>Skor</th><th>Peringkat</th><th>Lintang</th><th>Piala</th></tr></thead><tbody>${Array.from({length:10},(_,i)=>{const x=board[i],rank=x?Number(x.peringkat)||i+1:i+1,stars=x?Number(x.bintang)||0:0,cup=x?(Number(x.piala)===3?'🥇 Piala Emas':Number(x.piala)===2?'🥈 Piala Perak':Number(x.piala)===1?'🥉 Piala Perunggu':(i===0?'🥇 Piala Emas':i===1?'🥈 Piala Perak':i===2?'🥉 Piala Perunggu':'-')):'-';return `<tr><td>${x?rank:'-'}</td><td>${x?escapeHTML(x.nama??x.name??'-'):'-'}</td><td>${x?(x.skor??x.total??'-'):'-'}</td><td>${x?'Juara '+rank:'-'}</td><td>${x?(stars?'⭐ '.repeat(stars):'0'):'-'}</td><td>${cup}</td></tr>`}).join('')}</tbody></table></div>`;
 }
+function showLeaderboard(){sharedLeaderboard=null;show(`${leaderboardHTML()}<div class="center"><button class="btn gold" onclick="go('map')">↩ Mbalik Peta</button></div>`,'leaderboard');playBg('menuutama.mp3');loadSharedLeaderboard()}
 function loadSharedLeaderboard(){
  const callbackName='siCakrawalaRanking_'+Date.now()+'_'+Math.floor(Math.random()*100000);
  const script=document.createElement('script');
@@ -535,7 +536,7 @@ function loadSharedLeaderboard(){
  window[callbackName]=function(result){
    if(result&&result.ok&&Array.isArray(result.ranking)){
      sharedLeaderboard=result.ranking;
-     if(state.page==='final'){
+     if(state.page==='final'||state.page==='leaderboard'){
        const holder=document.createElement('div');holder.innerHTML=leaderboardHTML();
        const newWrap=holder.querySelector('.leaderboard-wrap');
        const oldWrap=screen.querySelector('.leaderboard-wrap');
