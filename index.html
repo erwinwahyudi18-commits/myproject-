@@ -440,4 +440,489 @@ const q5=[
  ['ꦒꦒ',['Gaga','Baba','Mata','Bata'],'Gaga'],
  ['ꦫꦒ',['Raga','Rasa','Lara','Sapa'],'Raga'],
  ['ꦩꦭ',['Mala','Mata','Kaca','Dada'],'Mala']
-];
+];<script>
+const state={
+ page:'home',
+ name:localStorage.getItem('sc_name')||'',
+ level:1,
+ question:0,
+ score:0,
+ correct:0,
+ wrong:0,
+ lives:3,
+ stars:0,
+ unlocked:1,
+ answers:[],
+ current:null,
+ music:true,
+ voice:true,
+ sound:true,
+ teacher:false,
+ finished:false
+};
+
+const screen=document.getElementById('screen');
+const topbar=document.getElementById('topbar');
+
+function total(){
+ return Number(state.score)||0;
+}
+
+function reward(){
+ return Math.max(0,Math.min(5,Math.floor(total()/200)));
+}
+
+function show(html,page){
+ state.page=page||state.page;
+ screen.innerHTML=html;
+ topbar.hidden=page==='home'||page==='name';
+ updateTop();
+}
+
+function updateTop(){
+ document.getElementById('playerName').textContent=state.name||'Jeneng';
+ document.getElementById('scoreTop').textContent=total();
+ document.getElementById('starTop').textContent=reward();
+ document.getElementById('musicToggle').textContent=
+  state.music?'Pateni Musik':'Urip Musik';
+}
+
+function toast(message){
+ const el=document.getElementById('toast');
+ el.textContent=message;
+ el.classList.remove('hidden');
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>el.classList.add('hidden'),2200);
+}
+
+function shuffle(arr){
+ const result=[...arr];
+
+ for(let i=result.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [result[i],result[j]]=[result[j],result[i]];
+ }
+
+ return result;
+}
+
+function playSound(file){
+ if(!state.sound||!file)return;
+
+ const audio=document.getElementById('sfx');
+ audio.src=asset(file);
+ audio.currentTime=0;
+ audio.play().catch(()=>{});
+}
+
+function playBg(file){
+ if(!state.music)return;
+
+ const audio=document.getElementById('bgm');
+ const src=asset(file);
+
+ if(audio.src!==src){
+  audio.src=src;
+  audio.play().catch(()=>{});
+ }
+}
+
+function toggleMusic(){
+ state.music=!state.music;
+ const audio=document.getElementById('bgm');
+
+ if(state.music){
+  audio.play().catch(()=>{});
+ }else{
+  audio.pause();
+ }
+
+ updateTop();
+}
+
+function say(text){
+ if(!state.voice||!('speechSynthesis' in window))return;
+
+ window.speechSynthesis.cancel();
+
+ const utterance=new SpeechSynthesisUtterance(text);
+ utterance.lang='id-ID';
+ utterance.rate=.85;
+
+ window.speechSynthesis.speak(utterance);
+}
+
+function editName(){
+ const value=prompt('Ketik jenengmu:',state.name);
+
+ if(value===null)return;
+
+ if(!value.trim()){
+  toast('Jeneng ora kena kosong!');
+  return;
+ }
+
+ state.name=value.trim();
+ localStorage.setItem('sc_name',state.name);
+ updateTop();
+ toast('Jeneng kasil diganti!');
+}
+
+function enterGame(){
+ if(!state.name.trim()){
+  showName();
+  return;
+ }
+
+ go('map');
+}
+
+function showName(){
+ show(`
+  <h1>👋 Sugeng Rawuh!</h1>
+  <p>Jenengmu sapa?</p>
+  <div class="name-panel">
+   <label>Jeneng siswa
+    <input type="text" id="nameInput"
+     placeholder="Tulis jenengmu..."
+     maxlength="30">
+   </label>
+  </div>
+  <button class="btn gold" onclick="saveName()">Miwiti Dolanan</button>
+ `,'name');
+}
+
+function saveName(){
+ const value=document.getElementById('nameInput').value.trim();
+
+ if(!value){
+  toast('Tulisen jeneng dhisik!');
+  return;
+ }
+
+ state.name=value;
+ localStorage.setItem('sc_name',value);
+ go('map');
+}
+
+function go(page){
+ if(page==='home'){
+  showHome();
+  return;
+ }
+
+ if(page==='map'){
+  showMap();
+  return;
+ }
+
+ if(page==='settings'){
+  openSettings();
+  return;
+ }
+
+ if(page==='leaderboard'){
+  showLeaderboard();
+  return;
+ }
+}
+
+function goBack(){
+ if(state.page==='home')return;
+
+ if(state.page==='game'){
+  if(confirm('Arep metu saka dolanan iki?')){
+   showMap();
+  }
+  return;
+ }
+
+ if(state.page==='settings'){
+  showMap();
+  return;
+ }
+
+ if(state.page==='leaderboard'){
+  showMap();
+  return;
+ }
+
+ showHome();
+}
+
+function showHome(){
+ topbar.hidden=true;
+
+ show(`
+  <div class="home">
+   <div class="hero">
+    <div>
+     <h1>SI CAKRAWALA</h1>
+     <p class="sub">Petualangan Sinau Aksara Jawa</p>
+     <p>Jelajahi budaya lokal Undaan kanthi nyenengake!</p>
+     <button class="btn gold" onclick="enterGame()">🎮 MIWITI</button>
+     <button class="btn light" onclick="showLeaderboard()">🏆 PAPAN SKOR</button>
+     <button class="btn light" onclick="openSettings()">⚙ SETELAN</button>
+    </div>
+    <img class="guide" src="${asset('karakter.png')}"
+     alt="Karakter Si Cakrawala">
+   </div>
+  </div>
+ `,'home');
+
+ playBg('menuutama.mp3');
+}
+
+function showMap(){
+ const levels=[
+  {
+   title:'Pengenalan Aksara',
+   desc:'Sinau lan ngrungokake 20 aksara dasar Hanacaraka.',
+   emoji:'📚'
+  },
+  {
+   title:'Maca Tembung',
+   desc:'Sinau maca tembung nganggo sandhangan.',
+   emoji:'🔤'
+  },
+  {
+   title:'Maca Ukara',
+   desc:'Sinau maca ukara prasaja basa Jawa.',
+   emoji:'📖'
+  }
+ ];
+
+ const html=levels.map((level,i)=>{
+  const number=i+1;
+  const locked=number>state.unlocked;
+
+  return `
+   <div class="level ${locked?'locked':''}">
+    <div class="emoji">${level.emoji}</div>
+    <h3>Level ${number}</h3>
+    <strong>${level.title}</strong>
+    <p>${level.desc}</p>
+    <button class="btn ${locked?'light':'gold'}"
+     ${locked?'disabled':''}
+     onclick="startLevel(${number})">
+     ${locked?'🔒 Durung Dibukak':'▶ Bukak Level'}
+    </button>
+   </div>
+  `;
+ }).join('');
+
+ show(`
+  <h1>🗺️ Peta Petualangan</h1>
+  <p>Sinaua kanthi runtut saka level siji nganti level telu.</p>
+  <div class="levelmap">${html}</div>
+  <button class="btn light" onclick="showLeaderboard()">🏆 Papan Skor</button>
+  <button class="btn light" onclick="openSettings()">⚙ Setelan</button>
+ `,'map');
+
+ playBg('menuutama.mp3');
+}
+
+function startLevel(level){
+ if(level>state.unlocked){
+  toast('Level iki durung kabukak!');
+  return;
+ }
+
+ state.level=level;
+ state.question=0;
+ state.correct=0;
+ state.wrong=0;
+ state.lives=3;
+ state.answers=[];
+ state.finished=false;
+
+ if(level===1){
+  showLevelIntroduction();
+ }else if(level===2){
+  showLevel2Introduction();
+ }else{
+  showLevel3Introduction();
+ }
+}
+
+function showLevelIntroduction(){
+ show(`
+  <h1>📚 Level 1</h1>
+  <h2>Pengenalan lan Pengucapan Aksara</h2>
+  <p>Ayo sinau ngenali lan ngucapake 20 aksara dasar Hanacaraka.</p>
+  <div class="cards">
+   <div class="card">📖<strong>Sinau</strong><p>Ngenali wujud aksara.</p></div>
+   <div class="card">🔊<strong>Rungokake</strong><p>Rungokake pangucapane.</p></div>
+   <div class="card">⭐<strong>Latihan</strong><p>Wangsulana pitakon.</p></div>
+  </div>
+  <button class="btn gold" onclick="showLearning()">Ayo Sinau!</button>
+ `,'intro');
+}
+
+function showLearning(){
+ const cards=aksara.map(a=>`
+  <div class="card letter">
+   ${aksaraView(a[0])}
+   <strong>${a[1]}</strong>
+   <button class="btn small light"
+    onclick="say('${a[1]}');playSound('${a[2]}')">
+    🔊 Rungokake
+   </button>
+  </div>
+ `).join('');
+
+ show(`
+  <h1>Sinau 20 Aksara Dasar</h1>
+  <p>Pencet tombol swara kanggo ngrungokake pangucapane.</p>
+  <div class="cards material-grid">${cards}</div>
+  <button class="btn gold" onclick="beginQuestions()">▶ Wiwiti Latihan</button>
+ `,'learning');
+}
+
+function beginQuestions(){
+ state.question=0;
+ state.correct=0;
+ state.wrong=0;
+ state.lives=3;
+ showQuestion();
+}
+
+function getQuestions(){
+ if(state.level===1)return [...q1,...q3];
+ if(state.level===2)return [...q2,...q4];
+ return [...q5];
+}
+
+function showQuestion(){
+ const questions=getQuestions();
+
+ if(state.question>=questions.length||state.lives<=0){
+  finishLevel();
+  return;
+ }
+
+ const q=questions[state.question];
+ state.current=q;
+
+ const options=shuffle(q[1]);
+
+ const buttons=options.map(option=>`
+  <button class="choice"
+   onclick="answerQuestion(this,'${escapeHTML(option)}')">
+   ${state.level===1?escapeHTML(option):
+     (state.level===2?aksaraLineView(option):escapeHTML(option))}
+  </button>
+ `).join('');
+
+ const questionText=state.level===1?
+  `Apa jeneng aksara iki?`:
+  state.level===2?
+  `Pilih aksara sing cocog karo swara iki:`:
+  `Apa wacane tembung iki?`;
+
+ const prompt=state.level===1?
+  aksaraView(q[0],'word'):
+  state.level===2?
+  `<span class="word">${escapeHTML(q[0])}</span>`:
+  `<span class="word">${aksaraLineViewLevel3(q[0])}</span>`;
+
+ show(`
+  <h2>Level ${state.level}</h2>
+  <div class="stats">
+   <span class="stat">❤️ Nyawa: ${state.lives}</span>
+   <span class="stat">⭐ Skor: ${total()}</span>
+   <span class="stat">Soal: ${state.question+1}/${questions.length}</span>
+  </div>
+  <div class="progress">
+   <span style="width:${state.question/questions.length*100}%"></span>
+  </div>
+  <div class="question">
+   <p>${questionText}</p>
+   ${prompt}
+  </div>
+  <div class="choices">${buttons}</div>
+  <div id="feedback" class="feedback"></div>
+ `,'game');
+
+ playBg('musikpermainan.mp3');
+}
+
+function answerQuestion(button,answer){
+ if(state.finished)return;
+
+ const q=state.current;
+ if(!q)return;
+
+ const buttons=[...document.querySelectorAll('.choice')];
+ buttons.forEach(b=>b.disabled=true);
+
+ const correct=String(answer)===String(q[2]);
+
+ if(correct){
+  state.correct++;
+  state.score+=10;
+  button.classList.add('correct');
+  document.getElementById('feedback').textContent='🎉 Bener! Apik banget!';
+  playSound('benar.mp3');
+  say('Bener. Apik banget!');
+ }else{
+  state.wrong++;
+  state.lives--;
+  button.classList.add('wrong');
+
+  document.getElementById('feedback').textContent=
+   'Durung trep. Ayo sinau maneh!';
+
+  const correctButton=buttons.find(b=>{
+   const text=b.textContent.trim();
+   return text===String(q[2]);
+  });
+
+  if(correctButton)correctButton.classList.add('correct');
+
+  playSound('salah.mp3');
+ }
+
+ state.answers.push({
+  question:q[0],
+  answer:answer,
+  correct:correct
+ });
+
+ updateTop();
+
+ setTimeout(()=>{
+  state.question++;
+  showQuestion();
+ },1200);
+}
+
+function finishLevel(){
+ state.finished=true;
+
+ const questions=getQuestions();
+ const passed=state.correct>=Math.ceil(questions.length*.6);
+
+ if(passed){
+  state.unlocked=Math.max(state.unlocked,Math.min(3,state.level+1));
+ }
+
+ const earned=Math.min(5,Math.floor(state.correct/4));
+
+ show(`
+  <h1>${passed?'🎉 Sugeng!':'💪 Aja Nyerah!'}</h1>
+  <h2>Level ${state.level} Rampung</h2>
+  <div class="cards">
+   <div class="card"><strong>${state.correct}</strong><p>Jawaban Bener</p></div>
+   <div class="card"><strong>${state.wrong}</strong><p>Jawaban Salah</p></div>
+   <div class="card"><strong>${state.score}</strong><p>Skor Total</p></div>
+   <div class="card"><strong>${earned} ⭐</strong><p>Bintang</p></div>
+  </div>
+  <p>${passed?'Level sabanjure wis kabukak!':'Coba maneh supaya bisa mbukak level sabanjure.'}</p>
+  <button class="btn gold" onclick="showMap()">Peta Petualangan</button>
+  <button class="btn light" onclick="startLevel(${state.level})">Baleni Level</button>
+ `,'result');
+
+ playSound(passed?'menang.mp3':'selesai.mp3');
+}
+</script>
