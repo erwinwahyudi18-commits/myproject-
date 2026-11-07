@@ -420,7 +420,7 @@ main:has(.screen.material3){align-items:stretch!important;justify-content:flex-s
   min-width:1.85em!important; min-height:1.85em!important;
   max-width:1.85em!important; max-height:1.85em!important;
   flex:0 0 1.85em!important;
-  object-fit:contain!important; object-position:center!important;
+object-fit:contain!important; object-position:center!important;
   vertical-align:middle!important; transform:none!important;
   filter:grayscale(1) contrast(1.08)!important; opacity:1!important;
   mix-blend-mode:multiply!important; margin:0 .015em!important;
@@ -506,6 +506,51 @@ main{width:min(1200px,98vw)!important;height:auto!important;min-height:0!importa
 @media(max-width:800px){
   .screen.song .song-layout .songimg{max-width:175%!important;max-height:80.5vh!important}
 }
+
+/* Tata letak khusus kaca Tujuwan Pasinaon: rong kertu rata lan proporsional. */
+.screen.objectives .objective-cards{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ align-items:stretch;
+ justify-content:center;
+ gap:clamp(12px,2vw,22px);
+ width:min(860px,100%);
+ margin:clamp(10px,2vh,22px) auto;
+ flex:0 0 auto;
+}
+.screen.objectives .objective-card{
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ min-width:0;
+ min-height:clamp(130px,20vh,190px);
+ padding:clamp(14px,2vw,24px);
+}
+.screen.objectives .objective-card strong{
+ font-size:clamp(1.05rem,2vw,1.35rem);
+ margin-bottom:8px;
+}
+.screen.objectives .objective-card p{
+ display:block;
+ line-height:1.5;
+ margin:4px auto;
+ padding:4px 8px;
+ max-width:34em;
+}
+.screen.objectives .objective-actions{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:8px;
+ flex:0 0 auto;
+}
+@media(max-width:650px){
+ .screen.objectives .objective-cards{grid-template-columns:minmax(0,1fr);width:min(480px,100%);gap:9px;margin:7px auto}
+ .screen.objectives .objective-card{min-height:0;padding:12px 14px}
+ .screen.objectives .objective-card p{font-size:.92rem;line-height:1.4}
+}
 </style></head>
 <body><div id="app"><header class="topbar" id="topbar" hidden>
 <button onclick="goBack()">↩ Mbalik</button><button class="pill" onclick="editName()">👤 <span id="playerName">Jeneng</span></button><span class="pill">⭐ Skor: <b id="scoreTop">0</b></span><span class="pill">✨ <b id="starTop">0</b></span><button onclick="showLeaderboard()">🏆 Papan Skor</button><button onclick="toggleMusic()" id="musicToggle">Pateni Musik</button><button onclick="openSettings()">⚙ Setelan</button><span class="spacer"></span>
@@ -586,7 +631,7 @@ function loadSharedLeaderboard(){
    sharedLeaderboard=normalizeSharedScores(result);
    if(state.page==='final'||state.page==='leaderboard'){
     const holder=document.createElement('div');holder.innerHTML=leaderboardHTML();
-    const newWrap=holder.querySelector('.leaderboard-wrap');
+const newWrap=holder.querySelector('.leaderboard-wrap');
     const oldWrap=screen.querySelector('.leaderboard-wrap');
     if(oldWrap&&newWrap)oldWrap.replaceWith(newWrap);
    }
@@ -623,8 +668,14 @@ function editName(){const n=prompt('Sapa jenengmu?',state.name);if(n&&n.trim()){
 function render(page){switch(page){case'home':home();break;case'objectives':objectives();break;case'instructions':instructions();break;case'song':song();break;case'map':mapPage();break;case'material1':material(1);break;case'example11':example(1,1);break;case'quiz11':startQuiz(1,1);break;case'example12':example(1,2);break;case'quiz12':startQuiz(1,2);break;case'score1':scoreLevel(1);break;case'material2':material(2);break;case'example21':example(2,1);break;case'quiz21':startQuiz(2,1);break;case'example22':example(2,2);break;case'quiz22':startQuiz(2,2);break;case'score2':scoreLevel(2);break;case'material3':material(3);break;case'example3':example(3,1);break;case'quiz3':startQuiz(3,1);break;case'final':finalPage();break;case'settings':settings();break;case'locks':locksPage();break;default:home()}}
 function home(){show(`<div class="hero home"><div><p class="sub">Sugeng Rawuh!</p><h1>SI CAKRAWALA</h1><p class="sub">Sinau Maca Aksara Jawa Lancar</p><p>Ayo njelajah budaya Jawa lan sinau maca aksara Jawa!</p><button class="btn gold" onclick="go('objectives')">AYO WIWITI</button></div><img class="guide" src="${asset('kartunjawa.png')}" alt="Kartun Jawa"></div>`,'home');playBg('pembukaan.mp3')}
 function objectives(){
- const tujuan=['Bocah bisa ngenali, nyebutake jeneng, lan ngucapake 20 aksara dhasar Hanacaraka kanthi bener.','Bocah bisa maca tembung nganggo aksara Jawa kanthi trep.','Bocah bisa maca ukara prasaja nganggo aksara Jawa kanthi lancar.'];
- show(`<h2>Tujuwan Pasinaon</h2><div class="cards">${tujuan.map((x,i)=>`<div class="card"><strong>Tujuwan ${i+1}</strong><p>${x}</p></div>`).join('')}</div>${guide()}<div><button class="btn light" onclick="goBack()">Mbalik</button><button class="btn" onclick="go('instructions')">Sabanjure</button></div>`,'objectives');playBg('tujuan.mp3')}
+ const tujuan=[
+  'Bocah bisa ngenali, nyebutake jeneng, lan ngucapake 20 aksara dhasar Hanacaraka kanthi bener.',
+  'Bocah bisa maca ukara prasaja nganggo aksara Jawa kanthi lancar.'
+ ];
+ const cards=tujuan.map((x,i)=>`<article class="card objective-card"><strong>Tujuwan ${i+1}</strong><p>${x}</p></article>`).join('');
+ show(`<h2>Tujuwan Pasinaon</h2><div class="objective-cards">${cards}</div>${guide()}<div class="objective-actions"><button class="btn light" onclick="goBack()">Mbalik</button><button class="btn" onclick="go('instructions')">Sabanjure</button></div>`,'objectives');
+ playBg('tujuan.mp3');
+}
 
 
 function instructions(){const rules=['Wacanen materi kanthi premati.','Klik aksara Jawa kanggo ngrungokake swarane.','Wacanen tuladha pitakon sadurunge dolanan.','Pilih salah siji wangsulan sing paling trep.','Saben wangsulan bener oleh 20 skor.','Wangsulan kliru ora oleh skor.','Rampungna tantangan supaya bisa mbukak level sabanjure.','Gatekna wektune nalika dolanan ing level 3.'];show(`<h2>Pituduh lan Tata Cara Dolanan</h2><div class="cards">${rules.map((x,i)=>`<div class="card"><strong>${i+1}.</strong>${x}</div>`).join('')}</div>${guide()}<button class="btn light" onclick="goBack()">Mbalik</button><button class="btn" onclick="go('song')">Sabanjure</button>`,'instructions');playBg('musik semangat.mp3')}
